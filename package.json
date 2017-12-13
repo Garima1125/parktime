@@ -1,0 +1,32 @@
+{
+  "name": "parktime-api",
+  "version": "1.0.0",
+  "description": "park time api server",
+  "main": "dist",
+  "scripts": {
+    "start": "babel src/ -d dist/ && node dist/app.js",
+    "watch": "babel -w src/ -d dist/",
+    "build": "babel src/ -d dist/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hepuliu/parktime-api.git"
+  },
+  "author": "Jessica Liu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hepuliu/parktime-api/issues"
+  },
+  "homepage": "https://github.com/hepuliu/parktime-api#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.13.1"
+  }
+}
