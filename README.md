@@ -33,3 +33,7 @@
 # License
 
 MIT
+
+# Notes
+
+make email primary key for users
