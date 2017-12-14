@@ -1,13 +1,17 @@
 "use strict"
 
 import express from 'express';
+import reviewsRoutes from './reviews';
 const router = express.Router({mergeParams: true});
 
 export default (knex) => {
+    router.use('/:user_id/reviews', reviewsRoutes(knex));
+
     router.get('/', (req, res) => {
         console.log("view users");
         res.status(200).send("");
     })
+
     router.post('/:user_id', (req, res) => {
         console.log("create new user");
         res.status(200).send("");

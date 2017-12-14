@@ -3,7 +3,6 @@
 import express from 'express';
 const router = express.Router({mergeParams: true});
 
-
 export default (knex) => {
     router.get('/', (req, res) => {
         console.log("view all schedules");

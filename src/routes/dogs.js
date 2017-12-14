@@ -1,10 +1,11 @@
 "use strict"
 
 import express from 'express';
-const router = express.Router({mergeParams: true});
 import jobsRoutes from './jobs';
+const router = express.Router({mergeParams: true});
 
 export default (knex) => {
+    // console.log(jobsRoutes(knex));
     router.use('/:dog_id/jobs', jobsRoutes(knex));
 
     router.post('/:dog_id', (req, res) => {

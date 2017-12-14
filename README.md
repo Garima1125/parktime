@@ -3,11 +3,28 @@
 ## Routes
 
 ### users
-* B - /users - get
 * C - /users/:user_id - post
+    - google login
+    - {email, first_name, last_name, image}
+    - find email and see if its in user database
+    - 
 * R - /users/:user_id - get
-* U - /users/:user_id - put
-* D - /users/:user_id - delete
+#* U - /users/:user_id - put
+#* D - /users/:user_id - delete
+
+### walkers
+* B - /walkers - get
+* C - /walkers/:walker_id - post
+* R - /walkers/:walker_id - get
+* U - /walkers/:walker_id - put
+* D - /walkers/:walker_id - delete
+
+### owners 
+* B - /owners - get
+* C - /owners/:owner_id - post
+* R - /owners/:owner_id - get
+* U - /owners/:owner_id - put
+* D - /owners/:owner_id - delete
 
 ### dogs
 * B - /dogs - get - N/A
@@ -16,19 +33,27 @@
 * U - /dogs/:dog_id - put
 * D - /dogs/:dog_id - delete
 
-### schedule (state: incomplete complete cancelled)
+### schedules (state: incomplete complete cancelled)
 * B - /dogs/:dog_id/jobs/:job_id/schedules - get
 * C - /dogs/:dog_id/jobs/:job_id/schedules/:schedule_id - post - N/A
 * R - /dogs/:dog_id/jobs/:job_id/schedules/:schedule_id - get
 * U - /dogs/:dog_id/jobs/:job_id/schedules/:schedule_id - put - optional
 * D - /dogs/:dog_id/jobs/:job_id/schedules/:schedule_id - delete
 
-### job (state: created offered confirmed) (schedules)
+### jobs (state: created offered confirmed) (schedules)
 * B - /dogs/:dog_id/jobs - get 
 * C - /dogs/:dog_id/jobs/:job_id - post 
 * R - /dogs/:dog_id/jobs/:job_id - get
 * U - /dogs/:dog_id/jobs/:job_id - put
 * D - /dogs/:dog_id/jobs/:job_id - delete
+
+### payments
+* C - /dogs/:dog_id/jobs/:job_id/payments/:payment_id - post 
+* R - /dogs/:dog_id/jobs/:job_id/payments/:payment_id - get 
+
+### reviews
+* C - /users/:user_id/reviews - get
+* R - /users/:user_id/reviews/:reviews_id - post
 
 # License
 
