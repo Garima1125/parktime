@@ -1,20 +1,27 @@
 "use strict";
 
+import path from 'path';
 import express from 'express';
 import dogsRoutes from './routes/dogs';
 import usersRoutes from './routes/users'
 import walkersRoutes from './routes/walkers'
 import ownersRoutes from './routes/owners'
+
 const PORT = process.env.PORT || 8080;
 const app = express();
-app.use(express.static("public"));
+
+// set the view engine to ejs
+app.set('view engine', 'ejs');
 
 //---routes---------------------------
 let knex = null;
-// console.log(dogsRoutes(knex));
-// console.log(usersRoutes(knex));
-// console.log(walkersRoutes(knex));
-// console.log(ownersRoutes(knex));
+
+app.use(express.static(path.join(__dirname, 'dist')))
+app.use('/static', express.static(path.join(__dirname, 'public')))
+
+app.get('/', (req, res) => {
+    res.render('main');
+});
 
 app.use('/dogs', dogsRoutes(knex));
 app.use('/users', usersRoutes(knex));
