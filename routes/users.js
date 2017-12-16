@@ -8,18 +8,28 @@ export default (knex) => {
     router.use('/:user_id/reviews', reviewsRoutes(knex));
 
     router.get('/', (req, res) => {
-        console.log("view users");
-        res.status(200).send("");
+        knex
+            .select (*)
+            .from('users')
+            .then(result => {
+                res.status(200).send(result);
+            }, err => {
+                res.status(500).send('Error');
+            }
     })
 
     router.post('/:user_id', (req, res) => {
-        console.log("create new user");
+        console.log("view a user");
         res.status(200).send("");
     })
 
     router.get('/:user_id', (req, res) => {
-        console.log("view a user");
-        res.status(200).send("");
+        users.where("user_id", req.params.id).fetch()
+        .then (result => {
+            res.status(200).send(result);
+        }, err => {
+            res.status(500),send("Error")
+        }
     })
     router.put('/:user_id', (req, res) => {
         console.log("update user profile");
