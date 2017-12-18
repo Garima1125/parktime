@@ -1,4 +1,3 @@
-
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('jobs', (table) => {
     table.increments('job_id').primary();

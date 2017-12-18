@@ -2,10 +2,75 @@ h1 {
     color: rgb(14, 168, 117);
 }
 
-.navbar {
+.navbar1 {
     color: red;
 }
 
-.footer {
+.footer1 {
     color: blue;
+}
+
+.navbar-brand{
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Itim', cursive;
+  color: white!important;
+  text-align: center!important;
+}
+
+.navbar-header{
+  float:right;
+}
+
+#head{
+  line-height: 71px;
+}
+
+.user-register{
+  width: 500px;
+  margin:auto;
+
+}
+ 
+#postal,#unit,#pro,#con,{
+  width: 200px;
+  resize: horizontal;
+  overflow: auto;
+  margin-right: 15px;
+  height: 30px;
+
+
+ 
+}
+
+.smallbox{
+  clear: both;
+  overflow: hidden;
+}
+
+.form-group1{
+  float:left;
+}
+
+#login{
+  margin-right: 15px;
+}
+
+
+#reg{
+ float:center;
+}
+
+.walker-details{
+width: 500px;
+  margin:auto;
+}
+
+#next{
+  float:right;
+}
+
+#choose{
+  margin-left: 100px;
+  width: 200px;
 }

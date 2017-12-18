@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "start": "babel-node app.js",
-    "build": "webpack --progress --color",
+    "build": "webpack --progress --color --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/hepuliu/parktime-api#readme",
   "dependencies": {
+    "auth0-js": "^8.12.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
