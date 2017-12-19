@@ -24,8 +24,4 @@ module.exports =[
   reviewer_id:3,
   reviewee_id:1
  },
-
-
-
-
 ]

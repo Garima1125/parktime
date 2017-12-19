@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "start": "babel-node app.js",
-    "build": "webpack --progress --color",
+    "build": "webpack --progress --color --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/hepuliu/parktime-api#readme",
   "dependencies": {
+    "auth0-js": "^8.12.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -30,14 +31,17 @@
     "ejs": "^2.5.7",
     "eslint": "^4.13.1",
     "express": "^4.16.2",
+    "file-loader": "^1.1.6",
     "knex": "^0.14.2",
     "node-sass": "^4.7.2",
     "path": "^0.12.7",
     "pg": "^7.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
     "uuid": "^3.1.0",
     "webpack": "^3.10.0"
   },

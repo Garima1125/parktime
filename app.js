@@ -32,6 +32,7 @@ app.use('/users', usersRoutes(knexObj));
 app.use('/walkers', walkersRoutes(knexObj));
 app.use('/owners', ownersRoutes(knexObj));
 
+
 app.listen(PORT, () =>{
     console.log("ParkTime API server listening on port" + PORT);  
 })
