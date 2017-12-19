@@ -9,6 +9,7 @@ import Homepage from './Homepage.jsx';
 // import Dog from './Dog.jsx';
 // import Job from './Job.jsx';
 import About from './About.jsx';
+import Content from './Content.jsx';
 import Footer from './Footer.jsx';
 
 
@@ -16,6 +17,7 @@ import Footer from './Footer.jsx';
 class App extends Component {
     render() {
         return (
+
             <BrowserRouter>
                 <div>
                     <Nav />
