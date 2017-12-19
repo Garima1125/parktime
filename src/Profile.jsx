@@ -36,6 +36,18 @@ class profile extends Component {
                 <input type="input" className="form-control" id ="contact" />
               </div>
               </div>
+              <div className="form-check ">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="radio" name="option" id="exampleRadio1" value="option1"/>
+                  I'm a Dog Walker
+                </label>
+              </div>
+              <div className="form-check ">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="radio" name="option" id="exampleRadio2" value="option2"/>
+                 Looking to hire someone.
+                </label>
+              </div>
 
               <div className="checkbox">
                 <label>

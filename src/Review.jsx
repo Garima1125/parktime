@@ -5,19 +5,19 @@ class Review extends Component {
     render() {
         return (
           <form className ="reviews" id="">
-          <h2>Please leave reviews and ratings below:</h2>
-              <div class="btn-group">
-                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Action
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#"></a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                  </div>
-                </div>
+          <h1>Please leave reviews and ratings below:</h1>
+                 <div className="form-group">
+                <label className="mr-sm-2" for="inlineFormCustomSelect" id="bankname">Ratings</label>
+                <select className="custom-select mb-2 mr-sm-2 mb-sm-0" id="choose">
+                  <option selected>Choose...</option>
+                  <option value="1">TD Canada Trust</option>
+                  <option value="2">CIBC</option>
+                  <option value="3">ScotiaBank</option>
+                  <option value="4">Bank of Montreal</option>
+                  <option value="5">Citibank Canada</option>
+                  <option value="6">RBC Royal Bank</option>
+                </select>
+              </div>
               <div className="form-group">
                 <label for="example">Reviews</label>
                 <input type="textarea" className="form-control" id="exampleInputEmail1" placeholder="Email" />

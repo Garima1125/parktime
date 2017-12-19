@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 class Job extends Component {
     render() {
         return (
-          <form className ="job-post" id="">
-          <h2>Post a Job</h2>
+          <form className="job-post" id="">
+          <h1>Post a Job</h1>
               <div className="form-group">
                 <label for="experience">Job Title</label>
                 <input type="textarea" className="form-control"/>
@@ -17,27 +17,27 @@ class Job extends Component {
                 <label for="desc">Pay Rate</label>
                 <input type="input" className="form-control"/>
               </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="New" id="exampleRadios1" value="option1" checked/>
+              <div className="form-check">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="radio" name="status" id="exampleRadios1" value="option1"/>
                    New - Hiring
                 </label>
               </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="offered" id="exampleRadios2" value="option2"/>
+              <div className="form-check">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="radio" name="status" id="exampleRadios2" value="option2"/>
                   Offered
                 </label>
               </div>
-              <div class="form-check disabled">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="accepted" id="exampleRadios3" value="option3" disabled/>
+              <div className="form-check ">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="radio" name="status" id="exampleRadios3" value="option3"/>
                   Job Completed
                 </label>
               </div>
-              <div class="form-check disabled">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="accepted" id="exampleRadios3" value="option3" disabled/>
+              <div className="form-check ">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="radio" name="status" id="exampleRadios4" value="option4"/>
                   Accepted- In process
                 </label>
               </div>

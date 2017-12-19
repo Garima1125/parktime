@@ -4,7 +4,7 @@ class Walker extends Component {
     render() {
         return (
           <form className ="walker-details" id="">
-          <h2>Walker details</h2>
+          <h1>Walker details</h1>
               <div className="form-group">
                 <label for="experience">Experience</label>
                 <input type="textarea" className="form-control"/>

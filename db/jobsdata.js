@@ -6,7 +6,7 @@ module.exports =[
   rate:15.25,
   status: 'offered',
   dog_id:1,
-  owner_id:1,
+  owner_id:2,
   walker_id:1
 },
 
@@ -17,7 +17,7 @@ module.exports =[
   rate:10.50,
   status: 'accepting applications',
   dog_id:2,
-  owner_id:2,
+  owner_id:3,
   walker_id:2
 },
 
@@ -28,7 +28,7 @@ module.exports =[
   rate:15.00,
   status:'offered',
   dog_id:3,
-  owner_id:3,
+  owner_id:1,
   walker_id:3
 },
 
@@ -39,7 +39,7 @@ module.exports =[
   rate:35.00,
   status: 'completed',
   dog_id:4,
-  owner_id:4,
+  owner_id:5,
   walker_id:4
 },
 
@@ -50,7 +50,7 @@ module.exports =[
   rate:15.00,
   status: 'offered',
   dog_id:5,
-  owner_id:5,
+  owner_id:4,
   walker_id:5
 }
 

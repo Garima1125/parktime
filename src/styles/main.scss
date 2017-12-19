@@ -2,31 +2,39 @@ h1 {
     color: rgb(14, 168, 117);
 }
 
-.navbar1 {
-    color: red;
-}
+footer {
+  position: fixed;
+  margin-top: 2%;
+  width: 100%;
+  height:20px !important;
+  font-size: 0.8em;
+  bottom: 0;
 
-.footer1 {
-    color: blue;
 }
 
 .navbar-brand{
   font-size: 25px;
   font-weight: bold;
   font-family: 'Itim', cursive;
-  color: white!important;
+  color: black!important;
   text-align: center!important;
+
 }
 
 .navbar-header{
   float:right;
+
 }
 
 #head{
   line-height: 71px;
+  position: fixed;
+  width: 100%;
+  
+
 }
 
-.user-register{
+.user-register, .walker-details, .Dog-profile, .job-post{
   width: 500px;
   margin:auto;
 
@@ -61,11 +69,6 @@ h1 {
  float:center;
 }
 
-.walker-details{
-width: 500px;
-  margin:auto;
-}
-
 #next{
   float:right;
 }
@@ -73,4 +76,34 @@ width: 500px;
 #choose{
   margin-left: 100px;
   width: 200px;
+}
+
+
+#about-us{
+  width:800px;
+  float:left;
+  margin-left: 30px;
+  line-height:2.5em;
+  font-size:20px;
+  margin-top: 30px;
+}
+
+#about{
+  text-align: center;
+}
+
+.home,.about_us{
+  float: left;
+  margin-left:25px;
+  color:black !important; 
+}
+
+.Signup{
+  float:left;
+  margin-left: 25px;
+}
+
+#dogrose{
+max-width: 100%; 
+height: auto;
 }

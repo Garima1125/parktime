@@ -4,7 +4,7 @@ class Dog extends Component {
     render() {
         return (
           <form className ="Dog-profile" id="">
-          <h2>Create your Paw-mate's profile below:</h2>
+          <h1>Create your Paw-mate's profile below:</h1>
               <div className="form-group">
                 <label for="profile-pic">Upload your Paw's picture</label>
                 <input type="file" id="exampleInputFile"/>
@@ -23,7 +23,7 @@ class Dog extends Component {
               </div>
               <div className="form-group">
                 <label for="example">Description</label>
-                <input type="textarea" className="form-control" id="exampleInputEmail1" placeholder="Email" />
+                <input type="textarea" className="form-control"/>
               </div>
           </form>
 

@@ -10,7 +10,7 @@ class Signup extends Component {
   }
     render() {
         return (
-            <div>
+            <div className="Signup">
                 <button className= "btn btn-default navbar-btn" onClick={this.authenticate_user.bind(this)}>Get Started</button>
             </div>
         );

@@ -52,9 +52,25 @@ module.exports = {
 
             {
                 test: /\.(jpg|png|svg|gif)$/,
-                loader: "url-loader?name=app/images/[name].[ext]",
-                include: '/assets/'
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name]-[hash:8].[ext]'
+                    },
+                  },
+                ],
+                include: /assets/
+            },
+            {
+                test: /\.(jpg|png|svg|gif)$/,
+                use: {
+                loader: 'url-loader',
+                
+                },
+                include: /assets/
             }
+
             ]
         },
     plugins: [

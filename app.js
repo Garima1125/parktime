@@ -23,6 +23,10 @@ app.get('/', (req, res) => {
     res.render('main');
 });
 
+app.get('/about', (req, res) => {
+    res.render('main');
+});
+
 
 app.use('/dogs', dogsRoutes(knex));
 app.use('/users', usersRoutes(knex));
