@@ -4,13 +4,14 @@ import Nav from './Nav.jsx';
 
 // import Signup from './Signup.jsx';
 import Homepage from './Homepage.jsx';
-//import Profile from './Profile.jsx';
-// import Walker from './Walker.jsx';
+import Profile from './Profile.jsx';
+import Walker from './Walker.jsx';
 // import Dog from './Dog.jsx';
 // import Job from './Job.jsx';
 import About from './About.jsx';
 import Content from './Content.jsx';
-import Footer from './Footer.jsx';
+// import Footer from './Footer.jsx';
+import Owner from './Owner.jsx';
 
 
 
@@ -23,7 +24,9 @@ class App extends Component {
                     <Nav />
                     <Route exact path='/' component={Homepage} />
                     <Route exact path='/about' component={About} />
-                    <Footer />
+                    <Route exact path='/profile' component={Profile} />
+                    <Route exact path='/walker' component={Walker} />
+                    <Route exact path='/owner' component={Owner} />
                 </div>
             </BrowserRouter>
         );

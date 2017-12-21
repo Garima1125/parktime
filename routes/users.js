@@ -9,28 +9,34 @@ export default (knex) => {
 
     router.get('/', (req, res) => {
         knex
-            .select (*)
+            .select('*')
             .from('users')
             .then(result => {
                 res.status(200).send(result);
             }, err => {
                 res.status(500).send('Error');
-            }
-    })
+            });
+    });
 
-    router.post('/:user_id', (req, res) => {
-        console.log("view a user");
-        res.status(200).send("");
-    })
+    router.post('/users/create/', (req, res) => {
+      console.log(req.body);
+      res.status(200).send();
+    });
+
+    // router.post('/:user_id', (req, res) => {
+    //     console.log("view a user");
+    //     res.status(200).send("");
+    // })
 
     router.get('/:user_id', (req, res) => {
         users.where("user_id", req.params.id).fetch()
         .then (result => {
             res.status(200).send(result);
         }, err => {
-            res.status(500),send("Error")
-        }
-    })
+            res.status(500),send("Error");
+        });
+    });
+
     router.put('/:user_id', (req, res) => {
         console.log("update user profile");
         res.status(200).send("");

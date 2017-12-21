@@ -22,7 +22,7 @@ module.exports = {
                     "presets": ["es2015", "stage-0"]
                 }
             },
-            { 
+            {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
@@ -41,12 +41,12 @@ module.exports = {
             },
 
             {
-                test: /\.css/,
+                test: /\.css$/,
                 include: /src/,
                 use: [
                     'style-loader',
                     'css-loader'
-                    
+
                 ]
             },
 
@@ -66,7 +66,7 @@ module.exports = {
                 test: /\.(jpg|png|svg|gif)$/,
                 use: {
                 loader: 'url-loader',
-                
+
                 },
                 include: /assets/
             }
