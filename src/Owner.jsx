@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-class Walker extends Component {
+class Owner extends Component {
     render() {
         return (
-          <form className ="walker-details">
-          <h1>Walker details</h1>
+          <form className ="owner-details">
+          <h1>Pet Owner details</h1>
               <div className="form-group">
                 <label htmlFor="profile-pic">Upload your photo</label>
                 <input type="file" id="exampleInputFile"/>
@@ -22,28 +22,30 @@ class Walker extends Component {
                 <input type="textarea" className="form-control"/>
               </div>
               <div className="form-group">
-                <label htmlFor="desc">Description</label>
-                <input type="textarea" className="form-control"/>
+                <label htmlFor="address">Address</label>
+                <input type="input" className="form-control" placeholder="Address" />
               </div>
+              <div className="smallbox">
               <div className="form-group1">
                 <label htmlFor="postal-code">Postal Code</label>
                 <input type="input" className="form-control" id="postal" />
               </div>
-              <div className="form-group">
-                <label className="mr-sm-2" htmlFor="inlineFormCustomSelect" id="bankname">Bank Name</label>
-                <select className="custom-select mb-2 mr-sm-2 mb-sm-0" id="choose">
-                  <option defaultValue>Choose...</option>
-                  <option value="1">TD Canada Trust</option>
-                  <option value="2">CIBC</option>
-                  <option value="3">ScotiaBank</option>
-                  <option value="4">Bank of Montreal</option>
-                  <option value="5">Citibank Canada</option>
-                  <option value="6">RBC Royal Bank</option>
-                </select>
+              <div className="form-group1">
+                <label htmlFor="postal-code">Unit Number</label>
+                <input type="input" className="form-control" id="unit" placeholder="Unit No:" />
               </div>
-              <div className="form-group">
-                <label htmlFor="example">Bank Account Number</label>
-                <input type="input" className="form-control" id="exampleInputEmail1" placeholder="Email" />
+              <div className="form-group1">
+                <label htmlFor="postal-code">Province</label>
+                <input type="input" className="form-control" id= "pro" placeholder="Province" />
+              </div>
+              <div className="form-group1">
+                <label htmlFor="postal-code">County</label>
+                <input type="input" id= "con"className="form-control"/>
+              </div>
+              <div className="form-group1">
+                <label htmlFor="postal-code">Contact Number:</label>
+                <input type="input" className="form-control" id ="contact" />
+              </div>
               </div>
               <button className="btn btn-primary">Submit</button>
           </form>
@@ -52,4 +54,4 @@ class Walker extends Component {
     }
 }
 
-export default Walker;
+export default Owner;

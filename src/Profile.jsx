@@ -1,66 +1,30 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
-class profile extends Component {
+class Profile extends Component {
     render() {
         return (
-          <div class="container-fluid">
-          <form className ="user-register">
-             <h1> Please create your Profile </h1>
-              <div className="form-group">
-                <label for="profile-pic">Upload your photo</label>
-                <input type="file" id="exampleInputFile"/>
+          <div className="container-fluid">
+            <div className="row" id="chooseprofile">
+                <div className="col-4">
+                  <div className="list-group" id="list-tab" role="tablist">
+                    <a className="list-group-item list-group-item-action" id="list-home-list" data-toggle="list"  aria-controls="option" disabled>Choose your profile below</a>
+                    <Link to={'/walker'} className="list-group-item list-group-item-action" role="tab" aria-controls="walker">Dog Walker</Link>
+                    <Link to={'/owner'} className="list-group-item list-group-item-action" role="tab" aria-controls="owner">Pet Owner</Link>
+                  </div>
+                </div>
+                <div className="col-8">
+                  <div className="tab-content" id="nav-tabContent">
+                    <div className="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
+                    <div className="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+                    <div className="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                    <div className="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                  </div>
+                </div>
               </div>
-              <div className="form-group">
-                <label for="address">Address</label>
-                <input type="input" className="form-control" placeholder="Address" />
-              </div>
-              <div className="smallbox">
-              <div className="form-group1">
-                <label for="postal-code">Postal Code</label>
-                <input type="input" className="form-control" id="postal" />
-              </div>
-              <div className="form-group1">
-                <label for="postal-code">Unit Number</label>
-                <input type="input" className="form-control" id="unit" placeholder="Unit No:" />
-              </div>
-              <div className="form-group1">
-                <label for="postal-code">Province</label>
-                <input type="input" className="form-control" id= "pro" placeholder="Province" />
-              </div>
-              <div className="form-group1">
-                <label for="postal-code">County</label>
-                <input type="input" id= "con"className="form-control"/>
-              </div>
-              <div className="form-group1">
-                <label for="postal-code">Contact Number:</label>
-                <input type="input" className="form-control" id ="contact" />
-              </div>
-              </div>
-              <div className="form-check ">
-                <label className="form-check-label">
-                  <input className="form-check-input" type="radio" name="option" id="exampleRadio1" value="option1"/>
-                  I'm a Dog Walker
-                </label>
-              </div>
-              <div className="form-check ">
-                <label className="form-check-label">
-                  <input className="form-check-input" type="radio" name="option" id="exampleRadio2" value="option2"/>
-                 Looking to hire someone.
-                </label>
-              </div>
-
-              <div className="checkbox">
-                <label>
-                  <input type="checkbox"/> Remember Me
-                </label>
-              </div>
-              <button type="submit" className="btn btn-primary" id="reg">Register</button>
-              <div></div>
-              <button type="next" className="btn btn-info" id="next">Next</button>
-            </form>
             </div>
         );
     }
 }
 
-export default profile;
+export default Profile;
