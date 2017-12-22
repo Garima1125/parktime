@@ -12,6 +12,7 @@ import ownersRoutes from './routes/owners'
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "dev";
 const app = express();
+const bcrypt = require('bcrypt');
 
 const bodyParser = require('body-parser');
 
@@ -49,10 +50,72 @@ app.get('/owner', (req, res) => {
     res.render('main');
 });
 
-app.post('/users/create/', (req, res) => {
-  console.log(req.body);
-  res.status(200).send({authenticated: true});
+app.post('/users/auth/google', (req, res) => {
+
+  var email = req.body.email;
+  var firstName = req.body.givenName;
+  var lastName = req.body.familyName;
+  var password = req.body.googleId;
+  var photo_url = req.body.imageUrl;
+
+  knexObj
+      .select("user_id")
+      .from("users")
+      .where("email", email)
+      .then(function(results) {
+          if(results.length === 0) {
+            knexObj
+            .insert({email: email, password: password, first_name: firstName, last_name: lastName})
+            .into('users')
+            .then(function() {
+              res.send({authenticated: true});
+            })
+          }
+          else {
+            res.send({authenticated: true});
+          }
+      });
 });
+
+
+app.post('/users/auth/login', (req, res) => {
+  var email = req.body.email;
+  var password = req.body.password;
+
+  knexObj
+      .select("user_id","password")
+      .from("users")
+      .where("email", email)
+      .then(function(results) {
+          console.log('results ', results)
+          if(results.length === 0) {
+            knexObj
+            .insert({email: email, password: bcrypt.hashSync(req.body.password, 5)})
+            .into('users')
+            .returning('*')
+            .then(function() {
+              //res.send({authenticated: true});
+              console.log("here not found <<<< ")
+              res.send({authenticated: true});
+            })
+          }
+          else {
+            // if (bcrypt.compareSync(password, results[0].password) === true) {
+            //   res.send({authenticated: true});
+            // }
+            console.log("here user found ")
+            bcrypt.compare(password, results[0].password, function(err, result) {
+              console.log("result", result);
+              if(result) {
+                res.send({authenticated: true});
+              } else {
+                res.status(403);
+              }
+            });
+          }
+        });
+
+      });
 
 app.use('/dogs', dogsRoutes(knexObj));
 app.use('/users', usersRoutes(knexObj));
