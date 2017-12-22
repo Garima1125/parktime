@@ -20,7 +20,9 @@ class LoginModal extends Component {
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this.redirectUser = this.redirectUser.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.authenticateUser = this.authenticateUser.bind(this);
   }
 
   close() {
@@ -31,20 +33,17 @@ class LoginModal extends Component {
     this.setState({ showModal: true });
   };
 
-  handleInputChange(event) {
-    console.log(event);
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  handleEmailChange(event) {
+    this.setState({email: event.target.value})
+  }
 
-    this.setState({
-      [name]: value
-    });
+  handlePasswordChange(event) {
+    this.setState({password: event.target.value})
   }
 
   redirectUser(response) {
     $.ajax({
-      url: "/users/create/",
+      url: "/users/auth/google/",
       type: "POST",
       data: response.profileObj,
       dataType: 'json',
@@ -60,21 +59,21 @@ class LoginModal extends Component {
     });
   };
 
-  authenticateUser() {
+  authenticateUser(e) {
+    e.preventDefault();
     $.ajax({
-      url: "/users/create/",
+      url: "/users/auth/login/",
       type: "POST",
       data: {email: this.state.email, password: this.state.password},
       dataType: 'json',
       ContentType: 'application/json',
       success: (data) => {
-          console.log(data);
-          this.setState(data);
+        console.log(data);
+        this.setState(data);
       },
       error: function(error) {
         console.log(error);
       }.bind(this)
-
     });
   };
 
@@ -112,25 +111,25 @@ class LoginModal extends Component {
                 </ul>
                 <div className="tab-content">
                   <div className="tab-pane active" id="Login">
-                  <form role="form" className="form-horizontal">
+                  <form role="form" className="form-horizontal" onSubmit={this.authenticateUser}>
                       <div className="form-group">
                         <label htmlFor="email" className="col-sm-2 control-label">Email</label>
                         <div className="col-sm-10">
-                            <input type="email" className="form-control" id="email1" placeholder="Email" onChange={this.handleInputChange} />
+                            <input type="text" className="form-control" value={this.state.email} id="email1" placeholder="Email" onChange={this.handleEmailChange} />
                         </div>
                       </div>
                       <div className="form-group">
                           <label htmlFor="exampleInputPassword1" className="col-sm-2 control-label">
                               Password</label>
                           <div className="col-sm-10">
-                              <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleInputChange}/>
+                              <input type="password" className="form-control" value={this.state.password} id="exampleInputPassword1" placeholder="Password" onChange={this.handlePasswordChange}/>
                           </div>
                       </div>
                       <div className="row">
                           <div className="col-sm-2">
                           </div>
                           <div className="col-sm-10">
-                              <button type="submit" className="btn btn-primary btn-sm" onClick={this.authenticateUser.bind(this)}>
+                              <button type="submit" className="btn btn-primary btn-sm">
                                   Continue</button>
                           </div>
                       </div>
