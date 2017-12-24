@@ -1,3 +1,6 @@
+// Garima 
+// input postal code, convert to lat/lng 
+// submit to job search / dog walker search (maps)
 import React, {Component} from 'react';
 import {Carousel} from 'react-bootstrap';
 

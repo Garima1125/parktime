@@ -1,32 +1,30 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
-import Nav from './Nav.jsx';
+import Nav from './components/Nav.jsx';
 
 // import Signup from './Signup.jsx';
-import Homepage from './Homepage.jsx';
-import Profile from './Profile.jsx';
-import Walker from './Walker.jsx';
-// import Dog from './Dog.jsx';
-// import Job from './Job.jsx';
-import About from './About.jsx';
-import Content from './Content.jsx';
-// import Footer from './Footer.jsx';
-import Owner from './Owner.jsx';
-
-
+import Home from './containers/Home.jsx';
+import Dogs from './containers/Dogs.jsx';
+import About from './containers/About.jsx';
+import Profile from './containers/Profile.jsx';
+import Walker from './containers/Walker.jsx';
+import Content from './containers/Content.jsx';
+import Owner from './containers/Owner.jsx';
+import Search from './containers/Search.jsx';
 
 class App extends Component {
     render() {
         return (
-
             <BrowserRouter>
                 <div>
                     <Nav />
-                    <Route exact path='/' component={Homepage} />
+                    <Route exact path='/' component={Home} />
                     <Route exact path='/about' component={About} />
+                    <Route exact path='/dogs' component={Dogs} />
                     <Route exact path='/profile' component={Profile} />
                     <Route exact path='/walker' component={Walker} />
                     <Route exact path='/owner' component={Owner} />
+                    <Route exact path='/search' component={Search} />
                 </div>
             </BrowserRouter>
         );

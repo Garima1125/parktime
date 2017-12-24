@@ -10,7 +10,7 @@ import walkersRoutes from './routes/walkers'
 import ownersRoutes from './routes/owners'
 
 const PORT = process.env.PORT || 8080;
-const ENV = process.env.ENV || "dev";
+const ENV = process.env.ENV || "development";
 const app = express();
 const bcrypt = require('bcrypt');
 
@@ -34,6 +34,10 @@ app.get('/', (req, res) => {
     res.render('main');
 });
 
+app.get('/dogs', (req, res) => {
+  res.render('main');
+});
+
 app.get('/about', (req, res) => {
     res.render('main');
 });
@@ -48,6 +52,10 @@ app.get('/walker', (req, res) => {
 
 app.get('/owner', (req, res) => {
     res.render('main');
+});
+
+app.get('/search', (req, res) => {
+  res.render('main');
 });
 
 app.post('/users/auth/google', (req, res) => {

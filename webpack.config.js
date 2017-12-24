@@ -11,7 +11,9 @@ module.exports = {
     watchOptions: {
       poll: true
     },
-
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
     module: {
         loaders: [
             {
