@@ -94,16 +94,10 @@ app.post('/users/auth/login', (req, res) => {
             .into('users')
             .returning('*')
             .then(function() {
-              //res.send({authenticated: true});
-              console.log("here not found <<<< ")
               res.send({authenticated: true});
             })
           }
           else {
-            // if (bcrypt.compareSync(password, results[0].password) === true) {
-            //   res.send({authenticated: true});
-            // }
-            console.log("here user found ")
             bcrypt.compare(password, results[0].password, function(err, result) {
               console.log("result", result);
               if(result) {
@@ -115,7 +109,13 @@ app.post('/users/auth/login', (req, res) => {
           }
         });
 
-      });
+});
+
+app.post('/users/profile/create', (req, res) => {
+  console.log(req.body);
+  res.send(200);
+});
+
 
 app.use('/dogs', dogsRoutes(knexObj));
 app.use('/users', usersRoutes(knexObj));

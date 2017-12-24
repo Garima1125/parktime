@@ -22,6 +22,7 @@ class Profile extends Component {
                   </div>
                 </div>
               </div>
+              <img id='gif' src={'/static/assets/update.gif'} alt='gif'/>
             </div>
         );
     }
