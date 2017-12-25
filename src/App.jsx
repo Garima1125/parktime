@@ -1,3 +1,4 @@
+// Garima & Jessica
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Nav from './components/Nav.jsx';
@@ -8,9 +9,8 @@ import Dogs from './containers/Dogs.jsx';
 import About from './containers/About.jsx';
 import Profile from './containers/Profile.jsx';
 import Walker from './containers/Walker.jsx';
-import Content from './containers/Content.jsx';
 import Owner from './containers/Owner.jsx';
-import Search from './containers/Search.jsx';
+import JobSearch from './containers/JobSearch.jsx';
 
 class App extends Component {
     render() {
@@ -24,7 +24,7 @@ class App extends Component {
                     <Route exact path='/profile' component={Profile} />
                     <Route exact path='/walker' component={Walker} />
                     <Route exact path='/owner' component={Owner} />
-                    <Route exact path='/search' component={Search} />
+                    <Route exact path='/search' component={JobSearch} />
                 </div>
             </BrowserRouter>
         );

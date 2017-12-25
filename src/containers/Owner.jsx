@@ -1,5 +1,9 @@
 // Garima
-// 
+// creates onwer's profile
+// react-boostrap
+
+
+
 import React, {Component} from 'react';
 import $ from 'jquery';
 class Owner extends Component {

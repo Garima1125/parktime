@@ -15,10 +15,8 @@ export default (knex) => {
 
     router.get ('/all', (req, res) => {
         // TODO: get from session
-        let user_id = 1;
-        let dogs = knex('dogs')
-            .select('*')
-            .where('owner_id', user_id);
+        let user_id = '1';
+        let dogs = knex('dogs').select('*').where('owner_id', user_id);
         dogs.then(result => {
             res.json(result);
         }).catch(err => {

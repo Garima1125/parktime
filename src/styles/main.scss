@@ -1,248 +1,253 @@
-*{
-  padding:0;
-  margin:0;
-  overflow-x:hidden;
-}
+// commented out due to suspected conflict
+// apply css per need basis
+// check the "search" page see if map renders
+// Garima
 
-h1 {
-    color: rgb(14, 168, 117);
-}
+// *{
+//   padding:0;
+//   margin:0;
+//   overflow-x:hidden;
+// }
 
-footer {
-font-size: 0.8em;
-background-color: rgb(253, 183, 120);
-line-height: 71px;
-position:absolute;
-bottom:0;
-width:100%;
- z-index: -1
+// h1 {
+//     color: rgb(14, 168, 117);
+// }
 
-}
+// footer {
+// font-size: 0.8em;
+// background-color: rgb(253, 183, 120);
+// line-height: 71px;
+// position:absolute;
+// bottom:0;
+// width:100%;
+//  z-index: -1
 
-.navbar-brand{
-  font-size: 25px;
-  font-weight: bold;
-  font-family: 'Itim', cursive;
-  color: black!important;
-  text-align: center!important;
-  line-height: 35px;
+// }
 
-}
+// .navbar-brand{
+//   font-size: 25px;
+//   font-weight: bold;
+//   font-family: 'Itim', cursive;
+//   color: black!important;
+//   text-align: center!important;
+//   line-height: 35px;
 
-.navbar-header{
-  float:right;
+// }
 
-
-}
-
-
-#head{
-  line-height: 71px;
-  position: fixed;
-  width: 100%;
-  z-index:999;
-  background-color: rgb(253, 183, 120);
+// .navbar-header{
+//   float:right;
 
 
-}
-
-.user-register, .walker-details, .Dog-profile, .job-post, .owner-details{
-  width: 500px;
-  margin:auto;
-  margin-top: 109px;
-
-}
-
-#postal,#unit,#pro,#con,{
-  width: 200px;
-  resize: horizontal;
-  overflow: auto;
-  margin-right: 15px;
-  height: 30px;
-}
-
-#list-home-list{
-  background-color:rgb(253, 183, 120) ;
-  border-style:solid;
-  border-color: black;
-
-  .list-group-item{
-    border: 4px solid #ddd !important;
-  }
-}
-
-.smallbox{
-  clear: both;
-  overflow: hidden;
-}
-
-.form-group1{
-  float:left;
-}
-
-#login{
-  margin-right: 15px;
-
-}
+// }
 
 
-#reg{
- float:center;
-}
-
-#next{
-  float:right;
-}
-
-#choose{
-  margin-left: 21px;
-  width: 260px;
-  height: 30px;
-}
-
-#bankname{
-  margin-left: 28px;
-}
-.image_box{
-  height:300px;
-  img{
-    width:323px!important;
-    height:300px!important;
-    float:right;
-
-  }
-}
-
-#about-us{
-  width:800px;
-  float:left;
-  margin-left: 30px;
-  line-height:1.5em;
-  font-size:20px;
-  margin-top: 150px;
-}
-
-#about{
-  text-align: center;
-  margin:24px 0;
-
-}
-
-div#OR {
-  height: 30px;
-  width: 30px;
-  border: 1px solid #C2C2C2;
-  border-radius: 50%;
-  font-weight: bold;
-  line-height: 28px;
-  text-align: center;
-  font-size: 12px;
-  float: right;
-  position: absolute;
-  right: -16px;
-  top: 40%;
-  z-index: 1;
-  background: #DFDFDF;
-}
-
-.home,.about_us{
-  float: left;
-  margin-left:25px;
-  color:black !important;
-  line-height: 68px;
-  margin-right: 48px;
-
-}
-
-.carousel-inner
-{
-  height:720px;
-}
-#chooseprofile{
-  width: 500px;
-  margin:auto;
-  height:40%;
-  text-align: center;
-  margin-top:100px;
-}
-
-#dog{
-  // max-width: 99%;
-  // max-height: 99%;
-  display: block;
-  margin: 0;
-  height: 910px;
-  width: auto;
-}
-
-img{
-  height: 910px;
-  width: auto;
-    // max-width: 300px!important;
-    // max-height: 300px!important;
-}
-.loginBtn {
-  box-sizing: border-box;
-  position: relative;
-  margin: 0.2em;
-  padding: 0 15px 0 46px;
-  border: none;
-  text-align: left;
-  line-height: 34px;
-  white-space: nowrap;
-  border-radius: 0.2em;
-  font-size: 16px;
-  color: #FFF;
-}
+// #head{
+//   line-height: 71px;
+//   position: fixed;
+//   width: 100%;
+//   z-index:999;
+//   background-color: rgb(253, 183, 120);
 
 
-.loginBtn-google {
-  background: #DD4B39;
-}
-.loginBtn-google::before {
-  border-right: #BB3F30 1px solid;
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
-  content: "";
-}
-.loginBtn-google:hover,
-.loginBtn-google:focus {
-  background: #E74B37;
-}
+// }
+
+// .user-register, .walker-details, .Dog-profile, .job-post, .owner-details{
+//   width: 500px;
+//   margin:auto;
+//   margin-top: 109px;
+
+// }
+
+// #postal,#unit,#pro,#con,{
+//   width: 200px;
+//   resize: horizontal;
+//   overflow: auto;
+//   margin-right: 15px;
+//   height: 30px;
+// }
+
+// #list-home-list{
+//   background-color:rgb(253, 183, 120) ;
+//   border-style:solid;
+//   border-color: black;
+
+//   .list-group-item{
+//     border: 4px solid #ddd !important;
+//   }
+// }
+
+// .smallbox{
+//   clear: both;
+//   overflow: hidden;
+// }
+
+// .form-group1{
+//   float:left;
+// }
+
+// #login{
+//   margin-right: 15px;
+
+// }
 
 
-.marginabout{
-  margin-bottom:135px;
-  margin-top: 40px;
+// #reg{
+//  float:center;
+// }
 
-}
+// #next{
+//   float:right;
+// }
+
+// #choose{
+//   margin-left: 21px;
+//   width: 260px;
+//   height: 30px;
+// }
+
+// #bankname{
+//   margin-left: 28px;
+// }
+// .image_box{
+//   height:300px;
+//   img{
+//     width:323px!important;
+//     height:300px!important;
+//     float:right;
+
+//   }
+// }
+
+// #about-us{
+//   width:800px;
+//   float:left;
+//   margin-left: 30px;
+//   line-height:1.5em;
+//   font-size:20px;
+//   margin-top: 150px;
+// }
+
+// #about{
+//   text-align: center;
+//   margin:24px 0;
+
+// }
+
+// div#OR {
+//   height: 30px;
+//   width: 30px;
+//   border: 1px solid #C2C2C2;
+//   border-radius: 50%;
+//   font-weight: bold;
+//   line-height: 28px;
+//   text-align: center;
+//   font-size: 12px;
+//   float: right;
+//   position: absolute;
+//   right: -16px;
+//   top: 40%;
+//   z-index: 1;
+//   background: #DFDFDF;
+// }
+
+// .home,.about_us{
+//   float: left;
+//   margin-left:25px;
+//   color:black !important;
+//   line-height: 68px;
+//   margin-right: 48px;
+
+// }
+
+// .carousel-inner
+// {
+//   height:720px;
+// }
+// #chooseprofile{
+//   width: 500px;
+//   margin:auto;
+//   height:40%;
+//   text-align: center;
+//   margin-top:100px;
+// }
+
+// #dog{
+//   // max-width: 99%;
+//   // max-height: 99%;
+//   display: block;
+//   margin: 0;
+//   height: 910px;
+//   width: auto;
+// }
+
+// img{
+//   height: 910px;
+//   width: auto;
+//     // max-width: 300px!important;
+//     // max-height: 300px!important;
+// }
+// .loginBtn {
+//   box-sizing: border-box;
+//   position: relative;
+//   margin: 0.2em;
+//   padding: 0 15px 0 46px;
+//   border: none;
+//   text-align: left;
+//   line-height: 34px;
+//   white-space: nowrap;
+//   border-radius: 0.2em;
+//   font-size: 16px;
+//   color: #FFF;
+// }
+
+
+// .loginBtn-google {
+//   background: #DD4B39;
+// }
+// .loginBtn-google::before {
+//   border-right: #BB3F30 1px solid;
+//   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+//   content: "";
+// }
+// .loginBtn-google:hover,
+// .loginBtn-google:focus {
+//   background: #E74B37;
+// }
+
+
+// .marginabout{
+//   margin-bottom:135px;
+//   margin-top: 40px;
+
+// }
+
+// // .nav-tabs {
+// //     margin-bottom: 24px!important;
+// // }
+// // .sign-with {
+// //     margin-top: 25px;
+// //     padding: 20px;
+// //     border-top: 1px solid #e5e5e5;
+// //     padding:0 0 20px 0;
+// //     h3{
+// //       padding: 5px 0;
+// //     }
+// // }
+// .divTag {
+//   border-right: 1px dotted #C2C2C2;
+//   padding-right: 30px;
+// }
 
 // .nav-tabs {
-//     margin-bottom: 24px!important;
+//   margin-bottom: 15px;
 // }
 // .sign-with {
-//     margin-top: 25px;
-//     padding: 20px;
-//     border-top: 1px solid #e5e5e5;
-//     padding:0 0 20px 0;
-//     h3{
-//       padding: 5px 0;
-//     }
+//   margin-top: 25px;
+//   padding: 20px;
 // }
-.divTag {
-  border-right: 1px dotted #C2C2C2;
-  padding-right: 30px;
-}
 
-.nav-tabs {
-  margin-bottom: 15px;
-}
-.sign-with {
-  margin-top: 25px;
-  padding: 20px;
-}
-
-#main{
-  height: 800px;
-  width: 700px!important;
-  margin-left: 250px !important;
-}
+// #main{
+//   height: 800px;
+//   width: 700px!important;
+//   margin-left: 250px !important;
+// }

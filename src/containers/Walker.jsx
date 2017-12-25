@@ -1,3 +1,7 @@
+// Garima
+// Creating Walker's profile
+// react-boostrap
+
 import React, {Component} from 'react';
 import $ from 'jquery';
 

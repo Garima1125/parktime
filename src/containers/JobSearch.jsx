@@ -1,3 +1,6 @@
+// Jessica
+// map - display jobs near me
+
 import React, {Component} from 'react';
 import {Grid, Row, Col, Button, ButtonToolbar, Panel, PageHeader} from 'react-bootstrap';
 
@@ -27,7 +30,7 @@ class Search extends Component {
             center: {lat: -34.397, lng: 150.644},
             zoom: 6
         });
-        
+
         /*
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
