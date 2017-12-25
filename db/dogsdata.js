@@ -40,6 +40,5 @@ module.exports =[
   breed:'labrador', 
   description: '',
   owner_id: '1'
-  },
-
+  }
 ]

@@ -6,7 +6,6 @@ exports.up = function(knex, Promise) {
     table.decimal('rate');
     table.string('status');
     table.string('dog_id').unsigned().references('dog_id').inTable('dogs');
-    table.string('owner_id').unsigned().references('owner_id').inTable('owners');
     table.string('walker_id').unsigned().references('walker_id').inTable('walkers');
   });
 };

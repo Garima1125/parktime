@@ -6,7 +6,6 @@ module.exports =[
   rate:15.25,
   status: 'offered',
   dog_id: '1',
-  owner_id: '2',
   walker_id: '1'
 },
 
@@ -17,7 +16,6 @@ module.exports =[
   rate:10.50,
   status: 'accepting applications',
   dog_id: '2',
-  owner_id: '3',
   walker_id: '2'
 },
 
@@ -28,7 +26,6 @@ module.exports =[
   rate:15.00,
   status:'offered',
   dog_id: '3',
-  owner_id: '1',
   walker_id: '3'
 },
 
@@ -39,7 +36,6 @@ module.exports =[
   rate:35.00,
   status: 'completed',
   dog_id: '4',
-  owner_id: '5',
   walker_id: '4'
 },
 
@@ -50,8 +46,26 @@ module.exports =[
   rate:15.00,
   status: 'offered',
   dog_id: '5',
-  owner_id: '4',
+  walker_id: '5'
+},
+
+{
+  job_id: '6',
+  title:'looking for a dog walker',
+  description: "I'm looking to hire a dog walker. Please send your application if you're interested.",
+  rate:35.00,
+  status: 'completed',
+  dog_id: '2',
+  walker_id: '4'
+},
+
+{ 
+  job_id: '7',
+  title:'Take my dog for a walker',
+  description: "I have a 2years old shihpoo, who loves going on a walk and is looking for a friend.",
+  rate:15.00,
+  status: 'offered',
+  dog_id: '1',
   walker_id: '5'
 }
-
 ]

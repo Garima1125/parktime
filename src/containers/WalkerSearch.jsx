@@ -1,2 +1,2 @@
 // Jessica
-// map - display walkers near me
+// map - displays walkers near me
