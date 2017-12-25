@@ -1,6 +1,6 @@
-//require("./bootstrap/css/bootstrap.min.css");
-require("./styles/application.scss");
+// Garima & Jessica
 
+require("./styles/application.scss");
 
 import React from 'react';
 import ReactDOM from 'react-dom';

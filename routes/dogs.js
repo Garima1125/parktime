@@ -8,10 +8,21 @@ export default (knex) => {
     // console.log(jobsRoutes(knex));
     router.use('/:dog_id/jobs', jobsRoutes(knex));
 
-    router.post('/:dog_id', (req, res) => {
+    router.post('/', (req, res) => {
         console.log("create new dog");
         res.status(200).send("");
     })
+
+    router.get ('/all', (req, res) => {
+        // TODO: get from session
+        let user_id = '1';
+        let dogs = knex('dogs').select('*').where('owner_id', user_id);
+        dogs.then(result => {
+            res.json(result);
+        }).catch(err => {
+            res.status(500).send(err);
+        });
+    });
 
     router.get('/:dog_id', (req, res) => {
         console.log("view a dog");

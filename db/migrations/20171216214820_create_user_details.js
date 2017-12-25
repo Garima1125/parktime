@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('user_detail', (table) => {
-    table.increments('user_detail_id').primary();
+    table.string('user_detail_id').primary();
     table.string('postal_code');
     table.string('address');
     table.string('unit_number');
@@ -9,7 +9,9 @@ exports.up = function(knex, Promise) {
     table.string('country');
     table.string('phone');
     table.string('picture');
-    table.integer('user_id').unsigned().references('user_id').inTable('users');
+    table.decimal('user_latitude', 9, 6);
+    table.decimal('user_longitude', 9, 6);
+    table.string('user_id').unsigned().references('user_id').inTable('users');
 
   });
 };

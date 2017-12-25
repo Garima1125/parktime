@@ -1,3 +1,7 @@
+// Garima
+// Google signup
+// change jQuery to Fetch
+
 import React, {Component} from 'react';
 import GoogleLogin from 'react-google-login';
 import { Redirect } from 'react-router';

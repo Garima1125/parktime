@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+// Garima
+// use react-bootstrap 
 
+import React, {Component} from 'react';
 
 class About extends Component {
     render() {

@@ -1,3 +1,5 @@
+// Jessica
+
 import React, {Component} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import GoogleLogin from 'react-google-login';
@@ -91,7 +93,7 @@ class LoginModal extends Component {
       <div>
         <Button
           bsStyle="default"
-          bsSize="large"
+          bsSize="xsmall"
           onClick={this.open}
         >
           Get Started

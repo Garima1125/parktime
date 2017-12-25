@@ -1,3 +1,6 @@
+// Garima
+// choose between dog walker and job search
+
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
@@ -22,6 +25,7 @@ class Profile extends Component {
                   </div>
                 </div>
               </div>
+              <img id='gif' src={'/static/assets/update.gif'} alt='gif'/>
             </div>
         );
     }
