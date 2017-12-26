@@ -3,6 +3,7 @@
 import express from 'express';
 import jobsRoutes from './jobs';
 import { read } from 'fs';
+import schedules from './schedules';
 const router = express.Router({mergeParams: true});
 
 export default (knex) => {
@@ -22,103 +23,75 @@ export default (knex) => {
         knex
         .select()
         .from('users')
-        .fullOuterJoin('owners', 'users.user_id', 'owners.user_id')
+        .fullOuterJoin('owners', 'users.user_id', 'owners.owner_user_id')
         .fullOuterJoin('dogs', 'dogs.owner_id','owners.owner_id')
         .fullOuterJoin('jobs', 'dogs.dog_id', 'jobs.dog_id')
         .fullOuterJoin('schedules','schedules.job_id','jobs.job_id')
         .where ('users.user_id', user_id)
         .orderBy('dogs.dog_id')
-        .then(schedules => {
-
-            /*
-            let jobs = {
-                'job_id': {
-                    'job_id': '',
-                    'title': '',
-                    'description': '',
-                    'rate': '',
-                    'status': '',
-                    'schedules': []
-                }
-            };
-            */
-
+        .then(rows => {
+            console.log(JSON.stringify(rows, null, 4));
             // group schedules by job
             let jobs = {};
-            for (let schedule of schedules) {
-                console.log(`schedule_id: ${schedule.schedule_id}`);
-                if (schedule.job_id in jobs) {
-                    jobs[schedule.job_id].schedules.push({
-                        schedule_id: schedule.schedule_id,
-                        start_time: schedule.start_time,
-                        end_time: schedule.end_time,
-                        status: schedule.status
+            for (let row of rows) {
+                if (row.job_id in jobs) {
+                    jobs[row.job_id].schedules.push ({
+                        schedule_id: row.schedule_id,
+                        schedule_start_time: row.schedule_start_time,
+                        schedule_end_time: row.schedule_end_time,
+                        schedule_status: row.schedule_status
                     });
                 } else {
                     let job = {
-                        job_id: schedule.job_id,
-                        title: schedule.title,
-                        description: schedule.description,
-                        rate: schedule.rate,
-                        status: schedule.status,
-                        dogs: {
-                            dog_id: schedule.dog_id,
-                            name: schedule.name,
-                            age: schedule.age,
-                            breed: schedule.breed
+                        job_id: row.job_id,
+                        job_title: row.job_title,
+                        job_description: row.job_description,
+                        job_rate: row.job_rate,
+                        job_status: row.job_status,
+                        // temporary
+                        dog: {
+                            dog_id: row.dog_id,
+                            dog_name: row.dog_name,
+                            dog_age: row.dog_age,
+                            dog_breed:row.dog_breed,
+                            dog_description: row.dog_description
                         }
                     }
+
                     // only keep what we want in schedule
                     job.schedules = [{
-                        schedule_id: schedule.schedule_id,
-                        start_time: schedule.start_time,
-                        end_time: schedule.end_time,
-                        status: schedule.status
+                        scheudle_id: row.schedule_id,
+                        schedule_start_time: row.schedule_start_time,
+                        schedule_end_time: row.schedule_end_time,
+                        schedule_status: row.schedule_status
                     }]
-                    jobs[schedule.job_id] = job;
+                    jobs[row.job_id] = job;
                 }
             }
 
-            /*
-            let dogs = {
-                'dog_id': {
-                    'dog_id': '',
-                    'name': '',
-                    age: 8,
-                    breed: '',
-                    description: '',
-                    jobs: [
-                        {
-
-                        }
-                    ]
-                }
-            }
-            */
+            // group jobs by dog 
 
             let dogs = {};
             for (let job_id in jobs) {
-                console.log(`job_id: ${job_id}`);
                 let job = jobs[job_id];
-                if (job.dogs.dog_id in dogs) {
-                    let dog_id = job.dogs.dog_id;
-                    delete job.dogs;
+                if (job.dog.dog_id in dogs){
+                    let dog_id = job.dog.dog_id;
+                    delete job.dog;
                     dogs[dog_id].jobs.push(job);
                 } else {
                     let dog = {
-                        dog_id: job.dogs.dog_id,
-                        name: job.dogs.name,
-                        age: job.dogs.age,
-                        breed: job.dogs.breed,
-                        //description: job.description,
+                        dog_id: job.dog.dog_id,
+                        dog_name: job.dog.dog_name,
+                        dog_age: job.dog.dog_age,
+                        dog_breed: job.dog.dog_breed,
+                        dog_description: job.dog.dog_description
                     }
-                    let dog_id = job.dogs.dog_id;
-                    delete job.dogs;
+                    let dog_id = job.dog.dog_id;
+                    delete job.dog;
                     dog.jobs = [job];
                     dogs[dog_id] = dog;
                 }
             }
-            
             res.json(Object.values(dogs));
         }).catch(err => {
             console.log(err);

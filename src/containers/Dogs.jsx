@@ -21,32 +21,33 @@ class Dogs extends Component {
     }
 
     getDogs = () => {
-        // TODO: get dogs using fetch
-        fetch('/dogs/all')
-            .then(resp => {
-                if (resp.status !== 200) {
-                    // TODO: error handling
-                    return;
-                }
-                resp.json().then(dogs => {
-                    // HACK: put join dogs query
-                    for (let dog in dogs) {
-
-                    }
-                    this.setState({dogs: dogs});
-                    
-                })
-            }).catch(err => {
-                console.log('error fetching list of dogs');
-            });
+        fetch('dogs/all')
+        .then(resp => {
+            if (resp.status !== 200) {
+                // TODO: error handling
+                return;
+            }
+            resp.json().then(dogs => {
+                this.setState({dogs: dogs});
+            })
+        }) .catch(err => {
+            console.log('error fetching list of dogs');
+        })
     }
 
     scheduleList = (job) => {
         return job.schedules.map(schedule => {
             return (
-                <ListGroupItem>
-                    {schedule.status}: {schedule.start_time} - {schedule.end_time}
-                </ListGroupItem>
+                <div key={uuid()}>
+                    <ListGroupItem>
+                        {schedule.schedule_status}: {schedule.schedule_start_time} - {schedule.schedule_end_time}
+                    </ListGroupItem>
+                    <Button bsSize='small' bsStyle='danger'>
+                        <i className="fa fa-times fa-fw" aria-hidden="true"></i>
+                        Remove
+                        &nbsp;
+                    </Button>
+                </div>
             );
         });
     }
@@ -54,12 +55,17 @@ class Dogs extends Component {
     jobList = (dog) => {
         return dog.jobs.map(job => {
             return (
-                <ListGroupItem>
+                <ListGroupItem key={uuid()}>
                     <Row className="show-grid">
                         <Col md={12}>
-                            {job.title} - {job.description} - {job.rate} - {job.status}
+                            {job.job_title} - {job.job_description} - {job.job_rate} - {job.job_status}
                         </Col>
                     </Row>
+                    <Button bsSize='small' bsStyle='danger'>
+                        <i className="fa fa-times fa-fw" aria-hidden="true"></i>
+                        Remove
+                        &nbsp;
+                    </Button>
                     <Row className="show-grid">
                         <Col md={12}>
                             <br />
@@ -76,27 +82,27 @@ class Dogs extends Component {
     dogList = () => {
         return this.state.dogs.map(dog => {
             return (
-                <Panel key={uuid()} header={`#${dog.dog_id} ${dog.name} (${dog.age}) ${dog.breed}`}>
+                <Panel key={uuid()} hearder={`#${dog.dog_id} ${dog.dog_name} (${dog.dog_age}) ${dog.dog_breed}`}>
                     <Row className="show-grid">
                         <Col md={12}>
                             <ButtonToolbar>
                                 <NewJobModal dogID={dog.dog_id} />
                                 <Button bsSize='small'>
-                                    <i className="fa fa-calendar fa-fw" aria-hidden="true"></i>
+                                    <i className="fa fa-calender fa-fw" aria-hidden="true"></i>
                                     &nbsp;
                                     Schedule
                                 </Button>
                                 <Button bsSize='small' bsStyle='danger'>
                                     <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                                    &nbsp;
                                     Remove
+                                    &nbsp;
                                 </Button>
                             </ButtonToolbar>
                         </Col>
                     </Row>
                     <Row className="show-grid">
                         <Col md={12}>
-                            {dog.description}
+                            {dog.dog_description}
                         </Col>
                     </Row>
                     <br />
@@ -109,17 +115,16 @@ class Dogs extends Component {
                     </Row>
                 </Panel>
             );
-        });
+        })
     }
 
     render() {
-        // once clicked, you need to redirect to single dog page
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col md={12}>
                         <PageHeader>
-                            My Dogs &nbsp; 
+                            My Dogs &nbsp;
                             <small>Manage your dogs</small>
                         </PageHeader>
                         <ButtonToolbar>
@@ -130,7 +135,7 @@ class Dogs extends Component {
                 <br/>
                 <Row className="show-grid">
                     <Col md={12}>
-                        {this.dogList()}
+                        {this.dogList()};
                     </Col>
                 </Row>
             </Grid>

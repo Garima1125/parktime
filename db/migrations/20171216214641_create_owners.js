@@ -2,12 +2,12 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('owners', (table) => {
     table.string('owner_id').primary();
-    table.string('card_type');
-    table.bigInteger('card_number');
-    table.integer('expiry_year');
-    table.integer('expiry_month');
-    table.integer('cvv');
-    table.string('user_id').unsigned().references('user_id').inTable('users');
+    table.string('owner_card_type');
+    table.bigInteger('owner_card_number');
+    table.integer('owner_expiry_year');
+    table.integer('owner_expiry_month');
+    table.integer('owner_cvv');
+    table.string('owner_user_id').unsigned().references('user_id').inTable('users');
   })
 };
 
