@@ -4,12 +4,11 @@ import React, {Component} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import GoogleLogin from 'react-google-login';
 import { Redirect } from 'react-router';
-import $ from 'jquery';
 
 class LoginModal extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       showModal: false,
@@ -44,38 +43,32 @@ class LoginModal extends Component {
   }
 
   redirectUser(response) {
-    $.ajax({
-      url: "/users/auth/google/",
-      type: "POST",
-      data: response.profileObj,
-      dataType: 'json',
-      ContentType: 'application/json',
-      success: (data) => {
-          console.log(data);
-          this.setState(data);
-      },
-      error: function(error) {
-        console.log(error);
-      }.bind(this)
-
+    this.state.email = response.profileObj.email;
+    fetch("/users/auth/google/", {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(response.profileObj)
+    }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      this.setState(data);
+    }.bind(this)).catch(function(error){
+         console.log(error);
     });
-  };
 
-  authenticateUser(e) {
-    e.preventDefault();
-    $.ajax({
-      url: "/users/auth/login/",
-      type: "POST",
-      data: {email: this.state.email, password: this.state.password},
-      dataType: 'json',
-      ContentType: 'application/json',
-      success: (data) => {
-        console.log(data);
-        this.setState(data);
-      },
-      error: function(error) {
-        console.log(error);
-      }.bind(this)
+}
+
+  authenticateUser() {
+    fetch("/users/auth/login/", {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: this.state.email, password: this.state.password})
+    }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      this.setState(data);
+    }.bind(this)).catch(function(error){
+         console.log(error);
     });
   };
 
@@ -85,19 +78,17 @@ class LoginModal extends Component {
     }
 
     if (this.state.authenticated) {
-
+      this.props.onChange({email: this.state.email, authenticated: this.state.authenticated});
+      localStorage.setItem('authenticated', true);
+      localStorage.setItem('email', this.state.email)
       return <Redirect to='/profile' />;
     }
 
     return (
       <div>
-        <Button
-          bsStyle="default"
-          bsSize="xsmall"
-          onClick={this.open}
-        >
-          Get Started
-        </Button>
+          <Button bsStyle="default" bsSize="xsmall" onClick={this.open}>
+            Get Started
+          </Button>
 
         <Modal show={this.state.showModal} onHide={this.close} bsSize="large" aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
@@ -131,7 +122,7 @@ class LoginModal extends Component {
                           <div className="col-sm-2">
                           </div>
                           <div className="col-sm-10">
-                              <button type="submit" className="btn btn-primary btn-sm">
+                              <button type="submit" className="btn btn-primary btn-sm" onClick={this.authenticateUser}>
                                   Continue</button>
                           </div>
                       </div>
