@@ -3,7 +3,8 @@
 import express from 'express';
 import reviewsRoutes from './reviews';
 const router = express.Router({mergeParams: true});
-
+const bcrypt = require('bcrypt');
+const uuidv4 = require('uuid/v4');
 
 export default (knex) => {
     router.use('/:user_id/reviews', reviewsRoutes(knex));
@@ -48,13 +49,13 @@ export default (knex) => {
     })
 
     router.post('/auth/google', (req, res) => {
-        
-        let user = { 
+        console.log(req.body);
+        let user = {
             password: '',
             first_name: req.body.givenName,
             last_name: req.body.familyName,
             email: req.body.email,
-            user_id: req.body.googleId // uuid
+            user_id: req.body.googleId
         };
 
         knex
@@ -67,35 +68,39 @@ export default (knex) => {
                   .insert(user)
                   .into('users')
                   .then(function() {
-                    res.send({authenticated: true});
+                    res.send({"authenticated": "true"});
                   })
                 }
                 else {
-                  res.send({authenticated: true});
+                  res.send({"authenticated": "true"});
                 }
             });
     });
-      
-      
+
+
     router.post('/auth/login', (req, res) => {
         var email = req.body.email;
         var password = req.body.password;
 
-        let user = {
-            user_id: '',
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 5)
-        }
-      
+        // let user = {
+        //     user_id: '',
+        //     email: req.body.email,
+        //     password: bcrypt.hashSync(req.body.password, 5)
+        // }
+
         knex
             .select("user_id","password")
             .from("users")
-            .where("email", email)
+            .where("email", req.body.email)
             .then(function(results) {
                 console.log('results ', results)
                 if(results.length === 0) {
                 knex
-                  .insert(user)
+                  .insert({
+                      user_id: uuidv4(),
+                      email: req.body.email,
+                      password: bcrypt.hashSync(req.body.password, 5)
+                  })
                   .into('users')
                   .returning('*')
                   .then(function() {
@@ -113,13 +118,13 @@ export default (knex) => {
                   });
                 }
         });
-      
+
     });
-      
+
     router.post('/profile/create', (req, res) => {
         console.log(req.body);
         res.send(200);
     });
-    
+
     return router;
 }

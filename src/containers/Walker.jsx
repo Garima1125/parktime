@@ -102,7 +102,7 @@ class Walker extends Component {
                 <label htmlFor="postal-code">Postal Code</label>
                 <input type="input" className="form-control" value={this.state.postal_code} onChange={this.handlePostalCodeChange}id="postal" />
               </div>
-              <div className="form-group">
+              <div className="form-group" >
                 <label className="mr-sm-2" htmlFor="inlineFormCustomSelect" id="bankname">Bank Name</label>
                 <select className="custom-select mb-2 mr-sm-2 mb-sm-0" value={this.state.bank_name} onChange={this.handleBankNameChange}id="choose">
                   <option defaultValue>Choose...</option>
