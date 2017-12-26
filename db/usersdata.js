@@ -1,38 +1,38 @@
 module.exports =[
   {
-    password: '123456',
-    first_name:'jessica',
-    last_name:'liu',
-    email:'jessica@parktime.com',
+    user_password: '123456',
+    user_first_name:'jessica',
+    user_last_name:'liu',
+    user_email:'jessica@parktime.com',
     user_id: '1'
   },
 
-  { password: '123456',
-    first_name:'garima',
-    last_name:'arya',
-    email:'garima@parktime.com',
+  { user_password: '123456',
+    user_first_name:'garima',
+    user_last_name:'arya',
+    user_email:'garima@parktime.com',
     user_id: '2'
   },
 
   { 
-    password: '123456',
-    first_name:'shubham',
-    last_name:'arya',
-    email:'shubham@parktime.com',
+    user_password: '123456',
+    user_first_name:'shubham',
+    user_last_name:'arya',
+    user_email:'shubham@parktime.com',
     user_id: '3'
   },
 
-  { password: '123456',
-    first_name:'sagar',
-    last_name:'sharma',
-    email:'sagar@parktime.com',
+  { user_password: '123456',
+    user_first_name:'sagar',
+    user_last_name:'sharma',
+    user_email:'sagar@parktime.com',
     user_id: '4'
   },
   
-  { password: '123456',
-    first_name:'kanika',
-    last_name:'sharma',
-    email:'kanika@parktime.com',
+  { user_password: '123456',
+    user_first_name:'kanika',
+    user_last_name:'sharma',
+    user_email:'kanika@parktime.com',
     user_id: '5'
   },
 

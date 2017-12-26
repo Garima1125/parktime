@@ -1,45 +1,44 @@
 module.exports =[
 {
   dog_id: '1',
-  name: 'Romeo',
-  age: 8,
-  breed:'labrador', 
-  description: '',
+  dog_name: 'Romeo',
+  dog_age: 8,
+  dog_breed:'labrador', 
+  dog_description: '',
   owner_id: '1'
   },
 
 {
   dog_id: '2',
-  name: 'gabriel',
-  age: 3,
-  breed:'hound', 
-  description: '',
+  dog_name: 'gabriel',
+  dog_age: 3,
+  dog_breed:'hound', 
+  dog_description: '',
   owner_id: '2'
   },
 { 
   dog_id: '3',
-  name: 'Sherman',
-  age: 4,
-  breed:'Shihpoo', 
-  description: '',
+  dog_name: 'Sherman',
+  dog_age: 4,
+  dog_breed:'Shihpoo', 
+  dog_description: '',
   owner_id: '3'
   },
 {
   dog_id: '4',
-  name: 'oreo',
-  age: 1,
-  breed:'beagle', 
-  description: '',
+  dog_name: 'oreo',
+  dog_age: 1,
+  dog_breed:'beagle', 
+  dog_description: '',
   owner_id: '4'
   },
 
 {
   dog_id: '5',
-  name: 'scooby',
-  age: 8,
-  breed:'labrador', 
-  description: '',
+  dog_name: 'scooby',
+  dog_age: 8,
+  dog_breed:'labrador', 
+  dog_description: '',
   owner_id: '1'
-  },
-
+  }
 ]
