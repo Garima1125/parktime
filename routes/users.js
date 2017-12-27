@@ -51,17 +51,17 @@ export default (knex) => {
     router.post('/auth/google', (req, res) => {
         console.log(req.body);
         let user = {
-            password: '',
-            first_name: req.body.givenName,
-            last_name: req.body.familyName,
-            email: req.body.email,
+            user_password: '',
+            user_first_name: req.body.givenName,
+            user_last_name: req.body.familyName,
+            user_email: req.body.email,
             user_id: req.body.googleId
         };
 
         knex
             .select("user_id")
             .from("users")
-            .where("email", user.email)
+            .where("user_email", user.user_email)
             .then(function(results) {
                 if(results.length === 0) {
                 knex
@@ -89,17 +89,17 @@ export default (knex) => {
         // }
 
         knex
-            .select("user_id","password")
+            .select("user_id","user_password")
             .from("users")
-            .where("email", req.body.email)
+            .where("user_email", req.body.email)
             .then(function(results) {
                 console.log('results ', results)
                 if(results.length === 0) {
                 knex
                   .insert({
                       user_id: uuidv4(),
-                      email: req.body.email,
-                      password: bcrypt.hashSync(req.body.password, 5)
+                      user_email: req.body.email,
+                      user_password: bcrypt.hashSync(req.body.password, 5)
                   })
                   .into('users')
                   .returning('*')
@@ -108,7 +108,7 @@ export default (knex) => {
                   })
                 }
                 else {
-                  bcrypt.compare(password, results[0].password, function(err, result) {
+                  bcrypt.compare(password, results[0].user_password, function(err, result) {
                     console.log("result", result);
                     if(result) {
                       res.send({authenticated: true});
