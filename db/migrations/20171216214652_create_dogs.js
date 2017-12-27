@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('dog_age');
     table.string('dog_breed');
     table.text('dog_description');
-    table.string('owner_id').unsigned().references('owner_id').inTable('owners');
+    table.string('dog_owner_id').references('owner_id').inTable('owners');
   })
 };
 

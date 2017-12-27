@@ -5,8 +5,8 @@ exports.up = function(knex, Promise) {
     table.text('job_description');
     table.decimal('job_rate');
     table.string('job_status');
-    table.string('dog_id').unsigned().references('dog_id').inTable('dogs');
-    table.string('walker_id').unsigned().references('walker_id').inTable('walkers');
+    table.string('job_dog_id').references('dog_id').inTable('dogs');
+    table.string('job_walker_id').references('walker_id').inTable('walkers');
   });
 };
 

@@ -5,8 +5,8 @@ module.exports =[
   job_description: "I'm looking to hire a dog walker for my 3 years old labradore",
   job_rate:15.25,
   job_status: 'offered',
-  dog_id: '1',
-  walker_id: '1'
+  job_dog_id: '1',
+  job_walker_id: '1'
 },
 
 {
@@ -15,8 +15,8 @@ module.exports =[
   job_description: "looking for a dog walker near me, one who can walk my 6 months corgi twice in a day",
   job_rate:10.50,
   job_status: 'accepting applications',
-  dog_id: '2',
-  walker_id: '2'
+  job_dog_id: '2',
+  job_walker_id: '2'
 },
 
 { 
@@ -25,8 +25,8 @@ module.exports =[
   job_description: "i have a very naughty dog who loves a walk.",
   job_rate:15.00,
   job_status:'offered',
-  dog_id: '3',
-  walker_id: '3'
+  job_dog_id: '3',
+  job_walker_id: '3'
 },
 
 {
@@ -35,8 +35,8 @@ module.exports =[
   job_description: "I'm looking to hire a dog walker. Please send your application if you're interested.",
   job_rate:35.00,
   job_status: 'completed',
-  dog_id: '4',
-  walker_id: '4'
+  job_dog_id: '4',
+  job_walker_id: '4'
 },
 
 { 
@@ -45,8 +45,8 @@ module.exports =[
   job_description: "I have a 2years old shihpoo, who loves going on a walk and is looking for a friend.",
   job_rate:15.00,
   job_status: 'offered',
-  dog_id: '5',
-  walker_id: '5'
+  job_dog_id: '5',
+  job_walker_id: '5'
 },
 
 {
@@ -55,8 +55,8 @@ module.exports =[
   job_description: "I'm looking to hire a dog walker. Please send your application if you're interested.",
   job_rate:35.00,
   job_status: 'completed',
-  dog_id: '2',
-  walker_id: '4'
+  job_dog_id: '2',
+  job_walker_id: '4'
 },
 
 { 
@@ -65,7 +65,7 @@ module.exports =[
   job_description: "I have a 2years old shihpoo, who loves going on a walk and is looking for a friend.",
   job_rate:15.00,
   job_status: 'offered',
-  dog_id: '1',
-  walker_id: '5'
+  job_dog_id: '1',
+  job_walker_id: '5'
 }
 ]

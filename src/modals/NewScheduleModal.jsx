@@ -1,104 +1,101 @@
 // Jessica
-
+// Modal for Registering a new Schedule for a specific job
 import React, {Component} from 'react';
 import {Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap';
 
-class NewJobModal extends Component {
-
+class NewScheduleModal extends Component {
+    
     constructor(props) {
         super(props);
-        this.state = {
+        this.state ={
             showModal: false,
-            job_title: '',
-            job_description: '',
-            job_rate: 0.0
+            start_time: '',
+            end_time: '',
+            status: ''
         }
     }
 
+    // when the modal is closed
     close = () => {
-        this.setState({ showModal: false });
+        this.setState({ showModal: false});
     }
 
+    // when the modal is opend
     open = () => {
-        this.setState({ showModal: true });
+        this.setState({ showModal: true});
     }
 
+    // when the modal is changed
     change = (e) => {
-        this.setState({ [e.target.id]: e.target.value });
+        this.setState({[e.target.id]: e.target.value})
     }
 
+    // when register new schedule
     register = () => {
         let data = {
-            job_title: this.state.job_title,
-            job_description: this.state.job_description,
-            job_rate: this.state.job_rate,
-            job_dog_id: this.props.dogID
-
+            start_time: this.state.start_time,
+            end_time: this.state.end_time,
+            status: this.state.status
         };
-        fetch(`/dogs/${this.props.dogID}/jobs/new`, {
+        fetch(`/dogs/${this.props.dogID}/jobs/${this.props.jobID}`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         }).then(resp => {
-            if (resp.status !== 200) {
-                // TODO: error handling
-                return;
-            }
-            console.log(JSON.stringify(resp.status));
-            this.close();
-            console.log("closed");
-            this.props.getDogs();
-            console.log("getdogs called");
+            return resp.json()
+        }).then(data => {
+            console.log(data);
+            //TODO: Parse JSON response
         }).catch(err => {
             console.log(err);
-            console.log('error creating new dog');
-        });
+            console.log('error creating new schedule');
+        })
     }
-
+        
     render() {
         return (
             <div>
                 <Button bsSize="small" onClick={this.open}>
-                    <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
+                    <i className="fa fa-calender fa-fw" aria-hidden="true"></i>
                     &nbsp;
-                    Post New Walk
+                    Schedule
                     &nbsp;
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>New Job for Dog {this.props.dogID}</Modal.Title>
+                        <Modal.Title>Add Schedule for Job {this.props.jobID}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form horizontal>
-                            <FormGroup controlId="job_title">
+                            <FormGroup controlId="start_time">
                                 <Col componentClass={ControlLabel} sm={2}>
-                                    Title
+                                    Start Time
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="string" placeholder="Title" 
-                                        value={this.state.job_title}
+                                    <FormControl type="text" placeholder="start_time"
+                                        value={this.state.start_time}
                                         onChange={this.change}
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="job_description">
+                            <FormGroup controlId="end_time">
                                 <Col componentClass={ControlLabel} sm={2}>
-                                    Description
+                                    End Time
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="Description" 
-                                        value={this.state.job_description}
+                                    <FormControl type="text" placeholder="end_time"
+                                        value={this.state.end_time}
                                         onChange={this.change}
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="job_rate">
+                            <FormGroup controlId="status">
                                 <Col componentClass={ControlLabel} sm={2}>
-                                    Rate
+                                    End Time
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="decimal" placeholder="Rate" 
-                                        value={this.state.job_rate}
+                                    <FormControl type="text" placeholder="status"
+                                        value={this.state.end_time}
                                         onChange={this.change}
                                     />
                                 </Col>
@@ -112,7 +109,16 @@ class NewJobModal extends Component {
                 </Modal>
             </div>
         );
-    }
+    }   
 }
 
-export default NewJobModal;
+export default NewScheduleModal;
+
+{/* 
+<Button bsSize='small'>
+<i className="fa fa-calender fa-fw" aria-hidden="true"></i>
+&nbsp;
+Schedule
+</Button>
+
+<NewScheduleModal dogID={dog.dog_id} jobID={dog.jobs.job_id} /> */}

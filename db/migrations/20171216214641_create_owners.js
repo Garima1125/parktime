@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     table.integer('owner_expiry_year');
     table.integer('owner_expiry_month');
     table.integer('owner_cvv');
-    table.string('owner_user_id').unsigned().references('user_id').inTable('users');
+    table.string('owner_user_id').references('user_id').inTable('users');
   })
 };
 

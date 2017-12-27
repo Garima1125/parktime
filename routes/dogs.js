@@ -24,9 +24,9 @@ export default (knex) => {
         .select()
         .from('users')
         .fullOuterJoin('owners', 'users.user_id', 'owners.owner_user_id')
-        .fullOuterJoin('dogs', 'dogs.owner_id','owners.owner_id')
-        .fullOuterJoin('jobs', 'dogs.dog_id', 'jobs.dog_id')
-        .fullOuterJoin('schedules','schedules.job_id','jobs.job_id')
+        .fullOuterJoin('dogs', 'dogs.dog_owner_id','owners.owner_id')
+        .fullOuterJoin('jobs', 'dogs.dog_id', 'jobs.job_dog_id')
+        .fullOuterJoin('schedules','schedules.schedule_job_id','jobs.job_id')
         .where ('users.user_id', user_id)
         .orderBy('dogs.dog_id')
         .then(rows => {
@@ -60,7 +60,7 @@ export default (knex) => {
 
                     // only keep what we want in schedule
                     job.schedules = [{
-                        scheudle_id: row.schedule_id,
+                        schedule_id: row.schedule_id,
                         schedule_start_time: row.schedule_start_time,
                         schedule_end_time: row.schedule_end_time,
                         schedule_status: row.schedule_status

@@ -16,7 +16,14 @@ const bcrypt = require('bcrypt');
 
 const bodyParser = require('body-parser');
 
+// key1=val1&key2=val2...
+// GET http://google.com/hello?key1=val1&key2=val2
+// POST http://google.com/hello     key1=val1&key2=val2 <---- URL ENCODED POST
+// takes above encoded values and map it to req.body.?
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// POST http://google.com/hello     {key1:val1, key2:val2}
+// takes above json data and map it to req.body.
 app.use(bodyParser.json());
 
 // set the view engine to ejs

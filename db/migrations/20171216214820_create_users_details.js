@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
     table.string('user_picture');
     table.decimal('user_latitude', 9, 6);
     table.decimal('user_longitude', 9, 6);
-    table.string('user_id').unsigned().references('user_id').inTable('users');
+    table.string('user_id').references('user_id').inTable('users');
 
   });
 };
