@@ -9,9 +9,9 @@ class NewJobModal extends Component {
         super(props);
         this.state = {
             showModal: false,
-            title: '',
-            description: '',
-            rate: 0.0
+            job_title: '',
+            job_description: '',
+            job_rate: 0.0
         }
     }
 
@@ -29,19 +29,26 @@ class NewJobModal extends Component {
 
     register = () => {
         let data = {
-            title: this.state.title,
-            description: this.state.description,
-            rate: this.state.rate
+            job_title: this.state.job_title,
+            job_description: this.state.job_description,
+            job_rate: this.state.job_rate,
+            job_dog_id: this.props.dogID
+
         };
-        fetch(`/dogs/${this.props.dogID}/job`, {
+        fetch(`/dogs/${this.props.dogID}/jobs/new`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         }).then(resp => {
-            return resp.json()
-        }).then(data => {
-            console.log(data);
-            // TOOD: parse json response
+            if (resp.status !== 200) {
+                // TODO: error handling
+                return;
+            }
+            console.log(JSON.stringify(resp.status));
+            this.close();
+            console.log("closed");
+            this.props.getDogs();
+            console.log("getdogs called");
         }).catch(err => {
             console.log(err);
             console.log('error creating new dog');
@@ -63,35 +70,35 @@ class NewJobModal extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form horizontal>
-                            <FormGroup controlId="title">
+                            <FormGroup controlId="job_title">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Title
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="Title" 
-                                        value={this.state.title}
+                                    <FormControl type="string" placeholder="Title" 
+                                        value={this.state.job_title}
                                         onChange={this.change}
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="age">
+                            <FormGroup controlId="job_description">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Description
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="number" placeholder="Description" 
-                                        value={this.state.description}
+                                    <FormControl type="text" placeholder="Description" 
+                                        value={this.state.job_description}
                                         onChange={this.change}
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="rate">
+                            <FormGroup controlId="job_rate">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Rate
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="Rate" 
-                                        value={this.state.rate}
+                                    <FormControl type="decimal" placeholder="Rate" 
+                                        value={this.state.job_rate}
                                         onChange={this.change}
                                     />
                                 </Col>

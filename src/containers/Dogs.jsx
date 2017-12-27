@@ -90,7 +90,7 @@ class Dogs extends Component {
                     <Row className="show-grid">
                         <Col md={12}>
                             <ButtonToolbar>
-                                <NewJobModal dogID={dog.dog_id} />
+                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>
                                 <Button bsSize='small' bsStyle='danger'>
                                     <i className="fa fa-times fa-fw" aria-hidden="true"></i>
                                     Remove

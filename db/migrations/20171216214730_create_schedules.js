@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.timestamp('schedule_start_time');
     table.timestamp('schedule_end_time');
     table.string('schedule_status');
-    table.string('job_id').unsigned().references('job_id').inTable('jobs');
+    table.string('schedule_job_id').references('job_id').inTable('jobs');
   })
 };
 
