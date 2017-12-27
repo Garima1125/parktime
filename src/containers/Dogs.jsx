@@ -6,6 +6,7 @@ import uuid from 'uuid/v4';
 import {Grid, Row, Col, Button, ButtonToolbar, Panel, PageHeader, ListGroup, ListGroupItem} from 'react-bootstrap';
 import NewDogModal from '../modals/NewDogModal';
 import NewJobModal from '../modals/NewJobModal';
+import NewScheduleModal from '../modals/NewScheduleModal';
 
 class Dogs extends Component {
 
@@ -61,11 +62,14 @@ class Dogs extends Component {
                             {job.job_title} - {job.job_description} - {job.job_rate} - {job.job_status}
                         </Col>
                     </Row>
-                    <Button bsSize='small' bsStyle='danger'>
-                        <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                        Remove
-                        &nbsp;
-                    </Button>
+                    <ButtonToolbar>
+                        <NewScheduleModal dogID={dog.dog_id} jobID={dog.jobs.job_id} />
+                        <Button bsSize='small' bsStyle='danger'>
+                            <i className="fa fa-times fa-fw" aria-hidden="true"></i>
+                            Remove
+                            &nbsp;
+                        </Button>
+                    </ButtonToolbar>
                     <Row className="show-grid">
                         <Col md={12}>
                             <br />
@@ -82,16 +86,11 @@ class Dogs extends Component {
     dogList = () => {
         return this.state.dogs.map(dog => {
             return (
-                <Panel key={uuid()} hearder={`#${dog.dog_id} ${dog.dog_name} (${dog.dog_age}) ${dog.dog_breed}`}>
+                <Panel key={uuid()} header={`#${dog.dog_id} ${dog.dog_name} (${dog.dog_age}) ${dog.dog_breed}`}>
                     <Row className="show-grid">
                         <Col md={12}>
                             <ButtonToolbar>
                                 <NewJobModal dogID={dog.dog_id} />
-                                <Button bsSize='small'>
-                                    <i className="fa fa-calender fa-fw" aria-hidden="true"></i>
-                                    &nbsp;
-                                    Schedule
-                                </Button>
                                 <Button bsSize='small' bsStyle='danger'>
                                     <i className="fa fa-times fa-fw" aria-hidden="true"></i>
                                     Remove
