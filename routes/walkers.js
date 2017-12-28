@@ -25,5 +25,23 @@ export default (knex) => {
         console.log("delete walker");
         res.status(200).send("");
     })
+
+   router.get('/profile/view/:user_email',(req,res) => {
+      var user_email = req.params.user_email;
+      knex
+      .from('users')
+      .innerJoin('walkers', 'users.user_id', 'walkers.walker_user_id')
+      .innerJoin('users_detail', 'users.user_id','users_detail.user_id')
+      .where('users.user_email',user_email)
+      .then(function(results){
+          res.status(200).send(results);
+
+      })
+   })
+
+
+
+
+
     return router;
 }

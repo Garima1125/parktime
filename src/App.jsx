@@ -11,6 +11,7 @@ import Profile from './containers/Profile.jsx';
 import Walker from './containers/Walker.jsx';
 import Owner from './containers/Owner.jsx';
 import JobSearch from './containers/JobSearch.jsx';
+import WalkerProfile from './containers/WalkerProfile.jsx'
 
 class App extends Component {
     render() {
@@ -25,6 +26,7 @@ class App extends Component {
                     <Route exact path='/walker' component={Walker} />
                     <Route exact path='/owner' component={Owner} />
                     <Route exact path='/search' component={JobSearch} />
+                    <Route exact path='/walker/profile/view' component={WalkerProfile} />
                 </div>
             </BrowserRouter>
         );

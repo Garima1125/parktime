@@ -12,6 +12,7 @@
 h1 {
     color: rgb(45, 62, 79);
     text-align: center;
+    margin-top: -34px;
 }
 
 footer {
@@ -25,6 +26,23 @@ width:100%;
 
 }
 
+.carousel-caption {
+    top: 50%;
+    bottom: auto;
+}
+
+.postal{
+  margin-bottom: 10px;
+}
+
+#gif{
+  height: 600px;
+  margin-top: 0px;
+  margin-left: 269px;
+}
+.navbar{
+-webkit-margin-after: 0px;
+}
 // .navbar-brand{
 //   font-size: 25px;
 //   font-weight: bold;
@@ -41,7 +59,9 @@ width:100%;
 
 // }
 
-
+.ownerbuttons{
+  float:left;
+}
 
  .walker-details, .Dog-profile, .job-post, .owner-details{
   width: 500px;
@@ -79,6 +99,14 @@ width:100%;
 
 .form-group1{
   float:left;
+}
+
+#walker-submit{
+  margin-left: 100px;
+}
+
+#backbtn{
+  margin-left: 97px;
 }
 
 // #login{
@@ -246,4 +274,8 @@ div#OR {
   height: 800px;
   width: 700px!important;
   margin-left: 250px !important;
+}
+
+.walker-near-me, .jobs-near-me{
+  background-color: rgb(45, 62, 79)
 }

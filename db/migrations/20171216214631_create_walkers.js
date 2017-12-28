@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     table.string('walker_experience');
     table.string('walker_description');
     table.string('walker_bank_name');
+    table.string('walker_expected_payrate');
     table.string('walker_account_number');
     table.string('walker_user_id').references('user_id').inTable('users');
   });

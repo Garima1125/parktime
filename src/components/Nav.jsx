@@ -35,7 +35,7 @@ class Navigation extends Component {
     }
 
     return (
-        <Navbar collapseOnSelect>
+        <Navbar collapseOnSelect className="navbar">
             <Navbar.Header>
                 <Navbar.Brand>
                     <a href="/">ParkTime</a>

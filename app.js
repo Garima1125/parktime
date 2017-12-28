@@ -65,6 +65,10 @@ app.get('/search', (req, res) => {
   res.render('main');
 });
 
+app.get('/walker/profile/view', (req, res) => {
+  res.render('main');
+})
+
 app.use('/dogs', dogsRoutes(knexObj));
 app.use('/users', usersRoutes(knexObj));
 app.use('/walkers', walkersRoutes(knexObj));
