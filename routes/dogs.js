@@ -4,15 +4,28 @@ import express from 'express';
 import jobsRoutes from './jobs';
 import { read } from 'fs';
 import schedules from './schedules';
+import uuid from 'uuid/v4';
 const router = express.Router({mergeParams: true});
 
 export default (knex) => {
     // console.log(jobsRoutes(knex));
     router.use('/:dog_id/jobs', jobsRoutes(knex));
 
-    router.post('/', (req, res) => {
-        console.log("create new dog");
-        res.status(200).send("");
+    router.post('/new', (req, res) => {
+        let newDog = {
+            dog_id: uuid(),
+            dog_name: req.body.dog_name,
+            dog_age: req.body.dog_age,
+            dog_breed: req.body.dog_breed, 
+            dog_description: req.body.dog_description,
+            dog_owner_id: '1'
+        }
+        knex('dogs').insert(newDog).returning('*').then(result =>{
+            console.log(JSON.stringify(result));
+            res.status(200).send("dog created");
+        }).catch(err =>{
+            res.status(500).send('Error, dog cannot be created');
+        });
     })
 
     router.get ('/all', (req, res) => {

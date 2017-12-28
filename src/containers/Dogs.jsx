@@ -63,7 +63,7 @@ class Dogs extends Component {
                         </Col>
                     </Row>
                     <ButtonToolbar>
-                        <NewScheduleModal dogID={dog.dog_id} jobID={dog.jobs.job_id} />
+                        <NewScheduleModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs} />
                         <Button bsSize='small' bsStyle='danger'>
                             <i className="fa fa-times fa-fw" aria-hidden="true"></i>
                             Remove
@@ -127,7 +127,7 @@ class Dogs extends Component {
                             <small>Manage your dogs</small>
                         </PageHeader>
                         <ButtonToolbar>
-                            <NewDogModal />
+                            <NewDogModal getDogs={this.getDogs}/>
                         </ButtonToolbar>
                     </Col>
                 </Row>

@@ -46,9 +46,7 @@ class NewJobModal extends Component {
             }
             console.log(JSON.stringify(resp.status));
             this.close();
-            console.log("closed");
             this.props.getDogs();
-            console.log("getdogs called");
         }).catch(err => {
             console.log(err);
             console.log('error creating new dog');

@@ -9,10 +9,10 @@ class NewDogModal extends Component {
         super(props);
         this.state = {
             showModal: false,
-            name: '',
-            age: 0,
-            breed: '',
-            description: ''
+            dog_name: '',
+            dog_age: 0,
+            dog_breed: '',
+            dog_description: ''
         }
     }
 
@@ -30,17 +30,23 @@ class NewDogModal extends Component {
 
     register = () => {
         let data = {
-            name: this.state.name,
-            age: this.state.age,
-            breed: this.state.breed,
-            description: this.state.description
+            dog_name: this.state.dog_name,
+            dog_age: this.state.dog_age,
+            dog_breed: this.state.dog_breed,
+            dog_description: this.state.dog_description
         };
-        fetch('/dogs', {
+        fetch('/dogs/new', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         }).then(resp => {
-            return resp.json()
+            if (resp.status !== 200){
+                // TODO: error handling
+                return;
+            }
+            console.log(JSON.stringify(resp));
+            this.close();
+            this.props.getDogs();
         }).then(data => {
             console.log(data);
             // TOOD: parse json response
@@ -64,46 +70,46 @@ class NewDogModal extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form horizontal>
-                            <FormGroup controlId="name">
+                            <FormGroup controlId="dog_name">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Name
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="Name" 
-                                        value={this.state.name}                            
+                                    <FormControl type="string" placeholder="Name" 
+                                        value={this.state.dog_name}                            
                                         onChange={this.change}
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="age">
+                            <FormGroup controlId="dog_age">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Age
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="number" placeholder="Age" 
-                                        value={this.state.age}
+                                    <FormControl type="integer" placeholder="Age" 
+                                        value={this.state.dog_age}
                                         onChange={this.change}
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="breed">
+                            <FormGroup controlId="dog_breed">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Breed
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="Puddle" 
-                                        value={this.state.breed}
+                                    <FormControl type="string" placeholder="Poodle" 
+                                        value={this.state.dog_breed}
                                         onChange={this.change}
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="description">
+                            <FormGroup controlId="dog_description">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Description
                                 </Col>
                                 <Col sm={10}>
                                     <FormControl type="text" placeholder="My dog is ..." 
-                                        value={this.state.description}
+                                        value={this.state.dog_description}
                                         onChange={this.change}
                                     />
                                 </Col>

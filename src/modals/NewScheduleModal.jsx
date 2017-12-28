@@ -10,8 +10,7 @@ class NewScheduleModal extends Component {
         this.state ={
             showModal: false,
             start_time: '',
-            end_time: '',
-            status: ''
+            end_time: ''
         }
     }
 
@@ -27,25 +26,28 @@ class NewScheduleModal extends Component {
 
     // when the modal is changed
     change = (e) => {
-        this.setState({[e.target.id]: e.target.value})
+        this.setState({[e.target.id]: e.target.value});
     }
 
     // when register new schedule
     register = () => {
         let data = {
-            start_time: this.state.start_time,
-            end_time: this.state.end_time,
-            status: this.state.status
+            schedule_start_time: this.state.schedule_start_time,
+            schedule_end_time: this.state.schedule_end_time,
+            schedule_job_id: this.props.jobID
         };
-        fetch(`/dogs/${this.props.dogID}/jobs/${this.props.jobID}`, {
+        fetch(`/dogs/${this.props.dogID}/jobs/${this.props.jobID}/schedules/new`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         }).then(resp => {
-            return resp.json()
-        }).then(data => {
-            console.log(data);
-            //TODO: Parse JSON response
+            if (resp.status !== 200){
+                // TODO: error handling
+                return;
+            }
+            console.log(JSON.stringify(resp));
+            this.close();
+            this.props.getDogs();
         }).catch(err => {
             console.log(err);
             console.log('error creating new schedule');
@@ -67,35 +69,24 @@ class NewScheduleModal extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form horizontal>
-                            <FormGroup controlId="start_time">
+                            <FormGroup controlId="schedule_start_time">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Start Time
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="start_time"
-                                        value={this.state.start_time}
+                                    <FormControl type="timestamp" placeholder="start_time"
+                                        value={this.state.schedule_start_time}
                                         onChange={this.change}
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="end_time">
+                            <FormGroup controlId="schedule_end_time">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     End Time
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="end_time"
-                                        value={this.state.end_time}
-                                        onChange={this.change}
-                                    />
-                                </Col>
-                            </FormGroup>
-                            <FormGroup controlId="status">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    End Time
-                                </Col>
-                                <Col sm={10}>
-                                    <FormControl type="text" placeholder="status"
-                                        value={this.state.end_time}
+                                    <FormControl type="timestamp" placeholder="end_time"
+                                        value={this.state.schedule_end_time}
                                         onChange={this.change}
                                     />
                                 </Col>
@@ -114,11 +105,3 @@ class NewScheduleModal extends Component {
 
 export default NewScheduleModal;
 
-{/* 
-<Button bsSize='small'>
-<i className="fa fa-calender fa-fw" aria-hidden="true"></i>
-&nbsp;
-Schedule
-</Button>
-
-<NewScheduleModal dogID={dog.dog_id} jobID={dog.jobs.job_id} /> */}
