@@ -82,12 +82,6 @@ export default (knex) => {
         var email = req.body.email;
         var password = req.body.password;
 
-        // let user = {
-        //     user_id: '',
-        //     email: req.body.email,
-        //     password: bcrypt.hashSync(req.body.password, 5)
-        // }
-
         knex
             .select("user_id","user_password")
             .from("users")
@@ -120,10 +114,95 @@ export default (knex) => {
         });
 
     });
+// owner's Routes
+router.post('/profile/createowner',(req, res) => {
 
+ knex
+ .select("user_id")
+ .from('users')
+ .where('user_email',req.body.user_email)
+ .then(function(result){
+   var user_id = result[0].user_id;
+    knex
+     .insert({
+       owner_id:uuidv4(),
+       owner_user_id: user_id
+     })
+     .into('owners')
+     .then(function(){
+       knex('users')
+       .where('user_id',user_id)
+       .update({
+         user_first_name: req.body.user_first_name,
+         user_last_name: req.body.user_last_name,
+        })
+       .then(function(){
+         knex('users_detail')
+         .insert({
+           user_picture: req.body.user_picture,
+           user_postal_code: req.body.user_postal_code,
+           user_address: req.body.user_address,
+           user_unit_number: req.body.user_unit_number,
+           user_country: req.body.user_country,
+           user_province: req.body.user_province,
+           user_city: req.body.user_city,
+           user_phone: req.body.user_phone,
+           user_detail_id: uuidv4(),
+           user_id: user_id
+         })
+         .then(function() {
+           res.status(200).send({ownerCreated: true});
+         })
+       })
+     })
+})
+});
+
+
+// walker's routes
     router.post('/profile/create', (req, res) => {
-        console.log(req.body);
-        res.send(200);
+
+      knex
+        .select("user_id")
+        .from('users')
+        .where('user_email',req.body.user_email)
+        .then(function(result){
+          var user_id = result[0].user_id;
+           knex
+           .insert({
+             walker_id: uuidv4(),
+             walker_experience: req.body.walker_experience,
+             walker_description: req.body.walker_description,
+             walker_expected_payrate:req.body.walker_expected_payrate,
+             walker_bank_name: req.body.walker_bank_name,
+             walker_account_number: req.body.walker_account_number,
+             walker_user_id: user_id
+           })
+           .into('walkers')
+           .then(function(){
+             knex('users')
+             .where('user_id',user_id)
+             .update({
+               user_first_name: req.body.user_first_name,
+               user_last_name: req.body.user_last_name,
+             })
+             .then(function(){
+               knex('users_detail')
+               .insert({
+                 user_picture: req.body.user_picture,
+                 user_postal_code: req.body.user_postal_code,
+                 user_detail_id: uuidv4(),
+                 user_id: user_id
+               })
+               .then(function() {
+                 res.status(200).send({profileCreated: true});
+               })
+             })
+           })
+
+
+        })
+
     });
 
     return router;
