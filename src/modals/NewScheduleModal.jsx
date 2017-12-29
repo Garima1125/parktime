@@ -9,8 +9,8 @@ class NewScheduleModal extends Component {
         super(props);
         this.state ={
             showModal: false,
-            start_time: '',
-            end_time: ''
+            schedule_start_time: '',
+            schedule_end_time: ''
         }
     }
 

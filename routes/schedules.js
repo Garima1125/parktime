@@ -33,8 +33,15 @@ export default (knex) => {
 
 
     router.delete('/:schedule_id', (req, res) => {
-        console.log("delete a schedule");
-        res.status(200).send("");
+        knex('schedules').where('schedule_id', req.params.schedule_id)
+        .del()
+        .then(result => {
+            console.log('schedule deleted');
+            res.status(200).send("schedule deleted");
+        }).catch(err => {
+            console.log(err);
+            res.status(500).send("error, schedule cant be deleted");
+        })
     })
     return router;
 }
