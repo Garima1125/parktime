@@ -9,12 +9,12 @@ class Search extends Component {
     constructor(props) {
         super(props);
         window.initMap = this.initMap;
-        //loadJS('https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js');
         loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyChAVeWn4OYB0sKtR0QN7IyYfYL85O3tQ8&callback=initMap&libraries=visualization')
         this.state = {
             info: null,
-            markers: []
+            walkers: []
         }
+        this.markers = [];
         this.map = null;
     }
 
@@ -24,11 +24,9 @@ class Search extends Component {
 
     initMap = () => {
 
-        console.log('initMap');
-
         this.map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 6
+            center: {lat: 43.983112, lng: -79.590700},
+            zoom: 8
         });
 
         /*
@@ -49,51 +47,62 @@ class Search extends Component {
         */
   
         // TODO: get all nearby coordinates using fetch
-
-        let res = [];
-        
-        for (let job in res) {
-            this.addMarker(job);
-        }
-
-         // add cluster support
-         /*
-         let markerCluster = new MarkerClusterer(this.map, this.markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-            */
+        this.getWalkers();
 
     }
 
-    addMarker = (job) => {
+    getWalkers = () => {
+        fetch('/users/walkers').then(resp => {
+            if (resp.status !== 200) {
+                // TODO: error handling
+                console.log(resp.status);
+                return;
+            }
+            return resp.json();
+        }).then(data => {
+            for (let walker of data) {
+                this.addMarker(walker);
+            }
+            // add cluster support
+            var markerCluster = new MarkerClusterer(this.map, this.markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    addMarker = (walker) => {
+
         let marker = new google.maps.Marker({
             position: {
-                lat: parseFloat(job.lat),
-                lng: parseFloat(job.lng)
+                lat: parseFloat(walker.user_latitude),
+                lng: parseFloat(walker.user_longitude)
             },
-            label: job.id,
+            label: walker.user_email,
             map: this.map
         })
-        
-        marker.addListener('click', 
-            this.clickHandler(job, marker));
+
+        marker.addListener('click', this.clickHandler(walker, marker));
 
         this.markers.push(marker);
     }
 
 
-    clickHandler = (job, marker) => {
-        let info = (
-            <div>
-                {job.id}
-            </div>
-        );
-        this.setState({info: info});
-        google.maps.event.trigger(map, 'resize');
-        this.map.setCenter(marker.getPosition());
+    clickHandler = (walker, marker) => {
+        return () => {
+            let info = (
+                <div>
+                    {walker.user_email}
+                </div>
+            );
+            this.setState({info: info});
+            google.maps.event.trigger(map, 'resize');
+            this.map.setCenter(marker.getPosition());
+        };
     }
 
     render() {
-        let mapWidth = this.state.info ? 4 : 12;
+        let mapWidth = this.state.info ? 9 : 12;
         return (
             <Grid>
                 <Row className="show-grid">
@@ -109,7 +118,7 @@ class Search extends Component {
                     <Col xs={12} md={mapWidth}>
                         <div id="map" style={{height:'400px', width:'100%'}}></div>
                     </Col>
-                    <Col xs={12} md={8}>
+                    <Col xs={12} md={3}>
                         {this.state.info}
                     </Col>
                 </Row>

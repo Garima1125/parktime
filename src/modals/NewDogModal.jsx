@@ -47,9 +47,6 @@ class NewDogModal extends Component {
             console.log(JSON.stringify(resp));
             this.close();
             this.props.getDogs();
-        }).then(data => {
-            console.log(data);
-            // TOOD: parse json response
         }).catch(err => {
             console.log(err);
             console.log('error creating new dog');

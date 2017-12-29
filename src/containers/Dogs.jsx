@@ -7,6 +7,9 @@ import {Grid, Row, Col, Button, ButtonToolbar, Panel, PageHeader, ListGroup, Lis
 import NewDogModal from '../modals/NewDogModal';
 import NewJobModal from '../modals/NewJobModal';
 import NewScheduleModal from '../modals/NewScheduleModal';
+import DeleteDogModal from '../modals/DeleteDogModal';
+import DeleteJobModal from '../modals/DeleteJobModal';
+import DeleteScheduleModal from '../modals/DeleteScheduleModal';
 
 class Dogs extends Component {
 
@@ -36,18 +39,14 @@ class Dogs extends Component {
         })
     }
 
-    scheduleList = (job) => {
+    scheduleList = (dog,job) => {
         return job.schedules.map(schedule => {
             return (
                 <div key={uuid()}>
                     <ListGroupItem>
                         {schedule.schedule_status}: {schedule.schedule_start_time} - {schedule.schedule_end_time}
                     </ListGroupItem>
-                    <Button bsSize='small' bsStyle='danger'>
-                        <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                        Remove
-                        &nbsp;
-                    </Button>
+                    <DeleteScheduleModal dogID={dog.dog_id} jobID={job.job_id} scheduleID={schedule.schedule_id} getDogs={this.getDogs} />
                 </div>
             );
         });
@@ -64,17 +63,13 @@ class Dogs extends Component {
                     </Row>
                     <ButtonToolbar>
                         <NewScheduleModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs} />
-                        <Button bsSize='small' bsStyle='danger'>
-                            <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                            Remove
-                            &nbsp;
-                        </Button>
+                        <DeleteJobModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs}/>
                     </ButtonToolbar>
                     <Row className="show-grid">
                         <Col md={12}>
                             <br />
                             <ListGroup>
-                                {this.scheduleList(job)}
+                                {this.scheduleList(dog, job)}
                             </ListGroup>
                         </Col>
                     </Row>
@@ -90,12 +85,7 @@ class Dogs extends Component {
                     <Row className="show-grid">
                         <Col md={12}>
                             <ButtonToolbar>
-                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>
-                                <Button bsSize='small' bsStyle='danger'>
-                                    <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                                    Remove
-                                    &nbsp;
-                                </Button>
+                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>                
                             </ButtonToolbar>
                         </Col>
                     </Row>
@@ -127,7 +117,7 @@ class Dogs extends Component {
                             <small>Manage your dogs</small>
                         </PageHeader>
                         <ButtonToolbar>
-                            <NewDogModal getDogs={this.getDogs}/>
+                            <NewDogModal getDogs={this.getDogs} />
                         </ButtonToolbar>
                     </Col>
                 </Row>
@@ -143,4 +133,7 @@ class Dogs extends Component {
 }
 
 export default Dogs;
+
+// <DeleteJobModal getDogs={this.getDogs} dogID={dog.dog_id} />
+// <DeleteDogModal getDogs={this.getDogs} dogID={dog.dog_id} />
 

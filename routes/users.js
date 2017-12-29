@@ -9,15 +9,28 @@ export default (knex) => {
     router.use('/:user_id/reviews', reviewsRoutes(knex));
 
     router.get('/', (req, res) => {
-        knex
+        knex('users')
             .select('*')
-            .from('users')
             .then(result => {
                 res.status(200).send(result);
             }, err => {
                 res.status(500).send('Error');
             });
     });
+
+    router.get('/walkers', (req, res) => {
+        knex
+        .select()
+        .from('users')
+        .fullOuterJoin('users_detail', 'users.user_id', 'users_detail.user_id')
+        .fullOuterJoin('walkers', 'users_detail.user_id', 'walkers.walker_user_id')
+        .where('user_city', 'toronto')
+        .then(result => {
+            res.json(result);
+        }).catch(err => {
+            res.status(500).send(err);
+        })
+    })
 
     router.post('/users/create/', (req, res) => {
       console.log(req.body);

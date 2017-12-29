@@ -35,6 +35,7 @@
     "express": "^4.16.2",
     "file-loader": "^1.1.6",
     "jquery": "^3.2.1",
+    "js-marker-clusterer": "^1.0.0",
     "knex": "^0.14.2",
     "node-sass": "^4.7.2",
     "path": "^0.12.7",
