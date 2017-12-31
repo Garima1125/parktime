@@ -21,6 +21,8 @@ class Walker extends Component {
       user_postal_code: '',
       walker_bank_name: '',
       walker_account_number: '',
+      user_latitude: '',
+      user_longitude: '',
       user_email: localStorage.getItem("email"),
       profileCreated: false
     }
@@ -76,17 +78,34 @@ class Walker extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    fetch('/users/profile/create', {
-      method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(this.state)
-    }).then(function(response) {
-    return response.json();
-    }).then(function(data) {
-      this.setState(data);
-    }.bind(this)).catch(function(error) {
-        console.log(error);
-    });
+    var postal_code = this.state.postal_code;
+    var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + postal_code.replace(' ', '') + "&key=AIzaSyBqTA4VZJ73mcFVSg8owb7gxsxA_k447Lg"
+    fetch(url,{
+    }).then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+      var lat = data.results[0].geometry.location.lat;
+      var lng = data.results[0].geometry.location.lng;
+      this.setState({user_latitude: lat, user_longitude: lng})
+      console.log(this.state);
+      fetch('/users/profile/create', {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(this.state)
+      }).then(function(response) {
+      return response.json();
+      }).then(function(data) {
+        this.setState(data);
+      }.bind(this)).catch(function(error) {
+          console.log(error);
+      });
+    }.bind(this))
+    .catch(function(error){
+      console.log(error);
+    })
+
+
   }
 
     render() {

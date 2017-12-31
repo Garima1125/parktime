@@ -19,6 +19,8 @@ class Owner extends Component {
       user_address: '',
       user_unit_number: '',
       user_postal_code: '',
+      user_latitude: '',
+      user_longitude: '',
       user_city: '',
       user_province: '',
       user_country: '',
@@ -82,18 +84,33 @@ handleClick() {
 
   handleSubmit(e) {
     e.preventDefault();
-    fetch('/users/profile/createowner', {
-      method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(this.state)
-    }).then(function(response) {
-    return response.json();
-    }).then(function(data) {
-      this.setState(data);
-    }.bind(this)).catch(function(error) {
+    var postal_code = this.state.user_postal_code;
+    var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + postal_code.replace(' ', '') + "&key=AIzaSyBqTA4VZJ73mcFVSg8owb7gxsxA_k447Lg"
+    fetch(url,{})
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+      var lat = data.results[0].geometry.location.lat;
+      var lng = data.results[0].geometry.location.lng;
+      this.setState({user_latitude: lat, user_longitude: lng});
+      console.log(this.state);
+      fetch('/users/profile/createowner', {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(this.state)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(data) {
+        this.setState(data);
+    }.bind(this))
+    .catch(function(error) {
         console.log(error);
     });
-  }
+  }.bind(this));
+}
+
+
 
     render() {
       if(this.state.ownerCreated){

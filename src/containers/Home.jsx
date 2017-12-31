@@ -3,33 +3,68 @@
 // submit to job search / dog walker search (maps)
 import React, {Component} from 'react';
 import {Carousel, Form, FormGroup, FormControl, Button, Glyphicon} from 'react-bootstrap';
-
+import { Redirect } from 'react-router';
 class Homepage extends Component {
+
+  constructor(){
+    super()
+    this.state = {
+      postal_code: '',
+      postalCodeEntered: false
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+  }
+
+handleChange(event) {
+  this.setState({postal_code: event.target.value})
+}
+
+
+     handleSubmit(event) {
+       event.preventDefault();
+       console.log(this.state);
+       var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.postal_code + "&key=AIzaSyBqTA4VZJ73mcFVSg8owb7gxsxA_k447Lg"
+       fetch(url,{
+       }).then(function(response){
+         return response.json();
+       })
+       .then(function(data){
+         console.log(data.results[0].geometry.location);
+         this.setState({postalCodeEntered: true});
+       }.bind(this)).catch(function(error){
+         console.log(error);
+       })
+     }
+
+
     render() {
+      if(this.state.postalCodeEntered){
+      return <Redirect to='/search' />;
+      }
         return (
       <Carousel>
       <Carousel.Item>
         <img width={1500} height={600} alt="900x500" src='/static/assets/cute-dog.jpg' />
         <Carousel.Caption>
           <h4>Please enter your Postal Code</h4>
-          <Form inline className="postal">
+          <Form inline className="postal" onSubmit={this.handleSubmit}>
               {' '}
               <FormGroup controlId="formInlinePostalCode">
               {' '}
-              <FormControl type="text" placeholder="A1A 1A1" />
+              <FormControl type="text" placeholder="A1A 1A1"  value={this.state.postal_code} onChange={this.handleChange}/>
               </FormGroup>
               {' '}
-              <Button type="submit">
-                <Glyphicon glyph="search" />
-              </Button>
               </Form>
               <Form inline>
-              <Button type="submit" className= "walker-near-me">
+              <Button type="submit" onClick={this.handleSubmit} className= "walker-near-me">
               Walkers near me
               </Button>
               {' '}
               {' '}
-              <Button type="submit" className= "jobs-near-me">
+              <Button type="submit" onClick={this.handleSubmit} className= "jobs-near-me">
               Jobs near me
               </Button>
               </Form>
