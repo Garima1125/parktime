@@ -154,6 +154,8 @@ router.post('/profile/createowner',(req, res) => {
          .insert({
            user_picture: req.body.user_picture,
            user_postal_code: req.body.user_postal_code,
+           user_latitude: req.body.user_latitude,
+           user_longitude: req.body.user_longitude,
            user_address: req.body.user_address,
            user_unit_number: req.body.user_unit_number,
            user_country: req.body.user_country,
@@ -174,7 +176,7 @@ router.post('/profile/createowner',(req, res) => {
 
 // walker's routes
     router.post('/profile/create', (req, res) => {
-
+      console.log(req.body);
       knex
         .select("user_id")
         .from('users')
@@ -204,6 +206,8 @@ router.post('/profile/createowner',(req, res) => {
                .insert({
                  user_picture: req.body.user_picture,
                  user_postal_code: req.body.user_postal_code,
+                 user_latitude: req.body.user_latitude,
+                 user_longitude: req.body.user_longitude,
                  user_detail_id: uuidv4(),
                  user_id: user_id
                })
