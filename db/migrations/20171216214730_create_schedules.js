@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.timestamp('schedule_end_time');
     table.string('schedule_status');
     table.string('schedule_job_id').references('job_id').inTable('jobs');
+    table.datetime('schedule_deleted_at');
   })
 };
 

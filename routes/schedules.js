@@ -34,7 +34,7 @@ export default (knex) => {
 
     router.delete('/:schedule_id', (req, res) => {
         knex('schedules').where('schedule_id', req.params.schedule_id)
-        .del()
+        .update('schedule_deleted_at', knex.fn.now())
         .then(result => {
             console.log('schedule deleted');
             res.status(200).send("schedule deleted");

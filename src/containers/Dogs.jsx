@@ -85,7 +85,8 @@ class Dogs extends Component {
                     <Row className="show-grid">
                         <Col md={12}>
                             <ButtonToolbar>
-                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>                
+                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>
+                                <DeleteDogModal dogID={dog.dog_id} getDogs={this.getDogs}/>                
                             </ButtonToolbar>
                         </Col>
                     </Row>

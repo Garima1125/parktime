@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.timestamp('review_created_at');
     table.string('reviewer_id').references('user_id').inTable('users');
     table.string('reviewee_id').references('user_id').inTable('users');
+    table.datetime('review_deleted_at');
     
   })
 };

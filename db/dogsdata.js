@@ -5,7 +5,8 @@ module.exports =[
   dog_age: 8,
   dog_breed:'labrador', 
   dog_description: '',
-  dog_owner_id: '1'
+  dog_owner_id: '1',
+  dog_deleted_at: null
   },
 
 {
@@ -14,7 +15,8 @@ module.exports =[
   dog_age: 3,
   dog_breed:'hound', 
   dog_description: '',
-  dog_owner_id: '2'
+  dog_owner_id: '2',
+  dog_deleted_at: null
   },
 { 
   dog_id: '3',
@@ -22,7 +24,8 @@ module.exports =[
   dog_age: 4,
   dog_breed:'Shihpoo', 
   dog_description: '',
-  dog_owner_id: '3'
+  dog_owner_id: '3',
+  dog_deleted_at: null
   },
 {
   dog_id: '4',
@@ -30,7 +33,8 @@ module.exports =[
   dog_age: 1,
   dog_breed:'beagle', 
   dog_description: '',
-  dog_owner_id: '4'
+  dog_owner_id: '4',
+  dog_deleted_at: null
   },
 
 {
@@ -39,6 +43,7 @@ module.exports =[
   dog_age: 8,
   dog_breed:'labrador', 
   dog_description: '',
-  dog_owner_id: '1'
+  dog_owner_id: '1',
+  dog_deleted_at: null
   }
 ]

@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('dog_breed');
     table.text('dog_description');
     table.string('dog_owner_id').references('owner_id').inTable('owners');
+    table.datetime('dog_deleted_at');
   })
 };
 

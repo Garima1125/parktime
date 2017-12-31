@@ -31,30 +31,27 @@ export default (knex) => {
     router.get ('/all', (req, res) => {
         // TODO: get from session
         let user_id = '1';
-        // user_id in sesion
-        // extract owner_id from user_id
-        knex
-        .select()
-        .from('users')
-        .fullOuterJoin('owners', 'users.user_id', 'owners.owner_user_id')
-        .fullOuterJoin('dogs', 'dogs.dog_owner_id','owners.owner_id')
-        .fullOuterJoin('jobs', 'dogs.dog_id', 'jobs.job_dog_id')
-        .fullOuterJoin('schedules','schedules.schedule_job_id','jobs.job_id')
-        .where ('users.user_id', user_id)
-        .orderBy('dogs.dog_id')
-        .then(rows => {
-            console.log(JSON.stringify(rows, null, 4));
+        knex.raw(`select * from users 
+        left join owners on users.user_id = owners.owner_user_id and owner_deleted_at is null 
+        left join dogs on dogs.dog_owner_id = owners.owner_id and dog_deleted_at is null 
+        left join jobs on dogs.dog_id = jobs.job_dog_id and job_deleted_at is null 
+        left join schedules on jobs.job_id = schedules.schedule_job_id and schedule_deleted_at is null 
+        where user_id = ?`, [user_id])
+        .then(result => {
+            console.log(JSON.stringify(result.rows, null, 4));
             // group schedules by job
             let jobs = {};
-            for (let row of rows) {
+            for (let row of result.rows) {
                 if (row.job_id in jobs) {
-                    jobs[row.job_id].schedules.push ({
-                        schedule_id: row.schedule_id,
-                        schedule_start_time: row.schedule_start_time,
-                        schedule_end_time: row.schedule_end_time,
-                        schedule_status: row.schedule_status,
-                        schedule_job_id: row.schedule_job_id
-                    });
+                    if (row.schedule_id != null) {
+                        jobs[row.job_id].schedules.push ({
+                            schedule_id: row.schedule_id,
+                            schedule_start_time: row.schedule_start_time,
+                            schedule_end_time: row.schedule_end_time,
+                            schedule_status: row.schedule_status,
+                            schedule_job_id: row.schedule_job_id
+                        });
+                    }
                 } else {
                     let job = {
                         job_id: row.job_id,
@@ -73,18 +70,22 @@ export default (knex) => {
                     }
 
                     // only keep what we want in schedule
-                    job.schedules = [{
-                        schedule_id: row.schedule_id,
-                        schedule_start_time: row.schedule_start_time,
-                        schedule_end_time: row.schedule_end_time,
-                        schedule_status: row.schedule_status,
-                        schedule_job_id: row.schedule_job_id
-                    }]
+                    if (row.schedule_id != null) {
+                        job.schedules = [{
+                            schedule_id: row.schedule_id,
+                            schedule_start_time: row.schedule_start_time,
+                            schedule_end_time: row.schedule_end_time,
+                            schedule_status: row.schedule_status,
+                            schedule_job_id: row.schedule_job_id
+                        }]
+                    } else {
+                        job.schedules = [];
+                    }
                     jobs[row.job_id] = job;
                 }
             }
 
-            // group jobs by dog 
+            // // group jobs by dog 
 
             let dogs = {};
             for (let job_id in jobs) {
@@ -108,6 +109,7 @@ export default (knex) => {
                 }
             }
             res.json(Object.values(dogs));
+    
         }).catch(err => {
             console.log(err);
             res.status(500).send(err);
@@ -122,19 +124,13 @@ export default (knex) => {
         console.log("update dog profile");
         res.status(200).send("");
     })
+
     router.delete('/:dog_id', (req, res) => {
-        knex('schedules').where('schedule_job_id', req.params.job_id)
-        .del()
-        .then(resp => {
-            knex('jobs').where('job_id', req.params.job_id)
-            .del()
-            .then(result => {
-                console.log('job deleted');
-                res.status(200).send("job deleted");
-            }).catch(err => {
-                console.log(err);
-                res.status(500).send("error, job cant be deleted");
-            })
+        knex('dogs').where('dog_id', req.params.dog_id)
+        .update('dog_deleted_at', knex.fn.now())
+        .then(result => {
+            console.log('dog deleted');
+            res.status(200).send("dog deleted");
         }).catch(err => {
             res.status(500).send(err);
         });

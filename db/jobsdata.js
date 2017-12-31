@@ -6,7 +6,8 @@ module.exports =[
   job_rate:15.25,
   job_status: 'offered',
   job_dog_id: '1',
-  job_walker_id: '1'
+  job_walker_id: '1',
+  job_deleted_at: null
 },
 
 {
@@ -16,7 +17,8 @@ module.exports =[
   job_rate:10.50,
   job_status: 'accepting applications',
   job_dog_id: '2',
-  job_walker_id: '2'
+  job_walker_id: '2',
+  job_deleted_at: null
 },
 
 { 
@@ -26,7 +28,8 @@ module.exports =[
   job_rate:15.00,
   job_status:'offered',
   job_dog_id: '3',
-  job_walker_id: '3'
+  job_walker_id: '3',
+  job_deleted_at: null
 },
 
 {
@@ -36,7 +39,8 @@ module.exports =[
   job_rate:35.00,
   job_status: 'completed',
   job_dog_id: '4',
-  job_walker_id: '4'
+  job_walker_id: '4',
+  job_deleted_at: null
 },
 
 { 
@@ -46,7 +50,8 @@ module.exports =[
   job_rate:15.00,
   job_status: 'offered',
   job_dog_id: '5',
-  job_walker_id: '5'
+  job_walker_id: '5',
+  job_deleted_at: null
 },
 
 {
@@ -56,7 +61,8 @@ module.exports =[
   job_rate:35.00,
   job_status: 'completed',
   job_dog_id: '2',
-  job_walker_id: '4'
+  job_walker_id: '4',
+  job_deleted_at: null
 },
 
 { 
@@ -66,6 +72,7 @@ module.exports =[
   job_rate:15.00,
   job_status: 'offered',
   job_dog_id: '1',
-  job_walker_id: '5'
+  job_walker_id: '5',
+  job_deleted_at: null
 }
 ]

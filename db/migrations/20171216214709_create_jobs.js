@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('job_status');
     table.string('job_dog_id').references('dog_id').inTable('dogs');
     table.string('job_walker_id').references('walker_id').inTable('walkers');
+    table.datetime('job_deleted_at');
   });
 };
 

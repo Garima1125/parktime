@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.string('user_last_name');
     table.string('user_email');
     table.string('user_password');
+    table.datetime('user_deleted_at');
   });
 };
 

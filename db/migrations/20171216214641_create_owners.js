@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
     table.integer('owner_expiry_month');
     table.integer('owner_cvv');
     table.string('owner_user_id').references('user_id').inTable('users');
+    table.datetime('owner_deleted_at');
   })
 };
 

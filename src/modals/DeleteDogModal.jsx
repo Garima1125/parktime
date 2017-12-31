@@ -23,7 +23,6 @@ class DeleteDogModal extends Component {
     delete = () => {
         fetch(`/dogs/${this.props.dogID}`, {
             method: 'DELETE',
-            headers: {'Content-Type': 'application/json'}
         }).then(resp => {
             if (resp.status !== 200){
                 // TODO: error handling

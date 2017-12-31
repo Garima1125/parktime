@@ -14,7 +14,8 @@ module.exports =[
     user_picture:'http://knexjs.org/assets/images/knex.png',
     user_latitude: 43.653112,
     user_longitude: -79.390700,
-    user_id: '1'
+    user_id: '1',
+    user_detail_deleted_at: null
   },
 
   { user_detail_id: '2',
@@ -28,7 +29,8 @@ module.exports =[
     user_picture:'http://webneel.com/daily/sites/default/files/images/project/TiagoHoisel-3d-character-design.preview.jpg',
     user_latitude: 43.932112,
     user_longitude: -79.490700,
-    user_id: '2'
+    user_id: '2',
+    user_detail_deleted_at: null
   },
 
   { user_detail_id : '3',
@@ -42,7 +44,8 @@ module.exports =[
     user_picture:'https://thumbs.dreamstime.com/b/funny-cartoon-raccoon-19551786.jpg',
     user_latitude: 43.353112,
     user_longitude: -79.390700,
-    user_id: '3'
+    user_id: '3',
+    user_detail_deleted_at: null
   },
 
   { user_detail_id : '4',
@@ -56,7 +59,8 @@ module.exports =[
     user_picture:'https://img3.stockfresh.com/files/t/tigatelu/m/21/2874561_stock-photo-funny-cow-cartoon-embrace-a-bottle-of-milk.jpg',
     user_latitude: 43.673112,
     user_longitude: -79.380700,
-    user_id: '4'
+    user_id: '4',
+    user_detail_deleted_at: null
   },
   
   { user_detail_id : '5',
@@ -70,6 +74,7 @@ module.exports =[
     user_picture:'https://akamai-platform.foxfilm.com/s3/production/201701/ba2cb7e8bd4cdba2a16dc1163d2517969c902d5a.jpg',
     user_latitude: 43.983112,
     user_longitude: -79.590700,
-    user_id: '5'
+    user_id: '5',
+    user_detail_deleted_at: null
   }
 ]

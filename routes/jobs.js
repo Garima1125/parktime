@@ -42,19 +42,13 @@ export default (knex) => {
         console.log("update a job");
         res.status(200).send("");
     })
+
     router.delete('/:job_id', (req, res) => {
-        knex('schedules').where('schedule_job_id', req.params.job_id)
-        .del()
-        .then(resp => {
-            knex('jobs').where('job_id', req.params.job_id)
-            .del()
-            .then(result => {
-                console.log('job deleted');
-                res.status(200).send("job deleted");
-            }).catch(err => {
-                console.log(err);
-                res.status(500).send("error, job cant be deleted");
-            })
+        knex('jobs').where('job_id', req.params.job_id)
+        .update('job_deleted_at', knex.fn.now())
+        .then(result => {
+            console.log('job deleted');
+            res.status(200).send("job deleted");
         }).catch(err => {
             res.status(500).send(err);
         });

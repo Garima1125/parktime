@@ -12,7 +12,7 @@ exports.up = function(knex, Promise) {
     table.decimal('user_latitude', 9, 6);
     table.decimal('user_longitude', 9, 6);
     table.string('user_id').references('user_id').inTable('users');
-
+    table.datetime('user_detail_deleted_at');
   });
 };
 

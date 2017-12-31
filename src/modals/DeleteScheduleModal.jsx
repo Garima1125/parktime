@@ -32,7 +32,6 @@ class DeleteScheduleModal extends Component {
                 // TODO: error handling
                 return;
             }
-            
             this.close();
             this.props.getDogs();
         }).catch(err => {

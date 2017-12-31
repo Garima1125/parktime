@@ -6,6 +6,7 @@ module.exports = [
     walker_bank_name:'TD',
     walker_account_number:'221189463',
     walker_user_id: '1',
+    walker_deleted_at: null
   },
 
   {
@@ -16,6 +17,7 @@ module.exports = [
     walker_bank_name:'Scotia',
     walker_account_number:'4721179403',
     walker_user_id: '2',
+    walker_deleted_at: null
     },
 
   {
@@ -25,7 +27,8 @@ module.exports = [
     walker_expected_payrate: '20',
     walker_bank_name:'CIBC',
     walker_account_number:'870017963',
-    walker_user_id:3,
+    walker_user_id: '3',
+    walker_deleted_at: null
   },
 
   {
@@ -36,6 +39,7 @@ module.exports = [
     walker_bank_name:'TD',
     walker_account_number:'221189463',
     walker_user_id: '4',
+    walker_deleted_at: null
   },
 
   {
@@ -46,5 +50,6 @@ module.exports = [
     walker_bank_name:'ICICI',
     walker_account_number: '111111111',
     walker_user_id: '5',
+    walker_deleted_at: null
     },
 ]
