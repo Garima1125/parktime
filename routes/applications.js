@@ -5,32 +5,57 @@ import uuid from 'uuid/v4';
 const router = express.Router({mergeParams: true});
 
 export default (knex) => {
+    
     router.get('/', (req, res) => {
-        console.log("view all applications");
-        res.status(200).send("");
-    })
-    router.get('/:application_id', (req, res) => {
-        console.log("view a application");
-        res.status(200).send("");
+        let user_id = '1';
+        knex('applications').select().where('application_job_id', req.params.job_id).then(result => {
+            res.json(result);
+        }).catch(err => {
+            res.status(500).send(err);
+        });
     })
 
     router.post('/new', (req, res) => {
+        let user_id = '1';
+
         let newApplication = {
             application_id: uuid(),
-            application_start_time: req.body.application_start_time,
-            application_end_time: req.body.application_end_time,
             application_status: "created",
-            application_job_id: req.body.application_job_id
+            application_job_id: req.params.job_id,
+            application_description: req.body.description,
+            applicant_id: user_id
         };
+
+        console.log(newApplication);
 
         knex('applications').insert(newApplication).returning('*').then(result => {
             console.log("created a application" + JSON.stringify(result));
             res.status(200).send("application created");
         }).catch(err =>{
-            res.status(500).send("error, application cant be created");
+            res.status(500).send(err);
         });
     })
 
+    router.put('/:application_id', (req, res) => {
+
+        // TODO: update job status to offered as well
+
+        // TODO: once PAID, update job status to complete, update job walker_id to user_id
+        
+        knex('applications')
+            .update('application_status', 'offered')
+            .where('application_id', req.params.application_id)
+            .then(result => {
+                res.json(result);
+            }).catch(err => {
+                res.status(500).send(err);
+            });
+    })
+
+    router.get('/:application_id', (req, res) => {
+        console.log("view a application");
+        res.status(200).send("");
+    })
 
     router.delete('/:application_id', (req, res) => {
         knex('applications').where('application_id', req.params.application_id)

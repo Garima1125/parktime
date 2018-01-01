@@ -4,6 +4,11 @@ import express from 'express';
 const router = express.Router({mergeParams: true});
 
 export default (knex) => {
+
+    router.get('/jobs', (req, res) => {
+
+    })
+
     router.get('/', (req, res) => {
         console.log("view walkers");
         res.status(200).send("");

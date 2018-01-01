@@ -10,6 +10,7 @@ import NewScheduleModal from '../modals/NewScheduleModal';
 import DeleteDogModal from '../modals/DeleteDogModal';
 import DeleteJobModal from '../modals/DeleteJobModal';
 import DeleteScheduleModal from '../modals/DeleteScheduleModal';
+import ShowApplicationsModal from '../modals/ShowApplicationsModal';
 
 class Dogs extends Component {
 
@@ -58,12 +59,13 @@ class Dogs extends Component {
                 <ListGroupItem key={uuid()}>
                     <Row className="show-grid">
                         <Col md={12}>
-                            {job.job_title} - {job.job_description} - {job.job_rate} - {job.job_status}
+                            #{job.job_id} {job.job_title} - {job.job_description} - {job.job_rate} - {job.job_status}
                         </Col>
                     </Row>
                     <ButtonToolbar>
                         <NewScheduleModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs} />
-                        <DeleteJobModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs}/>
+                        <DeleteJobModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs} />
+                        <ShowApplicationsModal job={job} />
                     </ButtonToolbar>
                     <Row className="show-grid">
                         <Col md={12}>

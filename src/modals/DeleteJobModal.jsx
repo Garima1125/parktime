@@ -46,7 +46,7 @@ class DeleteJobModal extends Component {
             <div>
                 <Button bsSize='small' bsStyle='danger' onClick={this.open} >
                     <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                    DELETE JOB
+                    Remove Job
                     &nbsp;
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>

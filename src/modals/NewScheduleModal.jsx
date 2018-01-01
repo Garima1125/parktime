@@ -58,9 +58,9 @@ class NewScheduleModal extends Component {
         return (
             <div>
                 <Button bsSize="small" onClick={this.open}>
-                    <i className="fa fa-calender fa-fw" aria-hidden="true"></i>
+                    <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                     &nbsp;
-                    Schedule
+                    Add Schedule
                     &nbsp;
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>

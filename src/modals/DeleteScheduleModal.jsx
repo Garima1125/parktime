@@ -45,7 +45,7 @@ class DeleteScheduleModal extends Component {
             <div>
                 <Button bsSize='small' bsStyle='danger' onClick={this.open} >
                     <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                    DELETE SCHEDULE
+                    Remove Schedule
                     &nbsp;
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>

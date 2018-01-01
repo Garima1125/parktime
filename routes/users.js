@@ -9,6 +9,15 @@ const uuidv4 = require('uuid/v4');
 export default (knex) => {
     router.use('/:user_id/reviews', reviewsRoutes(knex));
 
+    router.get('/whoami', (req, res) => {
+      let user_id = '1';
+      knex('users').select(['user_id', 'user_first_name', 'user_last_name', 'user_email']).where('user_id', user_id).where('user_deleted_at', null).limit(1).then(user => {
+        res.json(user);
+      }, err => {
+        res.status(500).send(err);
+      });
+    });
+
     router.get('/', (req, res) => {
         knex('users')
             .select('*')
@@ -33,15 +42,10 @@ export default (knex) => {
         })
     })
 
-    router.post('/users/create/', (req, res) => {
+    router.post('/', (req, res) => {
       console.log(req.body);
       res.status(200).send();
     });
-
-    // router.post('/:user_id', (req, res) => {
-    //     console.log("view a user");
-    //     res.status(200).send("");
-    // })
 
     router.get('/:user_id', (req, res) => {
         users.where("user_id", req.params.id).fetch()
@@ -127,6 +131,7 @@ export default (knex) => {
         });
 
     });
+
 // owner's Routes
 router.post('/profile/createowner',(req, res) => {
 
