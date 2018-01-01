@@ -31,8 +31,9 @@ logoutUser(){
 
   render(){
     if(this.state.authenticated === false){
-      localStorage.removeItem('authenticated');
-      localStorage.removeItem('email');
+      // localStorage.removeItem('authenticated');
+      // localStorage.removeItem('email');
+      localStorage.clear();
       this.props.onChange({
         authenticated:false, email:''
       });

@@ -94,7 +94,6 @@ handleClick() {
       var lat = data.results[0].geometry.location.lat;
       var lng = data.results[0].geometry.location.lng;
       this.setState({user_latitude: lat, user_longitude: lng});
-      console.log(this.state);
       fetch('/users/profile/createowner', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
@@ -114,7 +113,8 @@ handleClick() {
 
     render() {
       if(this.state.ownerCreated){
-      return <Redirect to='/dogs' />;
+        localStorage.setItem('userType','owner');
+        return <Redirect to='/dogs' />;
       }
         return (
           <form className ="owner-details" onSubmit={this.handleSubmit}>

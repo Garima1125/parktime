@@ -96,7 +96,7 @@ export default (knex) => {
         var password = req.body.password;
 
         knex
-            .select("user_id","user_password")
+            .select("user_id","user_password", "user_type")
             .from("users")
             .where("user_email", req.body.email)
             .then(function(results) {
@@ -118,7 +118,7 @@ export default (knex) => {
                   bcrypt.compare(password, results[0].user_password, function(err, result) {
                     console.log("result", result);
                     if(result) {
-                      res.send({authenticated: true});
+                      res.send({authenticated: true, userType: results[0].user_type});
                     } else {
                       res.status(403);
                     }
@@ -148,6 +148,7 @@ router.post('/profile/createowner',(req, res) => {
        .update({
          user_first_name: req.body.user_first_name,
          user_last_name: req.body.user_last_name,
+         user_type:'owner'
         })
        .then(function(){
          knex('users_detail')
@@ -195,24 +196,25 @@ router.post('/profile/createowner',(req, res) => {
            })
            .into('walkers')
            .then(function(){
-             knex('users')
-             .where('user_id',user_id)
-             .update({
-               user_first_name: req.body.user_first_name,
-               user_last_name: req.body.user_last_name,
-             })
-             .then(function(){
-               knex('users_detail')
-               .insert({
+             knex('users_detail')
+             .insert({
                  user_picture: req.body.user_picture,
                  user_postal_code: req.body.user_postal_code,
                  user_latitude: req.body.user_latitude,
                  user_longitude: req.body.user_longitude,
                  user_detail_id: uuidv4(),
                  user_id: user_id
-               })
+             })
+            .then(function(){
+                 knex('users')
+                 .where('user_id',user_id)
+                 .update({
+                   user_first_name: req.body.user_first_name,
+                   user_last_name: req.body.user_last_name,
+                   user_type: 'walker'
+                 })
                .then(function() {
-                 res.status(200).send({profileCreated: true});
+                 res.status(200).send({profileCreated: true, userType: 'walker'});
                })
              })
            })

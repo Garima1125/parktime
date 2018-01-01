@@ -16,7 +16,8 @@ class LoginModal extends Component {
       first_name: '',
       last_name: '',
       password: '',
-      authenticated: false
+      authenticated: false,
+      userType: ''
     }
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
@@ -80,8 +81,15 @@ class LoginModal extends Component {
     if (this.state.authenticated) {
       this.props.onChange({email: this.state.email, authenticated: this.state.authenticated});
       localStorage.setItem('authenticated', true);
-      localStorage.setItem('email', this.state.email)
-      return <Redirect to='/profile' />;
+      localStorage.setItem('email', this.state.email);
+      localStorage.setItem('userType', this.state.userType)
+      if(this.state.userType === 'walker') {
+        return <Redirect to='/walker/profile/view' />;
+      }
+      else {
+        return <Redirect to='/profile' />;
+      }
+
     }
 
     return (

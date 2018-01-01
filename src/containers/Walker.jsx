@@ -24,6 +24,8 @@ class Walker extends Component {
       user_latitude: '',
       user_longitude: '',
       user_email: localStorage.getItem("email"),
+      authenticated: localStorage.getItem("authenticated"),
+      userType: '',
       profileCreated: false
     }
 
@@ -78,7 +80,7 @@ class Walker extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var postal_code = this.state.postal_code;
+    var postal_code = this.state.user_postal_code;
     var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + postal_code.replace(' ', '') + "&key=AIzaSyBqTA4VZJ73mcFVSg8owb7gxsxA_k447Lg"
     fetch(url,{
     }).then(function(response){
@@ -109,8 +111,14 @@ class Walker extends Component {
   }
 
     render() {
+      if(!this.state.authenticated) {
+        alert("Please Login First");
+        return <Redirect to='/' />;
+      }
+
       if(this.state.profileCreated){
-      return <Redirect to='/' />;
+        localStorage.setItem('userType', 'walker');
+        return <Redirect to='/' />;
       }
         return (
           <form className ="walker-details" onSubmit={this.handleSubmit}>
