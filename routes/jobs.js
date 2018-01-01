@@ -3,12 +3,14 @@
 import express from 'express';
 import schedulesRoutes from './schedules';
 import paymentsRoutes from './payments';
+import applicationsRoutes from './applications';
 import uuid from 'uuid/v4';
 
 const router = express.Router({mergeParams: true});
 
 export default (knex) => {
     router.use('/:job_id/schedules', schedulesRoutes(knex));
+    router.use('/:job_id/applications', applicationsRoutes(knex));
     router.use('/:job_id/payments', paymentsRoutes(knex));
    
     router.get('/', (req, res) => {
