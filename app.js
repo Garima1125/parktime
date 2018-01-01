@@ -61,9 +61,32 @@ app.get('/owner', (req, res) => {
     res.render('main');
 });
 
-app.get('/search', (req, res) => {
+app.get('/search/jobs', (req, res) => {
   res.render('main');
 });
+
+app.get('/search/walkers', (req, res) => {
+    res.render('main');
+});
+
+app.get('/myjobs', (req, res) => {
+    res.render('main');
+});
+
+app.get('/jobs', (req, res) => {
+
+    // associated dog - associated owner - associated user detail
+    knexObj.raw(`select * from users 
+    left join users_detail on users.user_id = users_detail.user_detail_user_id and user_detail_deleted_at is null
+    left join owners on users.user_id = owners.owner_user_id and owner_deleted_at is null
+    left join dogs on dogs.dog_owner_id = owners.owner_id and dog_deleted_at is null 
+    left join jobs on dogs.dog_id = jobs.job_dog_id and job_deleted_at is null 
+    `).then(result => {
+        res.json(result.rows);
+    }).catch(err => {
+        res.status(500).send(err);
+    });
+})
 
 app.get('/walker/profile/view', (req, res) => {
   res.render('main');

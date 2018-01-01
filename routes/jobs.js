@@ -13,10 +13,6 @@ export default (knex) => {
     router.use('/:job_id/applications', applicationsRoutes(knex));
     router.use('/:job_id/payments', paymentsRoutes(knex));
    
-    router.get('/', (req, res) => {
-        console.log("view all jobs");
-        res.status(200).send("");
-    })
     router.post('/new', (req, res) => {
         
         let newJob = {
@@ -28,7 +24,7 @@ export default (knex) => {
             job_dog_id: req.body.job_dog_id
         };
         
-        knex('jobs').insert(newJob).returning('*').then(result =>{
+        knex('jobs').insert(newJob).returning('*').then(result => {
             console.log("created a job");
             res.status(200).send("job created");
         }).catch(err =>{
