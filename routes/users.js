@@ -72,7 +72,7 @@ export default (knex) => {
         };
 
         knex
-            .select("user_id")
+            .select("user_id", "user_type")
             .from("users")
             .where("user_email", user.user_email)
             .then(function(results) {
@@ -85,7 +85,7 @@ export default (knex) => {
                   })
                 }
                 else {
-                  res.send({"authenticated": "true"});
+                  res.send({"authenticated": "true", "userType": results[0].user_type});
                 }
             });
     });

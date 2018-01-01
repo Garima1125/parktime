@@ -90,7 +90,6 @@ class Walker extends Component {
       var lat = data.results[0].geometry.location.lat;
       var lng = data.results[0].geometry.location.lng;
       this.setState({user_latitude: lat, user_longitude: lng})
-      console.log(this.state);
       fetch('/users/profile/create', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
