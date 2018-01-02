@@ -38,7 +38,8 @@ export default (knex) => {
         left join schedules on jobs.job_id = schedules.schedule_job_id and schedule_deleted_at is null 
         where user_id = ?`, [user_id])
         .then(result => {
-            console.log(JSON.stringify(result.rows, null, 4));
+            console.log(result);
+            //console.log(JSON.stringify(result.rows, null, 4));
             // group schedules by job
             let jobs = {};
             for (let row of result.rows) {

@@ -92,10 +92,6 @@ app.get('/walker/profile/view', (req, res) => {
   res.render('main');
 });
 
-app.get('/dogs/all', (req, res) => {
-  res.render('main');
-});
-
 app.get('/dogs/new', (req, res) => {
   res.render('main');
 });

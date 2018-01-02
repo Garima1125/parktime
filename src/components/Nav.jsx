@@ -3,7 +3,6 @@
 // find dog walkers
 // find jobs
 
-
 import React, {Component} from 'react';
 import {Navbar, Nav, NavItem, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
