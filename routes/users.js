@@ -1,32 +1,48 @@
 "use strict"
 
 import express from 'express';
+import bcrypt from 'bcrypt';
+import uuidv4 from 'uuid/v4';
 import reviewsRoutes from './reviews';
 const router = express.Router({mergeParams: true});
-const bcrypt = require('bcrypt');
-const uuidv4 = require('uuid/v4');
+
 
 export default (knex) => {
-    router.use('/:user_id/reviews', reviewsRoutes(knex));
 
-    router.get('/whoami', (req, res) => {
-      let user_id = '1';
-      knex('users').select(['user_id', 'user_first_name', 'user_last_name', 'user_email']).where('user_id', user_id).where('user_deleted_at', null).limit(1).then(user => {
-        res.json(user);
-      }, err => {
-        res.status(500).send(err);
-      });
-    });
+  router.use('/:user_id/reviews', reviewsRoutes(knex));
 
-    router.get('/', (req, res) => {
-        knex('users')
-            .select('*')
-            .then(result => {
-                res.status(200).send(result);
-            }, err => {
-                res.status(500).send('Error');
-            });
+  // get current logged-in user
+  router.get('/', (req, res) => {
+    res.json(req.user);
+  });
+
+  // profile update
+  router.put('/:user_id', (req, res) => {
+    //knex('users').update('')
+    //req.body.
+    // update user profile
+  })
+
+  // create local user
+  router.post('/', (req, res) => {
+    let user = {
+      user_id: req.body.email,
+      user_first_name: req.body.first_name,
+      user_last_name: req.body.last_name,
+      user_password: bcrypt.hashSync(req.body.password, 10)
+    };
+    knex('users').insert(user).returning().then(result => {
+      res.json(result);
+    }).catch(err => {
+      res.status(500).send(err);
     });
+  })
+
+  router.delete('/:user_id', (req, res) => {
+    console.log("delete user");
+    res.status(200).send("");
+  })
+    
 
     router.get('/walkers', (req, res) => {
         knex
@@ -60,40 +76,7 @@ export default (knex) => {
         console.log("update user profile");
         res.status(200).send("");
     })
-    router.delete('/:user_id', (req, res) => {
-        console.log("delete user");
-        res.status(200).send("");
-    })
-
-    router.post('/auth/google', (req, res) => {
-        console.log(req.body);
-        let user = {
-            user_password: '',
-            user_first_name: req.body.givenName,
-            user_last_name: req.body.familyName,
-            user_email: req.body.email,
-            user_id: req.body.googleId
-        };
-
-        knex
-            .select("user_id", "user_type")
-            .from("users")
-            .where("user_email", user.user_email)
-            .then(function(results) {
-                if(results.length === 0) {
-                knex
-                  .insert(user)
-                  .into('users')
-                  .then(function() {
-                    res.send({"authenticated": "true"});
-                  })
-                }
-                else {
-                  res.send({"authenticated": "true", "userType": results[0].user_type});
-                }
-            });
-    });
-
+    
 
     router.post('/auth/login', (req, res) => {
         var email = req.body.email;

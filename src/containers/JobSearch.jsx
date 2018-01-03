@@ -192,8 +192,7 @@ class JobSearch extends Component {
                     <Col xs={12} md={3}>
                         {this.state.info}
                     </Col>
-                </Row>
-                
+                </Row>                
             </Grid>
         )
     }

@@ -13,24 +13,12 @@ class Navigation extends Component {
   constructor() {
     super();
     this.state = {
-      authenticated: false,
-      email: ''
     }
-    this.changeState = this.changeState.bind(this);
-  }
-
-  changeState(data) {
-    this.setState(data);
-  }
-
-  componentDidMount() {
-    this.setState({authenticated: localStorage.getItem('authenticated')});
-    this.setState({email: localStorage.getItem('email')});
   }
 
   render() {
     const logOut = () => {
-      this.setState({authenticated: false, email: ''})
+      // WTF?
     }
 
     return (
