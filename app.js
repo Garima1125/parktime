@@ -42,7 +42,13 @@ app.use(passport.session());
 app.use('/auth', authRoutes(knexObj));
 app.use('/users', usersRoutes(knexObj));
 
-app.get('/test', mw.auth, mw.authType(null), (req, res) => {
+// test route to demonstrate user auth and routing middleware
+app.get('/test', 
+    mw.auth, 
+    mw.authType(null), (req, res) => {
+    res.json(req.user);
+});
+app.get('/owneronly', mw.auth, mw.authType('owner'), (req, res) => {
     res.json(req.user);
 });
 

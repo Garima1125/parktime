@@ -13,14 +13,36 @@ class Navigation extends Component {
   constructor() {
     super();
     this.state = {
+        user: null
     }
   }
 
-  render() {
-    const logOut = () => {
-      // WTF?
-    }
+  componentDidMount() {
+      this.getUser();
+  }
 
+  getUser = () => {
+    fetch('/users', {
+      credentials: "same-origin"
+    }).then(resp => {
+      if (resp.status !== 200) {
+        console.log(resp.status);
+        return;
+      }
+      resp.json().then(user => {
+        this.setState({user: user});
+      }).catch(err => {
+         // ignore 
+      });
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
+  render() {
+
+    let authModal = this.state.user ? <LogoutModal /> : <LoginModal />;
+    let hello = this.state.user ? <div>Hello {this.state.user.user_email}</div> : null;
     return (
         <Navbar collapseOnSelect className="navbar">
             <Navbar.Header>
@@ -43,17 +65,12 @@ class Navigation extends Component {
                         <NavItem eventKey={4}>Search Jobs</NavItem>
                     </LinkContainer>
                 </Nav>
-                {this.state.authenticated ?
-                <Nav>
-                  <NavItem>Hello {this.state.email}</NavItem>
-                </Nav> : <Nav></Nav>
-                }
                 <Nav pullRight>
-                    <NavItem eventKey={3}>
-                      {
-                        this.state.authenticated ? <LogoutModal onChange={this.changeState}/>
-                                                 : <LoginModal onChange={this.changeState} />
-                      }
+                    <NavItem eventKey={1}>
+                        {authModal}
+                    </NavItem>
+                    <NavItem eventKey={1}>
+                        {hello}
                     </NavItem>
                 </Nav>
             </Navbar.Collapse>
@@ -65,3 +82,5 @@ class Navigation extends Component {
 }
 
 export default Navigation;
+
+

@@ -1,5 +1,5 @@
 const authRequired = (req, res, next) => {  
-    if (!req.isAuthenticated() || !req.user) {
+    if (!req.user) {
         req.session.oauth2return = req.originalUrl;
         return res.redirect('/login');
     }
@@ -8,7 +8,7 @@ const authRequired = (req, res, next) => {
 
 const typeRequired = (type) => {
     return (req, res, next) => {
-        if (!req.isUnAuthenticated() || !req.user) {
+        if (!req.user) {
             req.session.oauth2return = req.originalUrl;
             return res.redirect('/login');
         }

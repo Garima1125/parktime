@@ -2,7 +2,7 @@
 
 import express from 'express';
 import bcrypt from 'bcrypt';
-import uuidv4 from 'uuid/v4';
+import uuid from 'uuid/v4';
 import reviewsRoutes from './reviews';
 const router = express.Router({mergeParams: true});
 
@@ -26,14 +26,17 @@ export default (knex) => {
   // create local user
   router.post('/', (req, res) => {
     let user = {
-      user_id: req.body.email,
-      user_first_name: req.body.first_name,
-      user_last_name: req.body.last_name,
+      user_id: uuid(),
+      user_email: req.body.username,
       user_password: bcrypt.hashSync(req.body.password, 10)
     };
-    knex('users').insert(user).returning().then(result => {
+    console.log(user);
+    knex('users').insert(user).returning('*').then(result => {
+      console.log(result);
       res.json(result);
+      
     }).catch(err => {
+      console.log(err);
       res.status(500).send(err);
     });
   })
@@ -91,7 +94,7 @@ export default (knex) => {
                 if(results.length === 0) {
                 knex
                   .insert({
-                      user_id: uuidv4(),
+                      user_id: uuid(),
                       user_email: req.body.email,
                       user_password: bcrypt.hashSync(req.body.password, 5)
                   })
@@ -126,7 +129,7 @@ router.post('/profile/createowner',(req, res) => {
    var user_id = result[0].user_id;
     knex
      .insert({
-       owner_id:uuidv4(),
+       owner_id:uuid(),
        owner_user_id: user_id
      })
      .into('owners')
@@ -151,7 +154,7 @@ router.post('/profile/createowner',(req, res) => {
            user_province: req.body.user_province,
            user_city: req.body.user_city,
            user_phone: req.body.user_phone,
-           user_detail_id: uuidv4(),
+           user_detail_id: uuid(),
            user_id: user_id
          })
          .then(function() {
@@ -174,7 +177,7 @@ router.post('/profile/createowner',(req, res) => {
           var user_id = result[0].user_id;
            knex
            .insert({
-             walker_id: uuidv4(),
+             walker_id: uuid(),
              walker_experience: req.body.walker_experience,
              walker_description: req.body.walker_description,
              walker_expected_payrate:req.body.walker_expected_payrate,
@@ -190,7 +193,7 @@ router.post('/profile/createowner',(req, res) => {
                  user_postal_code: req.body.user_postal_code,
                  user_latitude: req.body.user_latitude,
                  user_longitude: req.body.user_longitude,
-                 user_detail_id: uuidv4(),
+                 user_detail_id: uuid(),
                  user_id: user_id
              })
             .then(function(){

@@ -4,6 +4,7 @@ import express from 'express';
 import passport from 'passport';
 import passportLocal from 'passport-local';
 import passportGoogle from 'passport-google-oauth20';
+import bcrypt from 'bcrypt';
 import uuid from 'uuid/v4';
 const GoogleStrategy = passportGoogle.Strategy;
 const LocalStrategy = passportLocal.Strategy;
@@ -41,20 +42,24 @@ export default (knex) => {
     // user local strategy
     passport.use(new LocalStrategy(
         (username, password, done) => {
-            console.log(username);
+
             knex('users').select().where('user_email', username).first().then(user => {
                 if (user == null) {
+                    // unsuccessful
                     done(null, false);
                     return;
                 }
-                if (bcrypt.compareSync(password, user.user_password))  {
-                    delete user.user_password;
-                    delete user.user_deleted_at;
-                    done(null, user);
+                if (!bcrypt.compareSync(password, user.user_password))  {
+                    // unsuccessful
+                    done(null, false);
                     return;
                 }
-                done(null, false);
+                delete user.user_password;
+                delete user.user_deleted_at;
+                // successful
+                done(null, user);
             }).catch(err => {
+                // unsuccessful
                 done(err);
             });
         }

@@ -2,51 +2,34 @@
 import React, {Component} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import { Redirect } from 'react-router';
+import {Link} from 'react-router-dom';
 
 class LogoutModal extends Component{
 
   constructor(props){
     super(props);
-    this.close = this.close.bind(this);
-    this.open = this.open.bind(this);
-    this.logoutUser = this.logoutUser.bind(this);
     this.state = {
-      showModal: false,
-      authenticated:true
-
+      showModal: false
     }
   }
 
-  close() {
+  close = () => {
      this.setState({ showModal: false });
    }
 
-   open() {
+   open = () => {
      this.setState({ showModal: true });
    }
 
-logoutUser(){
-  this.setState({authenticated :false});
-}
+   logout = () => {
+     console.log('logout!!');
+     window.location.href = '/auth/logout';
+   }
 
   render(){
-    if(this.state.authenticated === false){
-      // localStorage.removeItem('authenticated');
-      // localStorage.removeItem('email');
-      localStorage.clear();
-      this.props.onChange({
-        authenticated:false, email:''
-      });
-      return <Redirect to='/' />;
-    }
-
     return (
       <div>
-        <Button
-          bsStyle="primary"
-          bsSize="small"
-          onClick={this.open}
-        >
+        <Button bsStyle="default" bsSize="xsmall" onClick={this.open}>
           Logout
         </Button>
 
@@ -56,8 +39,8 @@ logoutUser(){
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="col-md-6"><Button onClick={this.close} bsStyle="default">Close</Button></div>
-            <div className="col-md-6"><Button onClick={this.logoutUser} bsStyle="danger">Logout</Button></div>
+              <div className="col-md-6"><Button onClick={this.close} bsStyle="default">Close</Button></div>
+              <div className="col-md-6"><Button onClick={this.logout} bsStyle="danger">Logout</Button></div>
             </div>
           </Modal.Body>
           <Modal.Footer>

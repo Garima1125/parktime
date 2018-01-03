@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {Grid, Row, Col, PageHeader, Form, FormGroup, FormControl, ControlLabel, ButtonGroup, Button} from 'react-bootstrap';
 
-class Login extends Component {
+class Register extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
         }
     }
 
@@ -21,7 +21,7 @@ class Login extends Component {
                 <Row className="show-grid">
                     <Col md={12}>
                         <PageHeader>
-                            Login &nbsp;
+                            Register &nbsp;
                             <small>text here</small>
                         </PageHeader>
                     </Col>
@@ -29,7 +29,7 @@ class Login extends Component {
                 <br />
                 <Row className="show-grid">
                     <Col md={4}>
-                        <Form horizontal action='/auth/login' method='POST'>
+                        <Form horizontal action='/users/' method='POST'>
                             <FormGroup controlId="username">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Email
@@ -54,26 +54,10 @@ class Login extends Component {
                             </FormGroup>
                             <div className="signup">
                                 <Button type="submit">
-                                    Login
+                                    Register
                                 </Button>
                             </div>
                         </Form>
-                    </Col>
-                    <Col md={8}>
-                        <Row className="text-center sign-with">
-                            <Col md={12}>
-                                <h3>Sign in with</h3>
-                            </Col>
-                            <Col md={12}>
-                                <ButtonGroup justified>
-                                    <div className="signup">
-                                        <Button bsStyle="default" bsSize="xsmall" href='/auth/login'>
-                                            Google
-                                        </Button>
-                                    </div>
-                                </ButtonGroup>
-                            </Col>
-                        </Row>
                     </Col>
                 </Row>
             </Grid>
@@ -81,4 +65,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Register;
