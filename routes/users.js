@@ -17,7 +17,17 @@ export default (knex) => {
   });
 
   // profile update
-  router.put('/:user_id', (req, res) => {
+  router.post('/:user_id', (req, res) => {
+    knex('users')
+    .where('user_id', req.user.user_id)
+    .update('user_first_name', req.user.user_first_name)
+    .then(result => {
+      console.log(result)
+      res.status(200).send(result);
+    }).catch(err =>{
+      res.status(200).send(err)
+    })
+
     //knex('users').update('')
     //req.body.
     // update user profile
@@ -34,7 +44,7 @@ export default (knex) => {
     knex('users').insert(user).returning('*').then(result => {
       console.log(result);
       res.json(result);
-      
+
     }).catch(err => {
       console.log(err);
       res.status(500).send(err);
@@ -45,7 +55,7 @@ export default (knex) => {
     console.log("delete user");
     res.status(200).send("");
   })
-    
+
 
     router.get('/walkers', (req, res) => {
         knex
@@ -79,7 +89,7 @@ export default (knex) => {
         console.log("update user profile");
         res.status(200).send("");
     })
-    
+
 
     router.post('/auth/login', (req, res) => {
         var email = req.body.email;

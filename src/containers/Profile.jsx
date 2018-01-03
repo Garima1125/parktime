@@ -53,7 +53,7 @@ class Profile extends Component {
   }
 
   updateProfile = () => {
-    fetch('/users/', {
+    fetch('/users', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(this.state)
@@ -209,7 +209,7 @@ class Profile extends Component {
                 </Col>
               </FormGroup>
             </Form>
-            
+
           </Col>
         </Row>
         <Row className="show-grid">

@@ -6,6 +6,7 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, NavItem, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
+import GoogleLogin from 'react-google-login';
 import LoginModal from '../modals/LoginModal.jsx';
 import { Redirect } from 'react-router';
 import LogoutModal from '../modals/LogoutModal.jsx';
@@ -32,12 +33,13 @@ class Navigation extends Component {
       resp.json().then(user => {
         this.setState({user: user});
       }).catch(err => {
-         // ignore 
+         // ignore
       });
     }).catch(err => {
       console.log(err);
     });
   }
+
 
   render() {
 
@@ -82,5 +84,3 @@ class Navigation extends Component {
 }
 
 export default Navigation;
-
-
