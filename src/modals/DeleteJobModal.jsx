@@ -27,6 +27,7 @@ class DeleteJobModal extends Component {
     delete = () => {
         fetch(`/dogs/${this.props.dogID}/jobs/${this.props.jobID}`, {
             method: 'DELETE',
+            credentials: "same-origin"
         }).then(resp => {
             if (resp.status !== 200){
                 // TODO: error handling
@@ -40,7 +41,7 @@ class DeleteJobModal extends Component {
             console.log('error deleting job');
         })
     }
-        
+
     render() {
         return (
             <div>
@@ -57,7 +58,7 @@ class DeleteJobModal extends Component {
                         <Button onClick={this.delete}>Delete JOB</Button>
                         <Button onClick={this.close}>Cancel</Button>
                     </Modal.Body>
-                    <Modal.Footer>                        
+                    <Modal.Footer>
                     </Modal.Footer>
                 </Modal>
             </div>

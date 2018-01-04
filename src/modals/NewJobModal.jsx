@@ -38,7 +38,8 @@ class NewJobModal extends Component {
         fetch(`/dogs/${this.props.dogID}/jobs/new`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            credentials: "same-origin"
         }).then(resp => {
             if (resp.status !== 200) {
                 // TODO: error handling
@@ -73,7 +74,7 @@ class NewJobModal extends Component {
                                     Title
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="string" placeholder="Title" 
+                                    <FormControl type="string" placeholder="Title"
                                         value={this.state.job_title}
                                         onChange={this.change}
                                     />
@@ -84,7 +85,7 @@ class NewJobModal extends Component {
                                     Description
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="Description" 
+                                    <FormControl type="text" placeholder="Description"
                                         value={this.state.job_description}
                                         onChange={this.change}
                                     />
@@ -95,7 +96,7 @@ class NewJobModal extends Component {
                                     Rate
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="decimal" placeholder="Rate" 
+                                    <FormControl type="decimal" placeholder="Rate"
                                         value={this.state.job_rate}
                                         onChange={this.change}
                                     />

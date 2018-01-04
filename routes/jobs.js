@@ -12,9 +12,9 @@ export default (knex) => {
     router.use('/:job_id/schedules', schedulesRoutes(knex));
     router.use('/:job_id/applications', applicationsRoutes(knex));
     router.use('/:job_id/payments', paymentsRoutes(knex));
-   
+
     router.post('/new', (req, res) => {
-        
+
         let newJob = {
             job_id: uuid(),
             job_title: req.body.job_title,
@@ -23,7 +23,7 @@ export default (knex) => {
             job_status: 'created',
             job_dog_id: req.body.job_dog_id
         };
-        
+
         knex('jobs').insert(newJob).returning('*').then(result => {
             console.log("created a job");
             res.status(200).send("job created");
@@ -31,7 +31,7 @@ export default (knex) => {
             res.status(500).send('Error, job cannot be created');
         });
     })
-       
+
     router.get('/:job_id', (req, res) => {
         console.log("view a job");
         res.status(200).send("");
@@ -52,6 +52,6 @@ export default (knex) => {
         });
         return;
     })
-    
+
     return router;
 }

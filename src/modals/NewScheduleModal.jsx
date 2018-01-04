@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap';
 
 class NewScheduleModal extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state ={
@@ -39,7 +39,8 @@ class NewScheduleModal extends Component {
         fetch(`/dogs/${this.props.dogID}/jobs/${this.props.jobID}/schedules/new`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            credentials: "same-origin"
         }).then(resp => {
             if (resp.status !== 200){
                 // TODO: error handling
@@ -53,7 +54,7 @@ class NewScheduleModal extends Component {
             console.log('error creating new schedule');
         })
     }
-        
+
     render() {
         return (
             <div>
@@ -100,8 +101,7 @@ class NewScheduleModal extends Component {
                 </Modal>
             </div>
         );
-    }   
+    }
 }
 
 export default NewScheduleModal;
-

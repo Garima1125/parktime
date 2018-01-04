@@ -1,4 +1,4 @@
-// Jessica 
+// Jessica
 // when logged in as owner, I can add a dog profile
 
 import React, {Component} from 'react';
@@ -26,7 +26,9 @@ class Dogs extends Component {
     }
 
     getDogs = () => {
-        fetch('dogs/all')
+        fetch('dogs/all', {
+          credentials: "same-origin"
+        })
         .then(resp => {
             if (resp.status !== 200) {
                 // TODO: error handling
@@ -88,7 +90,7 @@ class Dogs extends Component {
                         <Col md={12}>
                             <ButtonToolbar>
                                 <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>
-                                <DeleteDogModal dogID={dog.dog_id} getDogs={this.getDogs}/>                
+                                <DeleteDogModal dogID={dog.dog_id} getDogs={this.getDogs}/>
                             </ButtonToolbar>
                         </Col>
                     </Row>
@@ -139,4 +141,3 @@ export default Dogs;
 
 // <DeleteJobModal getDogs={this.getDogs} dogID={dog.dog_id} />
 // <DeleteDogModal getDogs={this.getDogs} dogID={dog.dog_id} />
-

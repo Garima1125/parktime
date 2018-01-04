@@ -26,7 +26,8 @@ class DeleteScheduleModal extends Component {
     // when delete a schedule
     delete = () => {
         fetch(`/dogs/${this.props.dogID}/jobs/${this.props.jobID}/schedules/${this.props.scheduleID}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            credentials: "same-origin"
         }).then(resp => {
             if (resp.status !== 200){
                 // TODO: error handling
@@ -39,7 +40,7 @@ class DeleteScheduleModal extends Component {
             console.log('error deleting schedule');
         })
     }
-        
+
     render() {
         return (
             <div>
@@ -56,7 +57,7 @@ class DeleteScheduleModal extends Component {
                         <Button onClick={this.delete}>Delete SCHEDULE</Button>
                         <Button onClick={this.close}>Cancel</Button>
                     </Modal.Body>
-                    <Modal.Footer>                        
+                    <Modal.Footer>
                     </Modal.Footer>
                 </Modal>
             </div>
