@@ -60,10 +60,7 @@ class LoginModal extends Component {
             <Modal.Title>Welcome, please choose one of the following</Modal.Title>
           </Modal.Header>
 
-
-
           <Modal.Footer>
-
             <Button onClick={this.redirectRegister}>Register</Button>
             <Button onClick={this.redirectLogin}>Login</Button>
             <Button onClick={this.redirectProfile}>Redirect to Profile</Button>

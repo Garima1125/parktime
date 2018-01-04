@@ -25,11 +25,14 @@ class JobSearch extends Component {
     }
 
     getUser = () => {
-        fetch('/users/whoami').then(resp => {
+        fetch('/users', {
+            credentials: "same-origin"
+        }).then(resp => {
             if (resp.status !== 200) {
                 console.log(resp.status);
                 return;
             };
+            console.log('this user' + JSON.stringify(resp));
             resp.json().then(user => {
                 this.setState({user: user});
             });
@@ -38,57 +41,18 @@ class JobSearch extends Component {
         })
     }
 
-    isMine = (dog, job, cb) => {
-        fetch(`/dogs/${dog.dog_id}/jobs/${job.job_id}`).then(resp => {
-            if (resp.status !== 200) {
-                console.log(resp.status);
-                return;
-            }
-            resp.json().then(result => {
-                cb(result);
-            });
-        }).catch(err => {
-            console.log(err);
-        });
-    }   
-
-    getMine = () => {
-        fetch(`/dogs/${dog.dog_id}/jobs/${job.job_id}/applications/mine`).then(resp => {
-            if (resp.status !== 200) {
-                console.log(resp.status);
-                return;
-            }
-            resp.json().then(applications => {
-                this.setState({mine: applications})
-            });
-        }).catch(err => {
-            console.log(err);
-        });
-    }
-
     initMap = () => {
+        
+        let lat = parseFloat(this.state.user.user_latitude) || 10.2; //43.983112;
+        let lng = parseFloat(this.state.user.user_longitude) || -40.0; //-79.590700;
 
         this.map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 43.983112, lng: -79.590700},
+            center: {lat: lat, lng: lng},
             zoom: 8
         });
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                let pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                this.map.setCenter(pos);
-            }, () => {
-                // handle geolocation error
-                console.log('error - geolocation failed')
-            });
-        }
-
-        // TODO: get all nearby coordinates using fetch
+        // get all nearby coordinates using fetch
         this.getJobs();
-
     }
 
     getJobs = () => {
@@ -98,7 +62,7 @@ class JobSearch extends Component {
                 return;
             }
             resp.json().then(jobs => {
-                console.log(jobs);
+                console.log('get jobs' + JSON.stringify(jobs));
                 for (let job of jobs) {
                     this.addMarker(job);
                 }
@@ -115,41 +79,18 @@ class JobSearch extends Component {
 
         let marker = new google.maps.Marker({
             position: {
-                lat: parseFloat(job.user_detail_latitude),
-                lng: parseFloat(job.user_detail_longitude)
+                lat: parseFloat(job.user_latitude),
+                lng: parseFloat(job.user_longitude)
             },
             label: job.job_id,
             map: this.map
         })
 
+        console.log(job.job_id +'lat' + job.user_latitude + 'lng' + job.user_longitude);
+
         marker.addListener('click', this.clickHandler(job, marker));
 
         this.markers.push(marker);
-    }
-
-    apply = (job) => {
-        return () => {
-            fetch(`/dogs/${job.dog_id}/jobs/${job.job_id}/applications/new`, {
-                method: 'POST'
-            }).then(resp => {
-                if (resp.status !== 200) {
-                    console.log(resp.status);
-                    return;
-                }
-                resp.json().then(data => {
-                    console.log(data);
-                    this.getMine();
-                });
-            }).catch(err => {
-                console.log(err);
-            });
-        };
-    }
-
-    change = (e) => {
-        console.log(e.target.id);
-        console.log(e.target.value);
-        this.setState({ [e.target.id]: e.target.value });
     }
 
     clickHandler = (job, marker) => {

@@ -1,7 +1,9 @@
+const bcrypt = require('bcrypt');
+
 module.exports =[
   {
     user_id: '1',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'jessica',
     user_last_name:'liu',
     user_email:'jessica@parktime.com',
@@ -22,7 +24,7 @@ module.exports =[
 
   { 
     user_id: '2',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'garima',
     user_last_name:'arya',
     user_email:'garima@parktime.com',  
@@ -43,7 +45,7 @@ module.exports =[
 
   {
     user_id: '3',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'shubham',
     user_last_name:'arya',
     user_email:'shubham@parktime.com',
@@ -64,7 +66,7 @@ module.exports =[
 
   { 
     user_id: '4',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'sagar',
     user_last_name:'sharma',
     user_email:'sagar@parktime.com',
@@ -85,7 +87,7 @@ module.exports =[
 
   { 
     user_id: '5',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'kanika',
     user_last_name:'sharma',
     user_email:'kanika@parktime.com',
@@ -105,7 +107,7 @@ module.exports =[
   },
   { 
     user_id: '6',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'Tati',
     user_last_name:'Westbrook',
     user_email:'tati@parktime.com',
@@ -125,7 +127,7 @@ module.exports =[
   },
   { 
     user_id: '7',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'Jeffree',
     user_last_name:'Star',
     user_email:'Jeffree@parktime.com',
@@ -145,7 +147,7 @@ module.exports =[
   },
   { 
     user_id: '8',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'Jaclyn',
     user_last_name:'Hill',
     user_email:'jh@parktime.com',
@@ -165,7 +167,7 @@ module.exports =[
   },
   { 
     user_id: '9',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'James',
     user_last_name:'Austin',
     user_email:'james@parktime.com',
@@ -185,7 +187,7 @@ module.exports =[
   },
   { 
     user_id: '10',
-    user_password: '123456',
+    user_password: bcrypt.hashSync('123', 10),
     user_first_name:'Emma',
     user_last_name:'Stone',
     user_email:'emma@parktime.com',

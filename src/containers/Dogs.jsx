@@ -1,5 +1,5 @@
 // Jessica
-// when logged in as owner, I can add a dog profile
+// Owner's My dog page - can add a dog, job, and schedules
 
 import React, {Component} from 'react';
 import uuid from 'uuid/v4';

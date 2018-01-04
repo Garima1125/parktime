@@ -2,6 +2,7 @@
 
 import express from 'express';
 import bcrypt from 'bcrypt';
+import passport from 'passport';
 import uuid from 'uuid/v4';
 import reviewsRoutes from './reviews';
 const router = express.Router({mergeParams: true});
@@ -56,12 +57,18 @@ export default (knex) => {
     let user = {
       user_id: uuid(),
       user_email: req.body.username,
-      user_password: bcrypt.hashSync(req.body.password, 10)
+      user_password: bcrypt.hashSync(req.body.password, 10),
+      user_type: 'pending'
     };
     console.log(user);
     knex('users').insert(user).returning('*').then(result => {
-      console.log(result);
-      res.json(result);
+      
+      // logs user in after registration
+      req.params.username = req.body.username;
+      req.params.password = req.body.password;
+      passport.authenticate('local')(req, res, function () {
+        res.redirect('/profile');
+      })
 
     }).catch(err => {
       console.log(err);

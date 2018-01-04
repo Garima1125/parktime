@@ -13,6 +13,7 @@ export default (knex) => {
     router.use('/:job_id/applications', applicationsRoutes(knex));
     router.use('/:job_id/payments', paymentsRoutes(knex));
 
+    // create new job
     router.post('/new', (req, res) => {
 
         let newJob = {

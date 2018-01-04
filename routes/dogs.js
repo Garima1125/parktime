@@ -18,7 +18,7 @@ export default (knex) => {
             dog_age: req.body.dog_age,
             dog_breed: req.body.dog_breed,
             dog_description: req.body.dog_description,
-            dog_owner_id: '1'
+            owner_id: req.user.user_id
         }
         knex('dogs').insert(newDog).returning('*').then(result =>{
             console.log(JSON.stringify(result));
