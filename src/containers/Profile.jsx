@@ -7,6 +7,7 @@ class Profile extends Component {
     super(props);
     this.state = {
       user_id: '',
+      picture: '',
       first_name: '',
       last_name: '',
       type: '',
@@ -35,6 +36,7 @@ class Profile extends Component {
       }
       resp.json().then(user => {
         this.setState({ user_id: user.user_id });
+        this.setState({ picture: user.user_picture });
         this.setState({ first_name: user.user_first_name });
         this.setState({ last_name: user.user_last_name });
         this.setState({ type: user.user_type });
@@ -52,20 +54,33 @@ class Profile extends Component {
     });
   }
 
-  updateProfile = () => {
-    fetch('/users', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(this.state)
-    }).then(resp => {
-      if (resp.status !== 200){
-          alert('failed');
-          return;
-      }
-      console.log(resp);
-    }).catch(err => {
-        console.log(err);
-    });
+  updateProfile = (event) => {
+    event.preventDefault();
+    var postal_code = this.state.postal_code;
+    var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + postal_code.replace(' ', '') + "&key=AIzaSyBqTA4VZJ73mcFVSg8owb7gxsxA_k447Lg"
+    console.log(url);
+    fetch(url,{
+    }).then(response => {
+      return response.json();
+    }).then(data => {
+      console.log(data);
+      var lat = data.results[0].geometry.location.lat;
+      var lng = data.results[0].geometry.location.lng;
+      this.setState({user_latitude: lat, user_longitude: lng})
+      fetch('/users/update', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(this.state)
+      }).then(response => {
+        return response.json();
+      }).then(data => {
+        this.setState(data);
+      }).catch(error => {
+        console.log(error);
+      });
+    }).catch(error => {
+    console.log(error);
+    })
   }
 
   change = (e) => {
@@ -86,7 +101,18 @@ class Profile extends Component {
         <br />
         <Row className="show-grid">
           <Col md={12}>
-            <Form horizontal>
+            <Form horizontal onSubmit={this.updateProfile}>
+              <FormGroup controlId="picture">
+                <Col componentClass={ControlLabel} sm={2}>
+                  Picture
+                </Col>
+                <Col sm={10}>
+                  <FormControl type="string" placeholder="picture url"
+                    value={this.state.picture}
+                    onChange={this.change}
+                  />
+                </Col>
+              </FormGroup>
               <FormGroup controlId="first_name">
                 <Col componentClass={ControlLabel} sm={2}>
                   First Name

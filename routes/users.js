@@ -17,15 +17,33 @@ export default (knex) => {
   });
 
   // profile update
-  router.post('/:user_id', (req, res) => {
+  router.post('/update', (req, res) => {
+
+    console.log(req.body.first_name)
     knex('users')
-    .where('user_id', req.user.user_id)
-    .update('user_first_name', req.user.user_first_name)
+    .where('user_id', req.body.user_id)
+    .update({
+      user_first_name: req.body.first_name,
+      user_last_name: req.body.last_name,
+      user_type: req.body.type,
+      user_address: req.body.address,
+      user_postal_code: req.body.postal_code,
+      user_latitude: req.body.user_latitude,
+      user_longitude: req.body.user_longitude,
+      user_unit_number: req.body.unit_number,
+      user_city: req.body.city,
+      user_province: req.body.province,
+      user_country: req.body.country,
+      user_phone:req.body.phone,
+      user_picture: req.body.picture,
+      user_description:req.body.description
+    })
     .then(result => {
-      console.log(result)
       res.status(200).send(result);
+      console.log(result)
     }).catch(err =>{
-      res.status(200).send(err)
+      console.log(err)
+      res.status(500).send(err)
     })
 
     //knex('users').update('')
