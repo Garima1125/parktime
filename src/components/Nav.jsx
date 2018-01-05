@@ -46,7 +46,7 @@ class Navigation extends Component {
     let authModal = this.state.user ? <LogoutModal /> : <LoginModal />;
     let hello = this.state.user ? <div>Hello {this.state.user.user_email}</div> : null;
     return (
-        <Navbar collapseOnSelect className="navbar">
+        <Navbar collapseOnSelect className="navbar navbar-inverse">
             <Navbar.Header>
                 <Navbar.Brand>
                     <a href="/">ParkTime</a>

@@ -54,7 +54,7 @@ class LoginModal extends Component {
           Get Started
         </Button>
 
-        <Modal show={this.state.showModal} onHide={this.close} bsSize="large" aria-labelledby="contained-modal-title-lg">
+        <Modal show={this.state.showModal} onHide={this.close} bsSize="small" aria-labelledby="contained-modal-title-lg">
 
           <Modal.Header closeButton>
             <Modal.Title>Welcome, please choose one of the following</Modal.Title>
@@ -63,7 +63,6 @@ class LoginModal extends Component {
           <Modal.Footer>
             <Button onClick={this.redirectRegister}>Register</Button>
             <Button onClick={this.redirectLogin}>Login</Button>
-            <Button onClick={this.redirectProfile}>Redirect to Profile</Button>
           </Modal.Footer>
 
         </Modal>

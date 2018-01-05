@@ -29,7 +29,7 @@ class LogoutModal extends Component{
   render(){
     return (
       <div>
-        <Button bsStyle="default" bsSize="xsmall" onClick={this.open}>
+        <Button  id= "logout" bsStyle="default" bsSize="xsmall" onClick={this.open}>
           Logout
         </Button>
 

@@ -73,14 +73,15 @@ handleChange(event) {
       <Carousel.Item>
         <img width={1500} height={600} alt="900x500" src='/static/assets/andrew-pons-9.jpg' />
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>Hang out with pooches</h3>
+          <p>Love dogs ?
+          Caring for dogs on Park Time is a great way to spend quality time hanging out with different dogs and make some money.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img width={1500} height={600} alt="900x500" src='/static/assets/dogwalk.jpg' />
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          <h3>Make a Booking</h3>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
         </Carousel.Caption>
       </Carousel.Item>

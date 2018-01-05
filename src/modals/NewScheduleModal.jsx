@@ -2,12 +2,14 @@
 // Modal for Registering a new Schedule for a specific job
 import React, {Component} from 'react';
 import {Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap';
+import Datetime from 'react-datetime';
+import Moment from 'moment';
 
 class NewScheduleModal extends Component {
 
     constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             showModal: false,
             schedule_start_time: '',
             schedule_end_time: ''
@@ -25,8 +27,19 @@ class NewScheduleModal extends Component {
     }
 
     // when the modal is changed
-    change = (e) => {
-        this.setState({[e.target.id]: e.target.value});
+    // change = (e) => {
+    //   console.log(e._d);
+    //   console.log(Moment(e._d).format('YYYY-MM-DD HH:mm:ss'));//20 Mart 2017)
+    //     this.setState({[e.target.id]: e.target.value});
+    //
+    // }
+
+    handleStartTimeChange = (event) => {
+      this.setState({schedule_start_time: Moment(event._d).format('YYYY-MM-DD HH:mm:ss')});
+    }
+
+    handleEndTimeChange = (event) => {
+      this.setState({schedule_end_time: Moment(event._d).format('YYYY-MM-DD HH:mm:ss')});
     }
 
     // when register new schedule
@@ -75,10 +88,9 @@ class NewScheduleModal extends Component {
                                     Start Time
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="timestamp" placeholder="start_time"
-                                        value={this.state.schedule_start_time}
-                                        onChange={this.change}
-                                    />
+                                <Datetime
+                                onChange={this.handleStartTimeChange}
+                                inputProps={{placeholder: "start_time"}} />
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="schedule_end_time">
@@ -86,10 +98,9 @@ class NewScheduleModal extends Component {
                                     End Time
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="timestamp" placeholder="end_time"
-                                        value={this.state.schedule_end_time}
-                                        onChange={this.change}
-                                    />
+                                    <Datetime
+                                    onChange={this.handleEndTimeChange}
+                                    inputProps={{placeholder: "end_time"}} />
                                 </Col>
                             </FormGroup>
                         </Form>
