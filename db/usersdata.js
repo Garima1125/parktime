@@ -16,7 +16,7 @@ module.exports =[
     user_country:'canada',
     user_phone:'416-999-9999',
     user_picture:'http://knexjs.org/assets/images/knex.png',
-    user_latitude: 43.653112,
+    user_latitude: 43.153112,
     user_longitude: -79.390700,
     user_description:'I love dogs',
     user_deleted_at: null
@@ -58,8 +58,8 @@ module.exports =[
     user_country:'canada',
     user_phone:'647-909-7896',
     user_picture:'https://thumbs.dreamstime.com/b/funny-cartoon-raccoon-19551786.jpg',
-    user_latitude: 43.353112,
-    user_longitude: -79.390700,
+    user_latitude: 45.353112,
+    user_longitude: -79.210700,
     user_description:"I love dogs and i'm very comfortable with them",
     user_deleted_at: null
   },
@@ -79,8 +79,8 @@ module.exports =[
     user_country:'canada',
     user_phone:'647-779-7896',
     user_picture:'https://img3.stockfresh.com/files/t/tigatelu/m/21/2874561_stock-photo-funny-cow-cartoon-embrace-a-bottle-of-milk.jpg',
-    user_latitude: 43.673112,
-    user_longitude: -79.380700,
+    user_latitude: 43.600098,
+    user_longitude: -78.300200,
     user_description:"looking for a long term dog walker",
     user_deleted_at: null
   },
@@ -100,8 +100,8 @@ module.exports =[
     user_country:'canada',
     user_phone:'417-009-7886',
     user_picture:'https://akamai-platform.foxfilm.com/s3/production/201701/ba2cb7e8bd4cdba2a16dc1163d2517969c902d5a.jpg',
-    user_latitude: 43.983112,
-    user_longitude: -79.590700,
+    user_latitude: 40.983112,
+    user_longitude: -78.590700,
     user_description:"responsible, loving, patient",
     user_deleted_at: null
   },
@@ -120,8 +120,8 @@ module.exports =[
     user_country:'canada',
     user_phone:'416-009-1286',
     user_picture:'https://akamai-platform.foxfilm.com/s3/production/201701/ba2cb7e8bd4cdba2a16dc1163d2517969c902d5a.jpg',
-    user_latitude: 43.883112,
-    user_longitude: -79.700700,
+    user_latitude: 41.183112,
+    user_longitude: -78.300700,
     user_description:"owner of three bichons",
     user_deleted_at: null
   },
@@ -140,7 +140,7 @@ module.exports =[
     user_country:'canada',
     user_phone:'416-898-7886',
     user_picture:'https://akamai-platform.foxfilm.com/s3/production/201701/ba2cb7e8bd4cdba2a16dc1163d2517969c902d5a.jpg',
-    user_latitude: 43.123112,
+    user_latitude: 41.123112,
     user_longitude: -79.190700,
     user_description:"home to husky Ryan",
     user_deleted_at: null
@@ -160,8 +160,8 @@ module.exports =[
     user_country:'canada',
     user_phone:'416-229-9842',
     user_picture:'https://akamai-platform.foxfilm.com/s3/production/201701/ba2cb7e8bd4cdba2a16dc1163d2517969c902d5a.jpg',
-    user_latitude: 43.983112,
-    user_longitude: -79.590700,
+    user_latitude: 42.983112,
+    user_longitude: -79.190700,
     user_description:"I love dogs and i'm very comfortable with them",
     user_deleted_at: null
   },
@@ -180,8 +180,8 @@ module.exports =[
     user_country:'canada',
     user_phone:'416-129-7886',
     user_picture:'https://akamai-platform.foxfilm.com/s3/production/201701/ba2cb7e8bd4cdba2a16dc1163d2517969c902d5a.jpg',
-    user_latitude: 43.983112,
-    user_longitude: -79.590700,
+    user_latitude: 41.983112,
+    user_longitude: -79.190700,
     user_description:"looking for a dog walker",
     user_deleted_at: null
   },
@@ -200,8 +200,8 @@ module.exports =[
     user_country:'canada',
     user_phone:'416-224-2386',
     user_picture:'https://akamai-platform.foxfilm.com/s3/production/201701/ba2cb7e8bd4cdba2a16dc1163d2517969c902d5a.jpg',
-    user_latitude: 43.983112,
-    user_longitude: -79.590700,
+    user_latitude: 44.883112,
+    user_longitude: -79.120700,
     user_description:"your dog's best friend",
     user_deleted_at: null
   }
