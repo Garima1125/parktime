@@ -92,9 +92,50 @@ app.get('/myjobs', (req, res) => {
 // get all jobs
 app.get('/jobs', (req, res) => {
     knexObj.raw(`select * from users
-    right join jobs on jobs.walker_id = users.user_id and job_deleted_at is null`)
+    right join dogs on dogs.owner_id = users.user_id and user_deleted_at is null
+    right join jobs on jobs.job_dog_id = dogs.dog_id and job_deleted_at is null
+    `)
     .then(result => {
-        res.json(result.rows);
+        let users = {};
+        for (let row of result.rows) {
+            if (row.user_id in users){
+                if (row.job_id !== null) {
+                    users[row.user_id].jobs.push({
+                        job_id: row.job_id,
+                        job_title: row.job_title,
+                        job_description: row.job_description,
+                        job_rate: row.job_rate,
+                        job_status: row.job_status
+                    });
+                }
+            }else{
+                let user = {
+                    user_id: row.user_id,
+                    user_first_name: row.user_first_name,
+                    user_last_name: row.user_last_name,
+                    user_email: row.user_email,
+                    user_type: row.user_type,
+                    user_postal_code: row.user_postal_code,
+                    user_latitude: row.user_latitude,
+                    user_longitude: row.user_longitude,
+                    user_phone: row.user_phone,
+                    user_picture: row.user_picture,
+                }
+                if (row.job_id != null) {
+                    user.jobs = [{
+                        job_id: row.job_id,
+                        job_title: row.job_title,
+                        job_description: row.job_description,
+                        job_rate: row.job_rate,
+                        job_status: row.job_status
+                    }]
+                } else {
+                    user.jobs = [];
+                }
+                users[row.user_id] = user;
+            }        
+        }
+        res.json(Object.values(users));
     }).catch(err => {
         res.status(500).send(err);
     });

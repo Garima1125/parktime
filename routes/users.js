@@ -14,7 +14,11 @@ export default (knex) => {
 
   // get current logged-in user
   router.get('/', (req, res) => {
-    res.json(req.user);
+    let response = {};
+    if (req.user) {
+      response = req.user;
+    }
+    res.json(response);
   });
 
   // profile update

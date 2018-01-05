@@ -2,6 +2,7 @@
 // map - display jobs near me
 
 import React, {Component} from 'react';
+import uuid from 'uuid/v4';
 import {Grid, Row, Col, PageHeader, Button} from 'react-bootstrap';
 import NewApplicationModal from '../modals/NewApplicationModal';
 
@@ -14,14 +15,24 @@ class JobSearch extends Component {
         this.state = {
             user: null,
             info: null,
-            walkers: [],
+            users: null, // also contain jobs
         }
         this.markers = [];
         this.map = null;
     }
 
-    componentDidMount() {
-        this.getUser();
+    setLocation = () => {
+        if (this.props.location.state) {
+            console.log('location found');
+            let lat = parseFloat(this.props.location.state.referrer.lat);
+            let lng = parseFloat(this.props.location.state.referrer.lng); 
+            this.map.setCenter({lat: lat, lng: lng});
+        } else if (this.state.user) {
+            console.log('user found');
+            let lat = parseFloat(this.state.user.user_latitude);
+            let lng = parseFloat(this.state.user.user_longitude);
+            this.map.setCenter({lat: lat, lng: lng});
+        }
     }
 
     getUser = () => {
@@ -32,9 +43,11 @@ class JobSearch extends Component {
                 console.log(resp.status);
                 return;
             };
-            console.log('this user' + JSON.stringify(resp));
             resp.json().then(user => {
-                this.setState({user: user});
+                if (Object.keys(user).length === 0 && user.constructor === Object) {
+                    this.setState({user: user});
+                }
+                this.setLocation();
             });
         }).catch(err => {
             console.log(err);
@@ -42,9 +55,9 @@ class JobSearch extends Component {
     }
 
     initMap = () => {
-        
-        let lat = parseFloat(this.state.user.user_latitude) || 10.2; //43.983112;
-        let lng = parseFloat(this.state.user.user_longitude) || -40.0; //-79.590700;
+
+        let lat = 43.653112;
+        let lng = -0.390700;
 
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: lat, lng: lng},
@@ -53,6 +66,8 @@ class JobSearch extends Component {
 
         // get all nearby coordinates using fetch
         this.getJobs();
+        this.getUser();
+        
     }
 
     getJobs = () => {
@@ -61,11 +76,14 @@ class JobSearch extends Component {
                 console.log(resp.status);
                 return;
             }
-            resp.json().then(jobs => {
-                console.log('get jobs' + JSON.stringify(jobs));
-                for (let job of jobs) {
-                    this.addMarker(job);
+            resp.json().then(users => {
+
+                this.setState({users: users});
+
+                for (let user of users) {
+                    this.addMarker(user);
                 }
+
                 // add cluster support
                 var markerCluster = new MarkerClusterer(this.map, this.markers,
                     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
@@ -75,36 +93,37 @@ class JobSearch extends Component {
         })
     }
 
-    addMarker = (job) => {
+    addMarker = (user) => {
 
         let marker = new google.maps.Marker({
             position: {
-                lat: parseFloat(job.user_latitude),
-                lng: parseFloat(job.user_longitude)
+                lat: parseFloat(user.user_latitude),
+                lng: parseFloat(user.user_longitude)
             },
-            label: job.job_id,
+            label: user.user_email,
             map: this.map
         })
 
-        console.log(job.job_id +'lat' + job.user_latitude + 'lng' + job.user_longitude);
-
-        marker.addListener('click', this.clickHandler(job, marker));
+        marker.addListener('click', this.clickHandler(user, marker));
 
         this.markers.push(marker);
     }
 
-    clickHandler = (job, marker) => {
+    clickHandler = (user, marker) => {
         return () => {
             // loop through all my applications and if we can find this job_id
+            let jobInfo = user.jobs.map(job => {
+                return (
+                    <li key={uuid()}>
+                        {job.job_id} - {job.job_title} 
+                        <NewApplicationModal job={job} />
+                    </li>
+                );
+            });
             let info = (
                 <ul>
-                    <li>{job.job_id}</li>
-                    <li>{job.job_title}</li>
-                    <li>{job.job_description}</li>
-                    <li>{job.job_rate}</li>
-                    <li>{job.user_email}</li>
-                    <li>{job.dog_name}</li>
-                    <NewApplicationModal job={job} />
+                    {jobInfo}
+                    
                 </ul>
             );
             this.setState({info: info});
