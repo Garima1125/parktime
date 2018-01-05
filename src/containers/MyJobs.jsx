@@ -58,7 +58,7 @@ class MyJobs extends Component {
                 <Row className="show-grid">
                     <Col md={12}>
                         <PageHeader>
-                            My Jobs &nbsp; 
+                            My Jobs &nbsp;
                             <small>Offered</small>
                         </PageHeader>
                     </Col>
@@ -70,7 +70,7 @@ class MyJobs extends Component {
                             {jobComponent}
                         </ul>
                     </Col>
-                </Row>                
+                </Row>
             </Grid>
         );
     }

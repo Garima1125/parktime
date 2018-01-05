@@ -14,11 +14,12 @@ export default (knex) => {
 
   // get current logged-in user
   router.get('/', (req, res) => {
-    let response = {};
-    if (req.user) {
-      response = req.user;
-    }
-    res.json(response);
+    res.json(req.user);
+    // let response = {};
+    // if (req.user) {
+    //   response = req.user;
+    // }
+    // res.json(response);
   });
 
   // profile update
@@ -66,7 +67,7 @@ export default (knex) => {
     };
     console.log(user);
     knex('users').insert(user).returning('*').then(result => {
-      
+
       // logs user in after registration
       req.params.username = req.body.username;
       req.params.password = req.body.password;

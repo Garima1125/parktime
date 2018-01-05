@@ -6,6 +6,7 @@ import uuid from 'uuid/v4';
 import {Grid, Row, Col, PageHeader, Button} from 'react-bootstrap';
 import NewApplicationModal from '../modals/NewApplicationModal';
 
+
 class JobSearch extends Component {
 
     constructor(props) {
@@ -25,7 +26,7 @@ class JobSearch extends Component {
         if (this.props.location.state) {
             console.log('location found');
             let lat = parseFloat(this.props.location.state.referrer.lat);
-            let lng = parseFloat(this.props.location.state.referrer.lng); 
+            let lng = parseFloat(this.props.location.state.referrer.lng);
             this.map.setCenter({lat: lat, lng: lng});
         } else if (this.state.user) {
             console.log('user found');
@@ -55,19 +56,18 @@ class JobSearch extends Component {
     }
 
     initMap = () => {
+      let lat = 51.0876682;
+      let lng = -49.0927846;
 
-        let lat = 43.653112;
-        let lng = -0.390700;
+      this.map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: lat, lng: lng},
+          zoom: 8
+      });
 
-        this.map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: lat, lng: lng},
-            zoom: 8
-        });
+      // get all nearby coordinates using fetch
+      this.getJobs();
+      this.getUser();
 
-        // get all nearby coordinates using fetch
-        this.getJobs();
-        this.getUser();
-        
     }
 
     getJobs = () => {
@@ -115,7 +115,7 @@ class JobSearch extends Component {
             let jobInfo = user.jobs.map(job => {
                 return (
                     <li key={uuid()}>
-                        {job.job_id} - {job.job_title} 
+                        {job.job_id} - {job.job_title}
                         <NewApplicationModal job={job} />
                     </li>
                 );
@@ -123,7 +123,7 @@ class JobSearch extends Component {
             let info = (
                 <ul>
                     {jobInfo}
-                    
+
                 </ul>
             );
             this.setState({info: info});
@@ -133,26 +133,26 @@ class JobSearch extends Component {
     }
 
     render() {
-        let mapWidth = this.state.info ? 9 : 12;
+        let mapWidth = this.state.info ? 9 : 10;
         return (
             <Grid>
                 <Row className="show-grid">
-                    <Col md={12}>
+                    <Col md={10}>
                         <PageHeader>
-                            Search Jobs &nbsp; 
+                            Search Jobs &nbsp;
                             <small>find your paw-mate!</small>
                         </PageHeader>
                     </Col>
                 </Row>
                 <br/>
                 <Row className="show-grid">
-                    <Col xs={12} md={mapWidth}>
+                    <Col xs={10} md={mapWidth}>
                         <div id="map" style={{height:'400px', width:'100%'}}></div>
                     </Col>
-                    <Col xs={12} md={3}>
+                    <Col xs={10} md={3}>
                         {this.state.info}
                     </Col>
-                </Row>                
+                </Row>
             </Grid>
         )
     }

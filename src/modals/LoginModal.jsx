@@ -57,7 +57,7 @@ class LoginModal extends Component {
         <Modal show={this.state.showModal} onHide={this.close} bsSize="small" aria-labelledby="contained-modal-title-lg">
 
           <Modal.Header closeButton>
-            <Modal.Title>Welcome, please choose one of the following</Modal.Title>
+            <Modal.Title>Please Login/Register first! </Modal.Title>
           </Modal.Header>
 
           <Modal.Footer>
