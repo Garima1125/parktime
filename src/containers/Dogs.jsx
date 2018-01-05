@@ -12,6 +12,7 @@ import DeleteJobModal from '../modals/DeleteJobModal';
 import DeleteScheduleModal from '../modals/DeleteScheduleModal';
 import ShowApplicationsModal from '../modals/ShowApplicationsModal';
 import Moment from 'moment';
+import Background from '../../public/assets/background_img.jpg';
 
 class Dogs extends Component {
 
@@ -48,6 +49,7 @@ class Dogs extends Component {
             return (
                 <div key={uuid()}>
                     <ListGroupItem>
+                    <h3>Schedule Details</h3>
                     <div className="row">
                        <dl className="dl-horizontal">
                           <dt>Start Time</dt>
@@ -56,11 +58,10 @@ class Dogs extends Component {
                           <dd>{Moment(schedule.schedule_end_time).format('YYYY-MM-DD hh:mm:ss A')}</dd>
                         </dl>
                         </div>
-                        {schedule.schedule_status}  + {schedule.schedule_start_time} - {schedule.schedule_end_time}
-
-<DeleteScheduleModal dogID={dog.dog_id} jobID={job.job_id} scheduleID={schedule.schedule_id} getDogs={this.getDogs} />
+                        <ButtonToolbar>
+                        <DeleteScheduleModal dogID={dog.dog_id} jobID={job.job_id} scheduleID={schedule.schedule_id} getDogs={this.getDogs} />
+                        </ButtonToolbar>
                     </ListGroupItem>
-
                 </div>
             );
         });
@@ -70,6 +71,7 @@ class Dogs extends Component {
         return dog.jobs.map(job => {
             return (
                 <ListGroupItem key={uuid()}>
+                <h3> Job Details</h3>
                     <Row className="show-grid">
                         <Col md={12}>
                         <div className="row">
@@ -82,19 +84,19 @@ class Dogs extends Component {
                               <dd>{job.job_rate}</dd>
                             </dl>
                             </div>
-
-                            #{job.job_id} {job.job_title} - {job.job_description} - {job.job_rate} - {job.job_status}
                         </Col>
                     </Row>
                     <ButtonToolbar>
-                        <NewScheduleModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs} />
                         <DeleteJobModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs} />
+                        <NewScheduleModal dogID={dog.dog_id} jobID={job.job_id} getDogs={this.getDogs} />
                         <ShowApplicationsModal job={job} />
                     </ButtonToolbar>
                     <Row className="show-grid">
                         <Col md={12}>
                             <br />
+
                             <ListGroup>
+
                                 {this.scheduleList(dog, job)}
                             </ListGroup>
                         </Col>
@@ -107,11 +109,13 @@ class Dogs extends Component {
     dogList = () => {
         return this.state.dogs.map(dog => {
             return (
-                <Panel key={uuid()} header={`#${dog.dog_id} ${dog.dog_name} (${dog.dog_age}) ${dog.dog_breed}`}>
-              <ListGroupItem>
-               <h3> Your Dog's Profile</h3>
-                <div className="row" id= "dog-detail">
-                   <dl className="dl-horizontal">
+              <Row className="show-grid">
+                  <Col md={8}>
+                <Panel key={uuid()} header= "Manage your Dogs">
+                 <ListGroupItem>
+                   <h3> Your Dog's Profile</h3>
+                    <div className="row" >
+                     <dl className="dl-horizontal">
                       <dt>Dog's Name</dt>
                       <dd id="dog-name">{dog.dog_name}</dd>
                       <dt>Dog's Age</dt>
@@ -121,16 +125,16 @@ class Dogs extends Component {
                       <dt>Dog's Description</dt>
                       <dd>{dog.dog_description}</dd>
                     </dl>
-                    </div>
-                    </ListGroupItem>
                     <Row className="show-grid">
                         <Col md={12}>
                             <ButtonToolbar>
-                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>
                                 <DeleteDogModal dogID={dog.dog_id} getDogs={this.getDogs}/>
+                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>
                             </ButtonToolbar>
                         </Col>
                     </Row>
+                    </div>
+                    </ListGroupItem>
                     <Row className="show-grid">
                         <Col md={12}>
                             {dog.dog_description}
@@ -145,18 +149,21 @@ class Dogs extends Component {
                         </Col>
                     </Row>
                 </Panel>
+                </Col>
+                </Row>
             );
         })
     }
 
+
     render() {
+      
         return (
             <Grid>
                 <Row className="show-grid">
-                    <Col md={12}>
+                    <Col md={10}>
                         <PageHeader>
                             My Dogs &nbsp;
-                            <small>Manage your dogs</small>
                         </PageHeader>
                         <ButtonToolbar>
                             <NewDogModal getDogs={this.getDogs} />

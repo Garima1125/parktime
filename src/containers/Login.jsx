@@ -19,7 +19,7 @@ class Login extends Component {
         return (
             <Grid>
                 <Row className="show-grid">
-                    <Col md={12}>
+                    <Col md={10}>
                         <PageHeader>
                             Login &nbsp;
                             <small>text here</small>
@@ -61,10 +61,10 @@ class Login extends Component {
                     </Col>
                     <Col md={8}>
                         <Row className="text-center sign-with">
-                            <Col md={12}>
+                            <Col md={10}>
                                 <h3>Sign in with</h3>
                             </Col>
-                            <Col md={12}>
+                            <Col md={10}>
                                 <ButtonGroup justified>
                                     <div className="signup">
                                         <Button bsStyle="default" bsSize="xsmall" href='/auth/login'>

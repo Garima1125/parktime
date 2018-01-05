@@ -140,10 +140,12 @@ class Profile extends Component {
                   Type
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="string" placeholder="Type"
-                    value={this.state.type}
-                    onChange={this.change}
-                  />
+                  <FormControl componentClass="select" placeholder="Type"
+                               value={this.state.type}
+                               onChange={this.change}>
+            				<option value="owner">Owner</option>
+            				<option value="walker">Walker</option>
+            			</FormControl>
                 </Col>
               </FormGroup>
               <FormGroup controlId="postal_code">

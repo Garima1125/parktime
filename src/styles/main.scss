@@ -15,6 +15,15 @@ h1 {
     margin-top: -34px;
 }
 
+h3{
+  text-decoration: underline;
+}
+
+.btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group {
+    float: right;
+    margin-right: 20px;
+  }
+
 footer {
 font-size: 0.8em;
 background-color: rgb(253, 183, 120);
@@ -111,6 +120,15 @@ width:100%;
   margin-left: 97px;
 }
 
+.panel-default .panel-heading, .panel-default .panel-title, .panel-default .panel-footer {
+    color: #393a35;
+}
+
+.panel-default > .panel-heading {
+    background-color: #93c54b;
+    border-color: #244363;
+}
+
 // #login{
 //   margin-right: 15px;
 
@@ -189,6 +207,12 @@ div#OR {
   height:40%;
   text-align: center;
   margin-top:100px;
+}
+
+.backgroung_img{
+  width: "100%";
+  height: "400px";
+  background-image: url("../../public/assets/background_img.jpg");
 }
 
 // #dog{
@@ -290,10 +314,14 @@ div#OR {
   color: #fcf8e3;
 }
 
-// #dog-detail{
-//   text-align: center;
-// }
+#dog-detail{
+  text-align: center;
+}
 
+.dl-horizontal dt{
+  margin-left: 147px;
+  margin-right: 26px;
+}
 
 // react-Datetime
 
@@ -505,4 +533,7 @@ td.rdtYear:hover {
   width: 100%;
   font-size: 1.2em;
   margin-top: 37px;
+}
+.modal-footer{
+  text-align: center;
 }
