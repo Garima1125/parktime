@@ -3,10 +3,10 @@
 // find dog walkers
 // find jobs
 
-
 import React, {Component} from 'react';
 import {Navbar, Nav, NavItem, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
+import GoogleLogin from 'react-google-login';
 import LoginModal from '../modals/LoginModal.jsx';
 import { Redirect } from 'react-router';
 import LogoutModal from '../modals/LogoutModal.jsx';
@@ -14,28 +14,39 @@ class Navigation extends Component {
   constructor() {
     super();
     this.state = {
-      authenticated: false,
-      email: ''
+        user: null
     }
-    this.changeState = this.changeState.bind(this);
-  }
-
-  changeState(data) {
-    this.setState(data);
   }
 
   componentDidMount() {
-    this.setState({authenticated: localStorage.getItem('authenticated')});
-    this.setState({email: localStorage.getItem('email')});
+      this.getUser();
   }
 
-  render() {
-    const logOut = () => {
-      this.setState({authenticated: false, email: ''})
-    }
+  getUser = () => {
+    fetch('/users', {
+      credentials: "same-origin"
+    }).then(resp => {
+      if (resp.status !== 200) {
+        console.log(resp.status);
+        return;
+      }
+      resp.json().then(user => {
+        this.setState({user: user});
+      }).catch(err => {
+         // ignore
+      });
+    }).catch(err => {
+      console.log(err);
+    });
+  }
 
+
+  render() {
+
+    let authModal = this.state.user ? <LogoutModal /> : <LoginModal />;
+    let hello = this.state.user ? <div>Hello {this.state.user.user_email}</div> : null;
     return (
-        <Navbar collapseOnSelect className="navbar">
+        <Navbar collapseOnSelect className="navbar navbar-inverse">
             <Navbar.Header>
                 <Navbar.Brand>
                     <a href="/">ParkTime</a>
@@ -56,17 +67,12 @@ class Navigation extends Component {
                         <NavItem eventKey={4}>Search Jobs</NavItem>
                     </LinkContainer>
                 </Nav>
-                {this.state.authenticated ?
-                <Nav>
-                  <NavItem>Hello {this.state.email}</NavItem>
-                </Nav> : <Nav></Nav>
-                }
                 <Nav pullRight>
-                    <NavItem eventKey={3}>
-                      {
-                        this.state.authenticated ? <LogoutModal onChange={this.changeState}/>
-                                                 : <LoginModal onChange={this.changeState} />
-                      }
+                    <NavItem eventKey={1}>
+                        {authModal}
+                    </NavItem>
+                    <NavItem eventKey={1}>
+                        {hello}
                     </NavItem>
                 </Nav>
             </Navbar.Collapse>

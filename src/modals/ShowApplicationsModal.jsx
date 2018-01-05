@@ -11,7 +11,7 @@ class ShowApplicationsModal extends Component {
         this.state = {
             showModal: false,
             applications: [],
-            
+
             selected: null,
             page: 'select'
         }
@@ -44,7 +44,7 @@ class ShowApplicationsModal extends Component {
             });
         }).catch(err => {
             console.log(err);
-        }); 
+        });
     }
 
     select = (application) => {
@@ -60,7 +60,7 @@ class ShowApplicationsModal extends Component {
                 console.log(JSON.stringify(resp));
             }).catch(err => {
                 console.log(err);
-            }); 
+            });
         };
     }
 
@@ -87,13 +87,13 @@ class ShowApplicationsModal extends Component {
         let mainComponent = null;
 
         if (this.state.page === 'select') {
-            
+
             mainComponent = applicationComponent;
-        
+
         } else if (this.state.page === 'payment') {
-            
+
             mainComponent = paymentComponent;
-        
+
         }
 
         // let mainComponent = this.state.page == 1 ? applicationComponent : paymentComponent;

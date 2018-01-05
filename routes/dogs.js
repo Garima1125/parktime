@@ -16,9 +16,9 @@ export default (knex) => {
             dog_id: uuid(),
             dog_name: req.body.dog_name,
             dog_age: req.body.dog_age,
-            dog_breed: req.body.dog_breed, 
+            dog_breed: req.body.dog_breed,
             dog_description: req.body.dog_description,
-            dog_owner_id: '1'
+            owner_id: req.user.user_id
         }
         knex('dogs').insert(newDog).returning('*').then(result =>{
             console.log(JSON.stringify(result));
@@ -30,15 +30,16 @@ export default (knex) => {
 
     router.get ('/all', (req, res) => {
         // TODO: get from session
-        let user_id = '1';
-        knex.raw(`select * from users 
-        left join owners on users.user_id = owners.owner_user_id and owner_deleted_at is null 
-        left join dogs on dogs.dog_owner_id = owners.owner_id and dog_deleted_at is null 
-        left join jobs on dogs.dog_id = jobs.job_dog_id and job_deleted_at is null 
-        left join schedules on jobs.job_id = schedules.schedule_job_id and schedule_deleted_at is null 
+        let user_id = req.user.user_id;
+        console.log(user_id);
+        knex.raw(`select * from users
+        left join dogs on dogs.owner_id = users.user_id and dog_deleted_at is null
+        left join jobs on dogs.dog_id = jobs.job_dog_id and job_deleted_at is null
+        left join schedules on jobs.job_id = schedules.schedule_job_id and schedule_deleted_at is null
         where user_id = ?`, [user_id])
         .then(result => {
-            console.log(JSON.stringify(result.rows, null, 4));
+            console.log(result);
+            //console.log(JSON.stringify(result.rows, null, 4));
             // group schedules by job
             let jobs = {};
             for (let row of result.rows) {
@@ -85,7 +86,7 @@ export default (knex) => {
                 }
             }
 
-            // // group jobs by dog 
+            // // group jobs by dog
 
             let dogs = {};
             for (let job_id in jobs) {
@@ -109,7 +110,7 @@ export default (knex) => {
                 }
             }
             res.json(Object.values(dogs));
-    
+
         }).catch(err => {
             console.log(err);
             res.status(500).send(err);
@@ -137,4 +138,3 @@ export default (knex) => {
     })
     return router;
 }
-

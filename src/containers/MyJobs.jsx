@@ -16,7 +16,7 @@ class MyJobs extends Component {
     }
 
     getUser = () => {
-        fetch('/users/whoami').then(resp => {
+        fetch('/users').then(resp => {
             if (resp.status !== 200) {
                 console.log(resp.status);
                 return;

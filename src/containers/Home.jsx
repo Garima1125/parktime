@@ -3,14 +3,14 @@
 // submit to job search / dog walker search (maps)
 import React, {Component} from 'react';
 import {Carousel, Form, FormGroup, FormControl, Button, Glyphicon} from 'react-bootstrap';
-import { Redirect } from 'react-router';
+import {Redirect, Router} from 'react-router';
 class Homepage extends Component {
 
   constructor(){
     super()
     this.state = {
       postal_code: '',
-      postalCodeEntered: false
+      redirect: false,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,23 +28,30 @@ handleChange(event) {
        console.log(this.state);
        var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.postal_code + "&key=AIzaSyBqTA4VZJ73mcFVSg8owb7gxsxA_k447Lg"
        fetch(url,{
-       }).then(function(response){
+       }).then(response => {
          return response.json();
        })
-       .then(function(data){
+       .then(data => {
          console.log(data.results[0].geometry.location);
-         this.setState({postalCodeEntered: true});
-       }.bind(this)).catch(function(error){
+         this.setState({
+           redirect: true,
+           geodata: data.results[0].geometry.location
+          });
+       }).catch(error => {
          console.log(error);
        })
      }
 
-
     render() {
-      if(this.state.postalCodeEntered){
-      return <Redirect to='/search' />;
-      }
-        return (
+      const { redirect, geodata } = this.state
+
+      if(redirect)
+        return (<Redirect to={{
+          pathname: '/search/jobs',
+          state: { referrer: this.state.geodata} 
+        }} />)
+      
+      return (
       <Carousel>
       <Carousel.Item>
         <img width={1500} height={600} alt="900x500" src='/static/assets/cute-dog.jpg' />
@@ -73,14 +80,15 @@ handleChange(event) {
       <Carousel.Item>
         <img width={1500} height={600} alt="900x500" src='/static/assets/andrew-pons-9.jpg' />
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>Hang out with pooches</h3>
+          <p>Love dogs ?
+          Caring for dogs on Park Time is a great way to spend quality time hanging out with different dogs and make some money.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img width={1500} height={600} alt="900x500" src='/static/assets/dogwalk.jpg' />
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          <h3>Make a Booking</h3>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -90,3 +98,5 @@ handleChange(event) {
 }
 
 export default Homepage;
+
+

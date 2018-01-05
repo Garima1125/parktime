@@ -5,9 +5,12 @@ const router = express.Router({mergeParams: true});
 
 export default (knex) => {
 
+    // get all jobs that the walker has applied to
     router.get('/jobs', (req, res) => {
 
+
     })
+
 
     router.get('/', (req, res) => {
         console.log("view walkers");

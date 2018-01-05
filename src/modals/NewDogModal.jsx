@@ -38,7 +38,8 @@ class NewDogModal extends Component {
         fetch('/dogs/new', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            credentials: "same-origin"
         }).then(resp => {
             if (resp.status !== 200){
                 // TODO: error handling
@@ -72,8 +73,8 @@ class NewDogModal extends Component {
                                     Name
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="string" placeholder="Name" 
-                                        value={this.state.dog_name}                            
+                                    <FormControl type="string" placeholder="Name"
+                                        value={this.state.dog_name}
                                         onChange={this.change}
                                     />
                                 </Col>
@@ -83,7 +84,7 @@ class NewDogModal extends Component {
                                     Age
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="integer" placeholder="Age" 
+                                    <FormControl type="integer" placeholder="Age"
                                         value={this.state.dog_age}
                                         onChange={this.change}
                                     />
@@ -94,7 +95,7 @@ class NewDogModal extends Component {
                                     Breed
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="string" placeholder="Poodle" 
+                                    <FormControl type="string" placeholder="Poodle"
                                         value={this.state.dog_breed}
                                         onChange={this.change}
                                     />
@@ -105,7 +106,7 @@ class NewDogModal extends Component {
                                     Description
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="My dog is ..." 
+                                    <FormControl type="text" placeholder="My dog is ..."
                                         value={this.state.dog_description}
                                         onChange={this.change}
                                     />
