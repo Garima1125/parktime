@@ -45,7 +45,7 @@ class JobSearch extends Component {
                 return;
             };
             resp.json().then(user => {
-                if (Object.keys(user).length === 0 && user.constructor === Object) {
+                if (!(Object.keys(user).length === 0 && user.constructor === Object)) {
                     this.setState({user: user});
                 }
                 this.setLocation();
