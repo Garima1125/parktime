@@ -4,11 +4,12 @@
 // find jobs
 
 import React, {Component} from 'react';
-import {Navbar, Nav, NavItem, Button} from 'react-bootstrap';
+import {Navbar, Nav, NavItem, NavDropdown, Button, MenuItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import GoogleLogin from 'react-google-login';
 import LoginModal from '../modals/LoginModal.jsx';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import LogoutModal from '../modals/LogoutModal.jsx';
 class Navigation extends Component {
   constructor() {
@@ -44,7 +45,7 @@ class Navigation extends Component {
   render() {
 
     let authModal = this.state.user ? <LogoutModal /> : <LoginModal />;
-    let hello = this.state.user ? <div>Hello {this.state.user.user_email}</div> : null;
+    let hello = this.state.user ? <div><span className="glyphicon glyphicon-user"></span> Hello {this.state.user.user_email}</div> : null;
     return (
         <Navbar collapseOnSelect className="navbar navbar-inverse">
             <Navbar.Header>
@@ -72,8 +73,14 @@ class Navigation extends Component {
                         {authModal}
                     </NavItem>
                     <NavItem eventKey={1}>
-                        {hello}
+                        <NavDropdown eventKey="4" title=  {hello} id="drop">
+
+                        <MenuItem eventKey="4.1"><Link to={'/profile/view'}>My Profile</Link></MenuItem>
+
+                        <MenuItem eventKey="4.2">Another action</MenuItem>
+                      </NavDropdown>
                     </NavItem>
+
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

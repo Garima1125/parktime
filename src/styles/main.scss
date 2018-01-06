@@ -51,6 +51,7 @@ width:100%;
 }
 .navbar{
 -webkit-margin-after: 0px;
+
 }
 // .navbar-brand{
 //   font-size: 25px;
@@ -79,13 +80,6 @@ width:100%;
 
 }
 
-#postal,#unit,#pro,#con,{
-  width: 200px;
-  resize: horizontal;
-  overflow: auto;
-  margin-right: 15px;
-  height: 30px;
-}
 
 #list-home-list{
   background-color:rgb(45, 62, 79) ;
@@ -265,9 +259,6 @@ div#OR {
 
 }
 
-// // .nav-tabs {
-// //     margin-bottom: 24px!important;
-// // }
 .sign-with {
     margin-top: 25px;
     padding: 20px;
@@ -536,4 +527,32 @@ td.rdtYear:hover {
 }
 .modal-footer{
   text-align: center;
+}
+
+.col-sm-2 {
+    width: 14.666667%;
+}
+
+#drop{
+  color: white;
+    font-size: 14px;
+}
+
+.navbar-inverse{
+  border-color: #244363;
+}
+
+.imgPreview {
+  text-align: center;
+  margin: 5px 127px;
+  height: 200px;
+  width: 200px;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-top: 5px solid gray;
+  border-bottom: 5px solid gray;
+  img {
+    width: 50px;
+    height: 50px;
+  }
 }

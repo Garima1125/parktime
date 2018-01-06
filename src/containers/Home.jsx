@@ -48,9 +48,9 @@ handleChange(event) {
       if(redirect)
         return (<Redirect to={{
           pathname: '/search/jobs',
-          state: { referrer: this.state.geodata} 
+          state: { referrer: this.state.geodata}
         }} />)
-      
+
       return (
       <Carousel>
       <Carousel.Item>
@@ -66,12 +66,12 @@ handleChange(event) {
               {' '}
               </Form>
               <Form inline>
-              <Button type="submit" onClick={this.handleSubmit} className= "walker-near-me">
+              <Button type="submit" onClick={this.handleSubmit} className= "walker-near-me"><span className="glyphicon glyphicon-search"></span>  
               Walkers near me
               </Button>
               {' '}
               {' '}
-              <Button type="submit" onClick={this.handleSubmit} className= "jobs-near-me">
+              <Button type="submit" onClick={this.handleSubmit} className= "jobs-near-me"><span className="glyphicon glyphicon-search"></span>
               Jobs near me
               </Button>
               </Form>
@@ -98,5 +98,3 @@ handleChange(event) {
 }
 
 export default Homepage;
-
-

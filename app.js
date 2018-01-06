@@ -34,8 +34,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use('/static', express.static(path.join(__dirname, 'public')))
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({limit: '250mb', extended: true }));
+app.use(bodyParser.json({limit: '250mb'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -44,8 +44,8 @@ app.use('/users', usersRoutes(knexObj));
 app.use('/dogs', dogsRoutes(knexObj));
 
 // test route to demonstrate user auth and routing middleware
-app.get('/test', 
-    mw.auth, 
+app.get('/test',
+    mw.auth,
     mw.authType(null), (req, res) => {
     res.json(req.user);
 });
@@ -76,6 +76,12 @@ app.get('/profile', mw.auth, (req, res) => {
 app.get('/dogs', (req, res) => {
   res.render('main');
 });
+
+app.get('/profile/view', (req, res) => {
+  res.render('main');
+});
+
+
 
 app.get('/about', (req, res) => {
     res.render('main');
@@ -133,7 +139,7 @@ app.get('/jobs', (req, res) => {
                     user.jobs = [];
                 }
                 users[row.user_id] = user;
-            }        
+            }
         }
         res.json(Object.values(users));
     }).catch(err => {
