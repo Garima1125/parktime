@@ -16,11 +16,6 @@ export default (knex) => {
   router.get('/', (req, res) => {
     res.json(req.user);
 
-
-
-
-
-
     // let response = {};
     // if (req.user) {
     //   response = req.user;
