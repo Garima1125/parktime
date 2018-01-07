@@ -43,16 +43,17 @@ export default (knex) => {
     router.put('/:application_id', (req, res) => {
         // update application stauts to incomplete
         knex('applications')
-            .update('application_status', 'incomplete')
+            .update('application_status', 'confirmed')
             .where('application_id', req.params.application_id)
             .returning('*')
-            .first()
             .then(result => {
-                
                 console.log(result)
                 knex('jobs')
-                    .update('walker_id', result.applicant_id)
-                    .where('job_id', result.application_job_id)
+                    .update({
+                        walker_id : result[0].applicant_id,
+                        job_status: 'incomplete'
+                    })
+                    .where('job_id', result[0].application_job_id)
                     .returning('*')
                     .then(data => {
                         console.log(data);
