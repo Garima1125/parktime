@@ -28,7 +28,7 @@ class Login extends Component {
                 </Row>
                 <br />
                 <Row className="show-grid">
-                    <Col md={4}>
+                    <Col md={6}>
                         <Form horizontal action='/auth/login' method='POST'>
                             <FormGroup controlId="username">
                                 <Col componentClass={ControlLabel} sm={2}>
@@ -57,18 +57,21 @@ class Login extends Component {
                                     Login
                                 </Button>
                             </div>
+                            <div id="OR" className="hidden-xs">OR
+                            </div>
                         </Form>
                     </Col>
                     <Col md={8}>
-                        <Row className="text-center sign-with">
+                    <Row className="text-center sign-with" id="sign-with">
                             <Col md={10}>
                                 <h3>Sign in with</h3>
                             </Col>
                             <Col md={10}>
-                                <ButtonGroup justified>
+                                <ButtonGroup justified >
                                     <div className="signup">
-                                        <Button bsStyle="default" bsSize="xsmall" href='/auth/login'>
-                                            Google
+
+                                        <Button bsStyle="default" bsSize="xsmall" href='/auth/login' id="loginBtn-google">
+                                        <img width={23} height={23} src='/static/assets/googlelogo.png' />    Google
                                         </Button>
                                     </div>
                                 </ButtonGroup>

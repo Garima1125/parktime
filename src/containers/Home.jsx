@@ -2,7 +2,7 @@
 // input postal code, convert to lat/lng
 // submit to job search / dog walker search (maps)
 import React, {Component} from 'react';
-import {Carousel, Form, FormGroup, FormControl, Button, Glyphicon} from 'react-bootstrap';
+import {Carousel, Form, FormGroup, FormControl,ControlLabel, Col,Panel, Grid, Row, PageHeader, ButtonGroup, Button, Glyphicon} from 'react-bootstrap';
 import {Redirect, Router} from 'react-router';
 class Homepage extends Component {
 
@@ -66,7 +66,7 @@ handleChange(event) {
               {' '}
               </Form>
               <Form inline>
-              <Button type="submit" onClick={this.handleSubmit} className= "walker-near-me"><span className="glyphicon glyphicon-search"></span>  
+              <Button type="submit" onClick={this.handleSubmit} className= "walker-near-me"><span className="glyphicon glyphicon-search"></span>
               Walkers near me
               </Button>
               {' '}
@@ -78,11 +78,72 @@ handleChange(event) {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img width={1500} height={600} alt="900x500" src='/static/assets/andrew-pons-9.jpg' />
+        <img width={1500} height={600} alt="900x500" src='/static/assets/dog1.jpg' />
         <Carousel.Caption>
-          <h3>Hang out with pooches</h3>
-          <p>Love dogs ?
-          Caring for dogs on Park Time is a great way to spend quality time hanging out with different dogs and make some money.</p>
+        <Panel>
+        <Grid>
+            <Row className="show-grid">
+                <Col md={8}>
+                    <h1>
+                        Login &nbsp;
+                    </h1>
+                </Col>
+            </Row>
+            <br />
+            <Row className="show-grid">
+                <Col md={6}>
+                    <Form horizontal action='/auth/login' method='POST'>
+                        <FormGroup controlId="username">
+                            <Col componentClass={ControlLabel} sm={2}>
+                                Email
+                            </Col>
+                            <Col sm={8}>
+                                <FormControl name="username" type="string" placeholder="Email"
+                                    value={this.state.username}
+                                    onChange={this.change}
+                                />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup controlId="password">
+                            <Col componentClass={ControlLabel} sm={2}>
+                                Password
+                            </Col>
+                            <Col sm={8}>
+                                <FormControl name="password" type="password" placeholder="Password"
+                                    value={this.state.password}
+                                    onChange={this.change}
+                                />
+                            </Col>
+                        </FormGroup>
+                        <div className="signup">
+                            <Button type="submit">
+                                Login
+                            </Button>
+                        </div>
+                        <div id="OR" className="hidden-xs">OR
+                        </div>    
+                    </Form>
+                </Col>
+                <Col md={8}>
+                <Row className="text-center sign-with" id="sign-with">
+                        <Col md={10}>
+                            <h3>Sign in with</h3>
+                        </Col>
+                        <Col md={10}>
+                            <ButtonGroup justified >
+                                <div className="signup">
+
+                                    <Button bsStyle="default" bsSize="xsmall" href='/auth/login' id="loginBtn-google">
+                                    <img width={23} height={23} src='/static/assets/googlelogo.png' />    Google
+                                    </Button>
+                                </div>
+                            </ButtonGroup>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </Grid>
+        </Panel>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
