@@ -2,7 +2,7 @@
 // input postal code, convert to lat/lng
 // submit to job search / dog walker search (maps)
 import React, {Component} from 'react';
-import {Carousel, Form, FormGroup, FormControl, Button, Glyphicon} from 'react-bootstrap';
+import {Carousel, Form, FormGroup, FormControl,ControlLabel, Col,Panel, Grid, Row, PageHeader, ButtonGroup, Button, Glyphicon} from 'react-bootstrap';
 import {Redirect, Router} from 'react-router';
 class Homepage extends Component {
 
@@ -66,7 +66,7 @@ handleChange(event) {
               {' '}
               </Form>
               <Form inline>
-              <Button type="submit" onClick={this.handleSubmit} className= "walker-near-me"><span className="glyphicon glyphicon-search"></span>  
+              <Button type="submit" onClick={this.handleSubmit} className= "walker-near-me"><span className="glyphicon glyphicon-search"></span>
               Walkers near me
               </Button>
               {' '}
@@ -78,11 +78,10 @@ handleChange(event) {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img width={1500} height={600} alt="900x500" src='/static/assets/andrew-pons-9.jpg' />
+        <img width={1500} height={600} alt="900x500" src='/static/assets/dog1.jpg' />
         <Carousel.Caption>
-          <h3>Hang out with pooches</h3>
-          <p>Love dogs ?
-          Caring for dogs on Park Time is a great way to spend quality time hanging out with different dogs and make some money.</p>
+        <h3>Make a Booking</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
