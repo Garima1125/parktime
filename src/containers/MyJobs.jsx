@@ -13,10 +13,13 @@ class MyJobs extends Component {
 
     componentDidMount() {
         this.getUser();
+        this.getJobs();
     }
 
     getUser = () => {
-        fetch('/users').then(resp => {
+        fetch('/users', {
+            credentials: "same-origin"
+        }).then(resp => {
             if (resp.status !== 200) {
                 console.log(resp.status);
                 return;
@@ -32,7 +35,9 @@ class MyJobs extends Component {
     getJobs = () => {
         // all jobs that have been paid and in active
         // get all jobs with walker_id as my user_id
-        fetch('/walkers/jobs').then(resp => {
+        fetch('/appliedjobs', {
+            credentials: "same-origin"
+        }).then(resp => {
             if (resp.status !== 200) {
                 console.log(resp.status);
                 return;
@@ -49,7 +54,7 @@ class MyJobs extends Component {
         let jobComponent = this.state.jobs.map(job => {
             return (
                 <li key={uuid()}>
-                    #{job.job_id} - {job.job_description} - {job.job_status}
+                    {job.job_status}: #{job.job_id} - {job.job_description} - {job.job_status}
                 </li>
             );
         });
