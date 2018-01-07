@@ -14,17 +14,30 @@ export default (knex) => {
 
   // get current logged-in user
   router.get('/', (req, res) => {
-    let response = {};
-    if (req.user) {
-      response = req.user;
-    }
-    res.json(response);
+    res.json(req.user);
+
+    // let response = {};
+    // if (req.user) {
+    //   response = req.user;
+    // }
+    // res.json(response);
   });
+
+  router.get('/profile/view', (req, res) => {
+    knex
+    .select('*')
+    .from('users')
+    .where('user_id', req.user.user_id)
+    .then((result) => {
+      res.status(200).json(result[0]);
+    }).catch((err) => {
+      res.status(500).send(err);
+    });
+  })
 
   // profile update
   router.post('/update', (req, res) => {
 
-    console.log(req.body.first_name)
     knex('users')
     .where('user_id', req.body.user_id)
     .update({
@@ -40,15 +53,15 @@ export default (knex) => {
       user_province: req.body.province,
       user_country: req.body.country,
       user_phone:req.body.phone,
-      user_picture: req.body.picture,
+      user_picture: req.body.imagePreviewUrl,
       user_description:req.body.description
     })
     .then(result => {
-      res.status(200).send(result);
-      console.log(result)
+      console.log("result" + result);
+      res.status(200).send({inserted: 1});
     }).catch(err =>{
-      console.log(err)
-      res.status(500).send(err)
+      console.log(err);
+      res.status(500).send(err);
     })
 
     //knex('users').update('')

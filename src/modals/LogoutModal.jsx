@@ -29,8 +29,7 @@ class LogoutModal extends Component{
   render(){
     return (
       <div>
-        <Button  id= "logout" bsStyle="default" bsSize="xsmall" onClick={this.open}>
-          Logout
+        <Button  id= "logout" bsStyle="default" bsSize="xsmall" onClick={this.open}><span className="glyphicon glyphicon-log-out"></span>  Logout
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close} bsSize="small">

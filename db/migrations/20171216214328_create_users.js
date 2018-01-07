@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
     table.string('user_province');
     table.string('user_country');
     table.string('user_phone');
-    table.string('user_picture');
+    table.text('user_picture');
     table.decimal('user_latitude', 9, 6);
     table.decimal('user_longitude', 9, 6);
     table.string('user_description');

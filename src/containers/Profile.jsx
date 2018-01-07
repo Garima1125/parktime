@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import {Grid, Row, Col, PageHeader, Form, FormGroup, FormControl, ControlLabel, ButtonGroup, Button} from 'react-bootstrap';
 
 class Profile extends Component {
 
   constructor(props) {
     super(props);
+    this.handleBack = this.handleBack.bind(this);
     this.state = {
       user_id: '',
       picture: '',
@@ -18,16 +20,24 @@ class Profile extends Component {
       province: '',
       country: '',
       phone: '',
-      description: ''
+      description: '',
+      imgFile:'',
+      imagePreviewUrl:'',
+      inserted: false
+
     }
   }
+
+  handleBack() {
+      this.props.history.push('/');
+      };
 
   componentDidMount() {
     this.getProfile();
   }
 
   getProfile = () => {
-    fetch('/users', {
+    fetch('/users/profile/view', {
       credentials: "same-origin"
     }).then(resp => {
       if (resp.status !== 200) {
@@ -74,7 +84,8 @@ class Profile extends Component {
       }).then(response => {
         return response.json();
       }).then(data => {
-        this.setState(data);
+        console.log(data);
+        this.setState({inserted: true})
       }).catch(error => {
         console.log(error);
       });
@@ -87,11 +98,33 @@ class Profile extends Component {
     this.setState({ [e.target.id]: e.target.value });
   }
 
+handlePictureChange = (e) => {
+  e.preventDefault();
+
+    let reader = new FileReader();
+    let imgFile = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        imgFile: imgFile,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(imgFile)
+}
+
+
+
   render() {
+    if (this.state.inserted) {
+      console.log(this.state);
+      return <Redirect to="/profile/view" />
+    }
     return (
       <Grid>
         <Row className="show-grid">
-          <Col md={12}>
+          <Col md={10}>
             <PageHeader>
               Update Profile &nbsp;
               <small>please update profile to continue</small>
@@ -100,16 +133,15 @@ class Profile extends Component {
         </Row>
         <br />
         <Row className="show-grid">
-          <Col md={12}>
+          <Col md={10}>
             <Form horizontal onSubmit={this.updateProfile}>
               <FormGroup controlId="picture">
                 <Col componentClass={ControlLabel} sm={2}>
                   Picture
                 </Col>
-                <Col sm={10}>
-                  <FormControl type="string" placeholder="picture url"
-                    value={this.state.picture}
-                    onChange={this.change}
+                <Col sm={8}>
+                  <FormControl type="file" placeholder="picture url"
+                    onChange={this.handlePictureChange}
                   />
                 </Col>
               </FormGroup>
@@ -117,7 +149,7 @@ class Profile extends Component {
                 <Col componentClass={ControlLabel} sm={2}>
                   First Name
                 </Col>
-                <Col sm={10}>
+                <Col sm={8}>
                   <FormControl type="string" placeholder="First Name"
                     value={this.state.first_name}
                     onChange={this.change}
@@ -128,7 +160,7 @@ class Profile extends Component {
                 <Col componentClass={ControlLabel} sm={2}>
                   Last Name
                 </Col>
-                <Col sm={10}>
+                <Col sm={8}>
                   <FormControl type="string" placeholder="Last Name"
                     value={this.state.last_name}
                     onChange={this.change}
@@ -139,7 +171,7 @@ class Profile extends Component {
                 <Col componentClass={ControlLabel} sm={2}>
                   Type
                 </Col>
-                <Col sm={10}>
+                <Col sm={8}>
                   <FormControl componentClass="select" placeholder="Type"
                                value={this.state.type}
                                onChange={this.change}>
@@ -148,22 +180,11 @@ class Profile extends Component {
             			</FormControl>
                 </Col>
               </FormGroup>
-              <FormGroup controlId="postal_code">
-                <Col componentClass={ControlLabel} sm={2}>
-                  Postal Code
-                </Col>
-                <Col sm={10}>
-                  <FormControl type="string" placeholder="Postal Code"
-                    value={this.state.postal_code}
-                    onChange={this.change}
-                  />
-                </Col>
-              </FormGroup>
               <FormGroup controlId="address">
                 <Col componentClass={ControlLabel} sm={2}>
                   Address
                 </Col>
-                <Col sm={10}>
+                <Col sm={8}>
                   <FormControl type="string" placeholder="address"
                     value={this.state.address}
                     onChange={this.change}
@@ -174,62 +195,73 @@ class Profile extends Component {
                 <Col componentClass={ControlLabel} sm={2}>
                   Unit Number
                 </Col>
-                <Col sm={10}>
+                <Col sm={3}>
                   <FormControl type="integer" placeholder="unit_number"
                     value={this.state.unit_number}
                     onChange={this.change}
                   />
                 </Col>
+                <FormGroup controlId="postal_code">
+                  <Col componentClass={ControlLabel} sm={2}>
+                    Postal Code
+                  </Col>
+                  <Col sm={3}>
+                    <FormControl type="string" placeholder="Postal Code"
+                      value={this.state.postal_code}
+                      onChange={this.change}
+                    />
+                  </Col>
+                </FormGroup>
               </FormGroup>
               <FormGroup controlId="city">
                 <Col componentClass={ControlLabel} sm={2}>
                   City
                 </Col>
-                <Col sm={10}>
+                <Col sm={3}>
                   <FormControl type="string" placeholder="city"
                     value={this.state.city}
                     onChange={this.change}
                   />
                 </Col>
-              </FormGroup>
-              <FormGroup controlId="province">
-                <Col componentClass={ControlLabel} sm={2}>
-                  Province
-                </Col>
-                <Col sm={10}>
-                  <FormControl type="string" placeholder="province"
-                    value={this.state.province}
-                    onChange={this.change}
-                  />
-                </Col>
+                <FormGroup controlId="province">
+                  <Col componentClass={ControlLabel} sm={2}>
+                    Province
+                  </Col>
+                  <Col sm={3}>
+                    <FormControl type="string" placeholder="province"
+                      value={this.state.province}
+                      onChange={this.change}
+                    />
+                  </Col>
+                </FormGroup>
               </FormGroup>
               <FormGroup controlId="country">
                 <Col componentClass={ControlLabel} sm={2}>
                   Country
                 </Col>
-                <Col sm={10}>
+                <Col sm={3}>
                   <FormControl type="string" placeholder="country"
                     value={this.state.country}
                     onChange={this.change}
                   />
                 </Col>
-              </FormGroup>
-              <FormGroup controlId="phone">
-                <Col componentClass={ControlLabel} sm={2}>
-                  Phone
-                </Col>
-                <Col sm={10}>
-                  <FormControl type="string" placeholder="phone"
-                    value={this.state.phone}
-                    onChange={this.change}
-                  />
-                </Col>
+                <FormGroup controlId="phone">
+                  <Col componentClass={ControlLabel} sm={2}>
+                    Phone
+                  </Col>
+                  <Col sm={3}>
+                    <FormControl type="string" placeholder="phone"
+                      value={this.state.phone}
+                      onChange={this.change}
+                    />
+                  </Col>
+                </FormGroup>
               </FormGroup>
               <FormGroup controlId="description">
                 <Col componentClass={ControlLabel} sm={2}>
                   Description
                 </Col>
-                <Col sm={10}>
+                <Col sm={8}>
                   <FormControl type="string" placeholder="description"
                     value={this.state.description}
                     onChange={this.change}
@@ -241,9 +273,10 @@ class Profile extends Component {
           </Col>
         </Row>
         <Row className="show-grid">
-          <Col md={12}>
+          <Col md={10}>
             <ButtonGroup>
-              <Button onClick={this.updateProfile}>Update</Button>
+              <Button onClick={this.updateProfile}><span className="glyphicon glyphicon-ok"></span>  Update</Button>
+              <Button onClick={this.handleBack}><span className="glyphicon glyphicon-repeat"></span>  Back</Button>
             </ButtonGroup>
           </Col>
         </Row>

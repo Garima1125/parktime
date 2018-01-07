@@ -10,7 +10,7 @@ import About from './containers/About.jsx';
 import Profile from './containers/Profile.jsx';
 import Login from './containers/Login.jsx';
 import Register from './containers/Register.jsx';
-//import Walker from './containers/Walker.jsx';
+import ViewProfile from './containers/ViewProfile.jsx';
 //import Owner from './containers/Owner';
 import MyJobs from './containers/MyJobs';
 import JobSearch from './containers/JobSearch';
@@ -30,6 +30,7 @@ class App extends Component {
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/register' component={Register} />
                     <Route exact path='/profile' component={Profile} />
+                    <Route exact path='/profile/view' component={ViewProfile} />
                     {/*
                     <Route exact path='/walker' component={Walker} />
                     <Route exact path='/owner' component={Owner} />
