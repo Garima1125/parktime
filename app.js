@@ -141,6 +141,20 @@ app.get('/jobs', (req, res) => {
     });
 })
 
+app.get(
+    '/appliedjobs', 
+    mw.auth, 
+    mw.authType('walker'),
+    (req, res) => {
+        knexObj.raw(`select * from jobs
+        full outer join applications
+        on applications.application_job_id = jobs.job_id where applications.applicant_id = ?`, [req.user.user_id]).then(result => {
+            res.json(result.rows);
+        }).catch(err => {
+            res.status(500).send(err);
+        })
+})
+
 app.listen(PORT, () =>{
     console.log("ParkTime API server listening on port" + PORT);
 })

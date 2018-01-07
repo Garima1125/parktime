@@ -32,7 +32,10 @@ class ShowApplicationsModal extends Component {
     }
 
     getApplications = (cb) => {
-        fetch(`/dogs/${this.props.job.dog_id}/jobs/${this.props.job.job_id}/applications`).then(resp => {
+        fetch(`/dogs/${this.props.dogID}/jobs/${this.props.job.job_id}/applications`, {
+            credentials: "same-origin"
+        }).then(resp => {
+
             if (resp.status !== 200) {
                 console.log(resp.status);
                 return;
@@ -49,11 +52,13 @@ class ShowApplicationsModal extends Component {
 
     select = (application) => {
         return () => {
-            fetch(`/dogs/${this.props.job.dog_id}/jobs/${this.props.job.job_id}/applications/${application.application_id}`, {
-                method: 'PUT'
+            fetch(`/dogs/${this.props.dogID}/jobs/${this.props.job.job_id}/applications/${application.application_id}`, {
+                method: 'PUT',
+                credentials: "same-origin"
             }).then(resp => {
                 if (resp.status !== 200){
                     // TODO: error handling
+                    console.log(resp.status);
                     return;
                 }
                 this.setState({page: 'payment'})
@@ -69,10 +74,11 @@ class ShowApplicationsModal extends Component {
             return (
                 <li key={uuid()}>
                     <Button bsSize="small" onClick={this.select(application)}>
-                        <i className="fa fa-thumb fa-fw" aria-hidden="true"></i>
+                        <i className="fa fa-check fa-fw" aria-hidden="true"></i>
                         &nbsp;
                         Select
                     </Button>
+                    &nbsp;
                     #{application.application_id} - {application.application_description}
                 </li>
             );

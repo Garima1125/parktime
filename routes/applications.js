@@ -7,7 +7,6 @@ const router = express.Router({mergeParams: true});
 export default (knex) => {
     
     router.get('/', (req, res) => {
-        let user_id = '1';
         knex('applications').select().where('application_job_id', req.params.job_id).then(result => {
             res.json(result);
         }).catch(err => {
@@ -15,8 +14,13 @@ export default (knex) => {
         });
     })
 
-    router.post('/new', (req, res) => {
-        let user_id = '1';
+    router.post('/', (req, res) => {
+        if (req.user.user_type !== 'walker') {
+            res.status(403).send('please register as walker to apply');
+            return;
+        }
+        
+        let user_id = req.user.user_id;
 
         let newApplication = {
             application_id: uuid(),
@@ -30,25 +34,38 @@ export default (knex) => {
 
         knex('applications').insert(newApplication).returning('*').then(result => {
             console.log("created a application" + JSON.stringify(result));
-            res.status(200).send("application created");
+            res.json({msg: "application created"});
         }).catch(err =>{
-            res.status(500).send(err);
+            res.status(500).json(err);
         });
     })
 
     router.put('/:application_id', (req, res) => {
-
-        // TODO: update job status to offered as well
-
-        // TODO: once PAID, update job status to complete, update job walker_id to user_id
-        
+        // update application stauts to incomplete
         knex('applications')
-            .update('application_status', 'offered')
+            .update('application_status', 'incomplete')
             .where('application_id', req.params.application_id)
+            .returning('*')
+            .first()
             .then(result => {
-                res.json(result);
+                
+                console.log(result)
+                knex('jobs')
+                    .update('walker_id', result.applicant_id)
+                    .where('job_id', result.application_job_id)
+                    .returning('*')
+                    .then(data => {
+                        console.log(data);
+                        res.json(data);
+                    }).catch(err => {
+                        console.log('job error');
+                        console.log(err);
+                        res.status(500).json(err);
+                    })
             }).catch(err => {
-                res.status(500).send(err);
+                console.log('app error');
+                console.log(err);
+                res.status(500).json(err);
             });
     })
 

@@ -29,8 +29,9 @@ class NewApplicationModal extends Component {
             let data = {
                 description: this.state.description
             };
-            fetch(`/dogs/${this.props.job.dog_id}/jobs/${this.props.job.job_id}/applications/new`, {
+            fetch(`/dogs/${this.props.job.dog_id}/jobs/${this.props.job.job_id}/applications`, {
                 method: 'POST',
+                credentials: "same-origin",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
             }).then(resp => {
