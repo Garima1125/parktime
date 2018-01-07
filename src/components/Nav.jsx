@@ -15,7 +15,7 @@ class Navigation extends Component {
   constructor() {
     super();
     this.state = {
-        user: null
+        user: {}
     }
   }
 
@@ -43,9 +43,9 @@ class Navigation extends Component {
 
 
   render() {
+    let authModal = (Object.keys(this.state.user).length !== 0) ? <LogoutModal /> : <LoginModal />;
+    let hello = (Object.keys(this.state.user).length !== 0) ? <div><span className="glyphicon glyphicon-user"></span>Hello {this.state.user.user_email}</div> : null;
 
-    let authModal = this.state.user ? <LogoutModal /> : <LoginModal />;
-    let hello = this.state.user ? <div><span className="glyphicon glyphicon-user"></span> Hello {this.state.user.user_email}</div> : null;
     return (
         <Navbar collapseOnSelect className="navbar navbar-inverse">
             <Navbar.Header>
