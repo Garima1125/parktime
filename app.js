@@ -153,13 +153,33 @@ app.get(
     mw.authType('walker'),
     (req, res) => {
         knexObj.raw(`select * from jobs
-        full outer join applications
+        left outer join applications
         on applications.application_job_id = jobs.job_id where applications.applicant_id = ?`, [req.user.user_id]).then(result => {
             res.json(result.rows);
         }).catch(err => {
-            res.status(500).send(err);
-        })
+            res.status(500).json(err);
+        });
 })
+
+app.put(
+    '/completejob',
+    mw.auth,
+    mw.authType('walker'),
+    (req, res) => {
+        console.log(req.body.job_id);
+        knexObj('jobs')
+            .update('job_status', 'completed')
+            .where('job_id', req.body.job_id)
+            .returning('*')
+            .then(result => {
+                console.log(result)
+                res.json(result.rows);
+            }).catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+    }
+)
 
 app.listen(PORT, () =>{
     console.log("ParkTime API server listening on port" + PORT);
