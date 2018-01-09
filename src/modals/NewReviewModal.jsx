@@ -114,7 +114,8 @@ class NewReviewModal extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.register}>Submit</Button>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button onClick={this.close}>Delete</Button>
+                        <Button onClick={this.close}>Edit</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

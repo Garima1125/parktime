@@ -45,8 +45,7 @@ class DeleteScheduleModal extends Component {
         return (
             <div>
                 <Button bsSize='small' bsStyle='danger' onClick={this.open} >
-                    <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                    Remove Schedule
+                    <span className="glyphicon glyphicon-trash"></span>   Remove Schedule
                     &nbsp;
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
@@ -54,8 +53,8 @@ class DeleteScheduleModal extends Component {
                         <Modal.Title></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Button onClick={this.delete}>Delete SCHEDULE</Button>
-                        <Button onClick={this.close}>Cancel</Button>
+                        <Button onClick={this.delete}><span className="glyphicon glyphicon-trash"></span>  Delete SCHEDULE</Button>
+                        <Button onClick={this.close}><span className="glyphicon glyphicon-remove"></span>  Cancel</Button>
                     </Modal.Body>
                     <Modal.Footer>
                     </Modal.Footer>

@@ -76,8 +76,8 @@ class NewApplicationModal extends Component {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.apply}>Apply</Button>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button onClick={this.apply}><span className="glyphicon glyphicon-hand-right"></span>  Apply</Button>
+                        <Button onClick={this.close}><span className="glyphicon glyphicon-remove"></span>  Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

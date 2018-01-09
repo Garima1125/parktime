@@ -87,7 +87,7 @@ class NewDogModal extends Component {
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Create your Paw-mate's profile below</Modal.Title>
+                        <Modal.Title>Create your Paw-mate's profile below <span className="glyphicon glyphicon-pencil"></span></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form horizontal>
@@ -135,8 +135,7 @@ class NewDogModal extends Component {
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="dog_description">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    Description
+                                <Col componentClass={ControlLabel} sm={2}>Comments
                                 </Col>
                                 <Col sm={10}>
                                     <FormControl type="text" placeholder="My dog is ..."
@@ -148,8 +147,8 @@ class NewDogModal extends Component {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.register}>Register</Button>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button onClick={this.register}><span className="glyphicon glyphicon-ok"></span>  Register</Button>
+                        <Button onClick={this.close}><span className="glyphicon glyphicon-remove"></span>  Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

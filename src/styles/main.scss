@@ -38,7 +38,9 @@ width:100%;
 .carousel-caption {
     top: 60%;
     bottom: auto;
-    color:rgb(148, 196, 83);
+    color:#FFEB3B;
+    text-shadow: none;
+    font-family: 'Play', sans-serif;
     // right: 60%;
 }
 
@@ -300,7 +302,7 @@ div#OR {
 #loginBtn-google {
   background: #DD4B39;
   color: white;
-  margin-left: 100px;
+  // margin-left: 100px;
 }
 #loginBtn-google::before {
   border-right: #BB3F30 1px solid;
@@ -323,7 +325,7 @@ div#OR {
 .sign-with {
     margin-top: 25px;
     padding: 10px;
-    border-top: 1px solid #e5e5e5;
+    // border-top: 1px solid #e5e5e5;
     padding:0 0 20px 0;
     h3{
       padding: 5px 0;
@@ -337,11 +339,11 @@ div#OR {
 // .nav-tabs {
 //   margin-bottom: 15px;
 // }
-#sign-with {
-  margin-top: 25px;
-  padding: 20px;
-  height: 10px;
-}
+// #sign-with {
+//   margin-top: 25px;
+//   padding: 20px;
+//   height: 10px;
+// }
 
 #main{
   height: 800px;
