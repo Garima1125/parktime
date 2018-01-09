@@ -95,6 +95,10 @@ app.get('/myjobs', (req, res) => {
     res.render('main');
 });
 
+app.get('/myjobsowner', (req, res) => {
+    res.render('main');
+});
+
 // get all jobs
 app.get('/jobs', (req, res) => {
     knexObj.raw(`select * from users
@@ -161,6 +165,20 @@ app.get(
         });
 })
 
+app.get(
+    '/jobsforreview', 
+    mw.auth, 
+    mw.authType('owner'),
+    (req, res) => {
+        knexObj.raw(`select * from users
+        left outer join dogs on dogs.owner_id = users.user_id and dog_deleted_at is null
+        left outer join jobs on jobs.job_dog_id = dogs.dog_id
+        where owner_id = ? and job_status = 'completed'`, [req.user.user_id]).then(result => {
+            res.json(result.rows);
+        }).catch(err => {
+            res.status(500).json(err);
+        });
+})
 app.put(
     '/completejob',
     mw.auth,

@@ -13,6 +13,7 @@ import Register from './containers/Register.jsx';
 import ViewProfile from './containers/ViewProfile.jsx';
 //import Owner from './containers/Owner';
 import MyJobs from './containers/MyJobs';
+import MyJobsOwner from './containers/MyJobsOwner';
 import JobSearch from './containers/JobSearch';
 import WalkerProfile from './containers/WalkerProfile'
 
@@ -26,6 +27,7 @@ class App extends Component {
                     <Route exact path='/about' component={About} />
                     <Route exact path='/dogs' component={Dogs} />
                     <Route exact path='/myjobs' component={MyJobs} />
+                    <Route exact path='/myjobsowner' component={MyJobsOwner} />
                     <Route exact path='/search/jobs' component={JobSearch} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/register' component={Register} />

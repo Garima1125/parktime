@@ -67,6 +67,9 @@ class Navigation extends Component {
                     <LinkContainer to='/search/jobs'>
                         <NavItem eventKey={4}>Search Jobs</NavItem>
                     </LinkContainer>
+                    <LinkContainer to='/myjobsowner'>
+                        <NavItem eventKey={5}>My Jobs Owner</NavItem>
+                    </LinkContainer>
                 </Nav>
                 <Nav pullRight>
                     <NavItem eventKey={1}>
