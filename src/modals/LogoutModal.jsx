@@ -38,7 +38,7 @@ class LogoutModal extends Component{
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col-md-6"><Button onClick={this.close} bsStyle="default">Close</Button></div>
+              <div className="col-md-6"><Button onClick={this.close} bsStyle="default" id="cancel">Cancel</Button></div>
               <div className="col-md-6"><Button onClick={this.logout} bsStyle="danger">Logout</Button></div>
             </div>
           </Modal.Body>

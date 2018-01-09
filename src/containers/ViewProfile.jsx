@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Grid, Row, Col, PageHeader,Image, Form, FormGroup, FormControl, ControlLabel, ButtonGroup, Button} from 'react-bootstrap';
-
+import Moment from 'moment';
+import Rating from 'react-rating';
 class ViewProfile extends Component {
 
   constructor(props) {
@@ -20,7 +21,9 @@ class ViewProfile extends Component {
       province: '',
       country: '',
       phone: '',
-      description: ''
+      description: '',
+      reviews: []
+
     }
   }
 
@@ -62,10 +65,29 @@ class ViewProfile extends Component {
         this.setState({ country: user.user_country });
         this.setState({ phone: user.user_phone });
         this.setState({ description: user.user_description });
+        this.getReviews();
       }).catch(err => {
         console.log(err);
       });
+  }
 
+  getReviews = () => {
+    var url = '/reviews/' + this.state.user_id + '/all';
+    fetch(url, {
+    }).then(resp => {
+      if (resp.status !== 200) {
+        console.log(resp.status);
+        return;
+      }
+      else {
+        return resp.json();
+      }
+    }).then((reviews) => {
+      console.log(reviews);
+        this.setState({reviews: reviews});
+      }).catch(err => {
+        console.log(err);
+      });
   }
 
   updateProfile = (event) => {
@@ -111,7 +133,7 @@ class ViewProfile extends Component {
       </div>
       <div className ="col-sm-8">
       <div className="row">
-      <dl className="dl-horizontal">
+      <dl className="dl-horizontal" id="profileTable">
       <dt>Name</dt>
       <dd id="walker-name">{this.state.first_name + ' ' + this.state.last_name}</dd>
       <dt>Type</dt>
@@ -133,13 +155,39 @@ class ViewProfile extends Component {
       <dt>Description</dt>
       <dd>{this.state.description}</dd>
     </dl>
+    </div>
+    <div id="form-action">
         <button type="submit" className="btn btn-primary" onClick={this.handleClick} id="walker-edit"><span className="glyphicon glyphicon-pencil"></span>  Edit</button>
         <button className="btn btn-primary" id="backbtn"onClick={this.handleBack}><span className="glyphicon glyphicon-repeat"></span>  Back</button>
       </div>
   </div>
 </div>
+   <div class="panel panel-default" id="review-panel">
+     <div class="panel-heading">Your Reviews</div>
+       <table class="table">
+      <thead>
+     <tr>
+     <th>Client Name</th>
+     <th>Ratings</th>
+     <th>Date Reviewed</th>
+     <th>Comments</th>
+     </tr>
+      </thead>
+      <tbody>
+      {this.state.reviews.map(review =>
+     <tr key={review.review_id}>
+     <td>{review.user_first_name +' ' + review.user_last_name}</td>
+     <td><Rating initialRating = {review.review_rating} readonly={true} /> </td>
+     <td>{Moment(review.review_created_at ).format('MMMM Do YYYY, h:mm:ss a')}</td>
 
-</div>
+     <td>{review.review_comment}</td>
+
+     </tr>
+   )}
+      </tbody>
+      </table>
+  </div>
+   </div>
     );
   }
 }

@@ -51,7 +51,7 @@ class NewApplicationModal extends Component {
     render() {
         return (
             <div>
-                <Button bsSize="small" onClick={this.open}>
+                <Button bsSize="small" onClick={this.open} id="apply">
                     <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                     &nbsp;
                     Apply
@@ -67,8 +67,8 @@ class NewApplicationModal extends Component {
                                     Description
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="string" placeholder="Description" 
-                                        value={this.state.description}                            
+                                    <FormControl type="string" placeholder="Description"
+                                        value={this.state.description}
                                         onChange={this.change}
                                     />
                                 </Col>

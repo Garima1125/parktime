@@ -114,10 +114,24 @@ class JobSearch extends Component {
             // loop through all my applications and if we can find this job_id
             let jobInfo = user.jobs.map(job => {
                 return (
-                    <li key={uuid()}>
-                        {job.job_id} - {job.job_title}
-                        <NewApplicationModal job={job} />
-                    </li>
+                  <Row className="show-grid">
+                      <Col md={16}>
+                      <h3>Job Details</h3>
+                  <div className="panel panel-default">
+                  <dl className="dl-vertical" id="job-dis">
+                    <dd key={uuid()}></dd>
+                    <dt>Job Title</dt>
+                    <dd>{job.job_title}</dd>
+                    <dd></dd>
+                    <dt>Job Description</dt>
+                    <dd>{job.job_description}</dd>
+                    <dt>Job Pay-Rate</dt>
+                    <dd>{job.job_rate}</dd>
+                    <NewApplicationModal job={job}/>
+                    </dl>
+                    </div>
+                    </Col>
+                    </Row>
                 );
             });
             let info = (
@@ -133,7 +147,7 @@ class JobSearch extends Component {
     }
 
     render() {
-        let mapWidth = this.state.info ? 9 : 10;
+        let mapWidth = this.state.info ? 4 : 10;
         return (
             <Grid>
                 <Row className="show-grid">

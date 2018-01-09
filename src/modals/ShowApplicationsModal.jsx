@@ -72,15 +72,17 @@ class ShowApplicationsModal extends Component {
     render() {
         let applicationComponent = this.state.applications.map(application => {
             return (
-                <li key={uuid()}>
-                    <Button bsSize="small" onClick={this.select(application)}>
-                        <i className="fa fa-check fa-fw" aria-hidden="true"></i>
-                        &nbsp;
-                        Select
+              <div>
+              <dl className="dl-vertical" id="job-dis">
+                <dd key={uuid()}></dd>
+                &nbsp;
+                <dt>Message : </dt>
+                <dd>{application.application_description}</dd>
+                    <Button bsSize="small" onClick={this.select(application)} id="select-btn">
+                      <span className="glyphicon glyphicon-ok"></span>  Select
                     </Button>
-                    &nbsp;
-                    #{application.application_id} - {application.application_description}
-                </li>
+                </dl>
+                </div>
             );
         });
 
@@ -121,7 +123,7 @@ class ShowApplicationsModal extends Component {
                         </ul>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button onClick={this.close}><span className="glyphicon glyphicon-remove"></span>  Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

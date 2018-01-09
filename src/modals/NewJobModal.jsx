@@ -70,8 +70,7 @@ class NewJobModal extends Component {
                     <Modal.Body>
                         <Form horizontal>
                             <FormGroup controlId="job_title">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    Title
+                                <Col componentClass={ControlLabel} sm={2}><span className="glyphicon glyphicon-pushpin"></span> Title
                                 </Col>
                                 <Col sm={10}>
                                     <FormControl type="string" placeholder="Title"
@@ -81,8 +80,8 @@ class NewJobModal extends Component {
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="job_description">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    Description
+                                <Col componentClass={ControlLabel} sm={2}><span className="glyphicon glyphicon-pencil"></span>
+                                    Details
                                 </Col>
                                 <Col sm={10}>
                                     <FormControl type="text" placeholder="Description"
@@ -92,7 +91,7 @@ class NewJobModal extends Component {
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="job_rate">
-                                <Col componentClass={ControlLabel} sm={2}>
+                                <Col componentClass={ControlLabel} sm={2}><span className="glyphicon glyphicon-usd"></span>
                                     Rate
                                 </Col>
                                 <Col sm={10}>
@@ -105,8 +104,8 @@ class NewJobModal extends Component {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.register}>Register</Button>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button onClick={this.register}><span className="glyphicon glyphicon-ok"></span> Register</Button>
+                        <Button onClick={this.close}><span className="glyphicon glyphicon-remove"></span> Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
