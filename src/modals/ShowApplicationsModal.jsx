@@ -70,21 +70,34 @@ class ShowApplicationsModal extends Component {
     }
 
     render() {
-        let applicationComponent = this.state.applications.map(application => {
-            return (
+        let applicationComponent = (
               <div>
-              <dl className="dl-vertical" id="job-dis">
-                <dd key={uuid()}></dd>
-                &nbsp;
-                <dt>Message : </dt>
-                <dd>{application.application_description}</dd>
-                    <Button bsSize="small" onClick={this.select(application)} id="select-btn">
-                      <span className="glyphicon glyphicon-ok"></span>  Select
-                    </Button>
-                </dl>
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Applicant</th>
+                      <th>Message</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {
+                    this.state.applications.map(application =>
+                      <tr key={application.application_id}>
+                        <td>{application.user_first_name + ' ' + application.user_last_name}</td>
+                        <td>{application.application_description}</td>
+                        <td>
+                        <Button bsSize="small" onClick={this.select(application)} id="select-btn">
+                          <span className="glyphicon glyphicon-ok"></span>  Select
+                        </Button>
+                        </td>
+                      </tr>
+                    )
+                  }
+                  </tbody>
+                </table>
                 </div>
-            );
-        });
+        )
 
         let paymentComponent = (
             <div>
@@ -118,9 +131,7 @@ class ShowApplicationsModal extends Component {
                         <Modal.Title>All Applications for {this.props.job.job_title}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ul>
                             {mainComponent}
-                        </ul>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.close}><span className="glyphicon glyphicon-remove"></span>  Close</Button>

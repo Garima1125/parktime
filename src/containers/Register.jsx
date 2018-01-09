@@ -27,8 +27,8 @@ class Register extends Component {
                     </Col>
                 </Row>
                 <br />
-                <Row className="show-grid">
-                    <Col md={6}>
+                <Row className="show-grid" >
+                    <Col md={6} id="reg">
 
                         <Form horizontal action='/users/' method='POST'>
                             <FormGroup controlId="username">

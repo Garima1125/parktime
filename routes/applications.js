@@ -5,9 +5,13 @@ import uuid from 'uuid/v4';
 const router = express.Router({mergeParams: true});
 
 export default (knex) => {
-    
+
     router.get('/', (req, res) => {
-        knex('applications').select().where('application_job_id', req.params.job_id).then(result => {
+        knex
+        .select('*')
+        .from('applications')
+        .innerJoin('users', 'users.user_id','applications.applicant_id')
+        .where('application_job_id', req.params.job_id).then(result => {
             res.json(result);
         }).catch(err => {
             res.status(500).send(err);
@@ -19,7 +23,7 @@ export default (knex) => {
             res.status(403).send('please register as walker to apply');
             return;
         }
-        
+
         let user_id = req.user.user_id;
 
         let newApplication = {
