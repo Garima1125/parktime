@@ -48,9 +48,11 @@ class Navigation extends Component {
 
     return (
         <Navbar collapseOnSelect className="navbar navbar-inverse">
+        
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="/">ParkTime</a>
+                    <a href="/">
+                    ParkTime</a>
                 </Navbar.Brand>
             </Navbar.Header>
             <Navbar.Collapse>

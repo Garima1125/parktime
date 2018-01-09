@@ -29,7 +29,7 @@ class LogoutModal extends Component{
   render(){
     return (
       <div>
-        <Button  id= "logout" bsStyle="default" bsSize="xsmall" onClick={this.open}><span className="glyphicon glyphicon-log-out"></span>  Logout
+        <Button  id= "logout" bsStyle="default" bsSize="xsmall" onClick={this.open}><span className="glyphicon glyphicon-off"></span>  Logout
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close} bsSize="small">
@@ -38,8 +38,8 @@ class LogoutModal extends Component{
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col-md-6"><Button onClick={this.close} bsStyle="default">Close</Button></div>
-              <div className="col-md-6"><Button onClick={this.logout} bsStyle="danger">Logout</Button></div>
+              <div className="col-md-6"><Button onClick={this.close} bsStyle="default" id="cancel"><span className="glyphicon glyphicon-remove"></span>  Cancel</Button></div>
+              <div className="col-md-6"><Button onClick={this.logout} bsStyle="danger"><span className="glyphicon glyphicon-off"></span>  Logout</Button></div>
             </div>
           </Modal.Body>
           <Modal.Footer>

@@ -48,6 +48,8 @@ class NewScheduleModal extends Component {
             schedule_start_time: this.state.schedule_start_time,
             schedule_end_time: this.state.schedule_end_time,
             schedule_job_id: this.props.jobID
+
+
         };
         fetch(`/dogs/${this.props.dogID}/jobs/${this.props.jobID}/schedules/new`, {
             method: 'POST',
@@ -85,17 +87,17 @@ class NewScheduleModal extends Component {
                         <Form horizontal>
                             <FormGroup controlId="schedule_start_time">
                                 <Col componentClass={ControlLabel} sm={2}>
-                                    Start Time
+                                    Start Time  <span className="glyphicon glyphicon-calendar"></span>
                                 </Col>
                                 <Col sm={10}>
                                 <Datetime
                                 onChange={this.handleStartTimeChange}
-                                inputProps={{placeholder: "start_time"}} />
+                                inputProps={{placeholder: "start_time"}}/>
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="schedule_end_time">
                                 <Col componentClass={ControlLabel} sm={2}>
-                                    End Time
+                                    End Time  <span className="glyphicon glyphicon-calendar"></span>
                                 </Col>
                                 <Col sm={10}>
                                     <Datetime
@@ -106,8 +108,8 @@ class NewScheduleModal extends Component {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.register}>Register</Button>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button onClick={this.register}><span className="glyphicon glyphicon-ok"></span> Register</Button>
+                        <Button onClick={this.close}><span className="glyphicon glyphicon-remove"></span> Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

@@ -50,8 +50,7 @@ class LoginModal extends Component {
 
     return (
       <div>
-        <Button bsStyle="default" bsSize="xsmall" onClick={this.open}>
-          Get Started
+        <Button bsStyle="default" bsSize="xsmall" onClick={this.open}><span className="glyphicon glyphicon-hand-right"></span>    Get Started
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close} bsSize="small" aria-labelledby="contained-modal-title-lg">
@@ -61,8 +60,8 @@ class LoginModal extends Component {
           </Modal.Header>
 
           <Modal.Footer>
-            <Button onClick={this.redirectRegister}>Register</Button>
-            <Button onClick={this.redirectLogin}>Login</Button>
+            <Button onClick={this.redirectRegister}><span className="glyphicon glyphicon-plus"></span>  Register</Button>
+            <Button onClick={this.redirectLogin}><span className="glyphicon glyphicon-user"></span>  Login</Button>
           </Modal.Footer>
 
         </Modal>

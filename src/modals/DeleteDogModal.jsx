@@ -43,17 +43,16 @@ class DeleteDogModal extends Component {
         return (
             <div>
                 <Button bsSize='small' bsStyle='danger' onClick={this.open} >
-                    <i className="fa fa-times fa-fw" aria-hidden="true"></i>
-                    Remove
-                    &nbsp;
+                    <span className="glyphicon glyphicon-trash"></span>  Remove
+
                 </Button>
-                <Modal show={this.state.showModal} onHide={this.close}>
+                <Modal show={this.state.showModal} onHide={this.close} width = {200}>
                     <Modal.Header closeButton>
-                        <Modal.Title></Modal.Title>
+                        <Modal.Title>Are you sure?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Button onClick={this.delete}>Delete</Button>
-                        <Button onClick={this.close}>Cancel</Button>
+                        <Button id="trash-dog" onClick={this.delete}><span className="glyphicon glyphicon-trash"></span> Delete</Button>
+                        <Button id="cancel-del" onClick={this.close}><span className="glyphicon glyphicon-remove"></span> Cancel</Button>
                     </Modal.Body>
                     <Modal.Footer>
                     </Modal.Footer>

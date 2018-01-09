@@ -28,7 +28,8 @@ class Register extends Component {
                 </Row>
                 <br />
                 <Row className="show-grid">
-                    <Col md={4}>
+                    <Col md={6}>
+
                         <Form horizontal action='/users/' method='POST'>
                             <FormGroup controlId="username">
                                 <Col componentClass={ControlLabel} sm={2}>
@@ -57,8 +58,12 @@ class Register extends Component {
                                     Register
                                 </Button>
                             </div>
+
                         </Form>
                     </Col>
+                    <div id="flower">
+                    <img width={500} height={600} alt="900x500" src='/static/assets/flower.jpg' />
+                    </div>
                 </Row>
             </Grid>
         );

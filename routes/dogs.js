@@ -14,6 +14,7 @@ export default (knex) => {
     router.post('/new', (req, res) => {
         let newDog = {
             dog_id: uuid(),
+            dog_picture: req.body.dog_picture,
             dog_name: req.body.dog_name,
             dog_age: req.body.dog_age,
             dog_breed: req.body.dog_breed,
@@ -66,7 +67,8 @@ export default (knex) => {
                             dog_name: row.dog_name,
                             dog_age: row.dog_age,
                             dog_breed:row.dog_breed,
-                            dog_description: row.dog_description
+                            dog_description: row.dog_description,
+                            dog_picture: row.dog_picture
                         }
                     }
 
@@ -101,7 +103,8 @@ export default (knex) => {
                         dog_name: job.dog.dog_name,
                         dog_age: job.dog.dog_age,
                         dog_breed: job.dog.dog_breed,
-                        dog_description: job.dog.dog_description
+                        dog_description: job.dog.dog_description,
+                        dog_picture: job.dog.dog_picture
                     }
                     let dog_id = job.dog.dog_id;
                     delete job.dog;

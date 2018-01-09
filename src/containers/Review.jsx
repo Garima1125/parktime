@@ -9,7 +9,7 @@ class Review extends Component {
           <form className ="reviews" id="">
           <h1>Please leave reviews and ratings below:</h1>
                  <div className="form-group">
-                <label className="mr-sm-2" for="inlineFormCustomSelect" id="bankname">Ratings</label>
+                <label className="mr-sm-2" for="inlineFormCustomSelect">Ratings</label>
                 <select className="custom-select mb-2 mr-sm-2 mb-sm-0" id="choose">
                   <option selected>Choose...</option>
                   <option value="1">1</option>

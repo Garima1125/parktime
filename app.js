@@ -14,9 +14,10 @@ import mw from './middlewares';
 
 import authRoutes from './routes/auth';
 import dogsRoutes from './routes/dogs';
-import usersRoutes from './routes/users'
-import walkersRoutes from './routes/walkers'
-import ownersRoutes from './routes/owners'
+import usersRoutes from './routes/users';
+import walkersRoutes from './routes/walkers';
+import ownersRoutes from './routes/owners';
+import reviewsRoutes from './routes/reviews';
 
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
@@ -42,6 +43,7 @@ app.use(passport.session());
 app.use('/auth', authRoutes(knexObj));
 app.use('/users', usersRoutes(knexObj));
 app.use('/dogs', dogsRoutes(knexObj));
+app.use('/reviews', reviewsRoutes(knexObj));
 
 // test route to demonstrate user auth and routing middleware
 app.get('/test',
@@ -152,8 +154,8 @@ app.get('/jobs', (req, res) => {
 })
 
 app.get(
-    '/appliedjobs', 
-    mw.auth, 
+    '/appliedjobs',
+    mw.auth,
     mw.authType('walker'),
     (req, res) => {
         knexObj.raw(`select * from jobs
