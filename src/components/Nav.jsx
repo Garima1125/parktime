@@ -60,12 +60,12 @@ class Navigation extends Component {
     let searchJobsMenu = this.renderOnType('walker', <LinkContainer to='/search/jobs'><NavItem eventKey={4}>Search Jobs</NavItem></LinkContainer>);
     let myDogsMenu = this.renderOnType('owner', <LinkContainer to='/dogs'><NavItem eventKey={2}>My Dogs</NavItem></LinkContainer>);
     let myJobsOwnerMenu = this.renderOnType('owner', <LinkContainer to='/myjobsowner'><NavItem eventKey={5}>My Jobs Owner</NavItem></LinkContainer>);
-       
+
     return (
         <Navbar collapseOnSelect className="navbar navbar-inverse">
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="/">
+                  <a href="/">
                     ParkTime</a>
                 </Navbar.Brand>
             </Navbar.Header>

@@ -3,11 +3,10 @@
 // check the "search" page see if map renders
 // Garima
 
-// *{
-//   padding:0;
-//   margin:0;
-//   overflow-x:hidden;
-// }
+*{
+font-family: 'Comfortaa', cursive;
+
+ }
 
 h1 {
     color: rgb(45, 62, 79);
@@ -19,6 +18,12 @@ h1 {
 
 h3{
   text-decoration: underline;
+}
+
+h2{
+  text-decoration: underline;
+  color: rgb(25, 18, 12);
+
 }
 
 .btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group {
@@ -42,18 +47,23 @@ width:100%;
     bottom: auto;
     color:#FFEB3B;
     text-shadow: none;
-    font-family: 'Play', sans-serif;
+    font-family: 'Indie Flower', cursive;
+
     // right: 60%;
 }
 
-#slide2, #slide3, p{
-  font-size:20px;
+#slide2, #slide3{
   text-shadow: none;
 }
 
+p{
+font-size: 25px;
+color:rgb(25, 18, 12);
+}
 
 .panel-transparent{
-    background: rgba(122, 130, 136, 0.2);
+    background-color:rgba(255,255,255, 0.5);
+
 }
 
 .postal{
@@ -85,6 +95,10 @@ width:100%;
 
 // }
 
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+    font-size: 30px;
+}
 #cancel{
   margin-left: 30px;
 }
