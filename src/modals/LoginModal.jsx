@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { NavItem, Modal, Button, ButtonGroup, Col, Row, Form, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-import GoogleLogin from 'react-google-login';
 import { Redirect } from 'react-router';
 import {withRouter} from "react-router-dom";
 

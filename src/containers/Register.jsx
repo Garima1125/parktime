@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Row, Col, PageHeader, Panel, Form, FormGroup, FormControl, ControlLabel, ButtonGroup, Button} from 'react-bootstrap';
+import { Grid, Row, Col, PageHeader, Panel, Form, FormGroup, FormControl, ControlLabel, ButtonGroup, Button } from 'react-bootstrap';
 
 class Register extends Component {
 
@@ -26,46 +26,57 @@ class Register extends Component {
                     </Col>
                 </Row>
                 <br />
+                <Row className="show-grid" >
+                    <Col md={12} id="reg">
+                        <ButtonGroup justified >
+                            <div className="signin">
+                                <Button bsStyle="default" bsSize="small" href='/auth/login' id="loginBtn-google">
+                                    <img width={23} height={23} src='/static/assets/googlelogo.png' />    Google
+                                </Button>
+                            </div>
+                        </ButtonGroup>
+                    </Col>
+                </Row>
 
                 <Row className="show-grid" >
                     <Col md={6} xs={6} lg={6} sm={6} id="reg">
-                     <Panel>
-                     <Panel>
-                        <Form horizontal action='/users/' method='POST'>
-                            <FormGroup controlId="username">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    Email
+                        <Panel>
+                            <Panel>
+                                <Form horizontal action='/users/' method='POST'>
+                                    <FormGroup controlId="username">
+                                        <Col componentClass={ControlLabel} sm={2}>
+                                            Email
                                 </Col>
-                                <Col sm={10}>
-                                    <FormControl name="username" type="string" placeholder="Email"
-                                        value={this.state.username}
-                                        onChange={this.change}
-                                    />
+                                        <Col sm={10}>
+                                            <FormControl name="username" type="string" placeholder="Email"
+                                                value={this.state.username}
+                                                onChange={this.change}
+                                            />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup controlId="password">
+                                        <Col componentClass={ControlLabel} sm={2}>
+                                            Password
                                 </Col>
-                            </FormGroup>
-                            <FormGroup controlId="password">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    Password
-                                </Col>
-                                <Col sm={10}>
-                                    <FormControl name="password" type="password" placeholder="Password"
-                                        value={this.state.password}
-                                        onChange={this.change}
-                                    />
-                                </Col>
-                            </FormGroup>
-                            <div className="signup">
-                                <Button type="submit"><span className="glyphicon glyphicon-plus"></span>  Register
+                                        <Col sm={10}>
+                                            <FormControl name="password" type="password" placeholder="Password"
+                                                value={this.state.password}
+                                                onChange={this.change}
+                                            />
+                                        </Col>
+                                    </FormGroup>
+                                    <div className="signup">
+                                        <Button type="submit"><span className="glyphicon glyphicon-plus"></span>  Register
                                 </Button>
-                            </div>
-                        </Form>
-                          </Panel>
-                          </Panel>
+                                    </div>
+                                </Form>
+                            </Panel>
+                        </Panel>
 
                     </Col>
 
                     <Col md={6} xs={6} lg={6} sm={6}>
-                    <img width={700} height={600} alt="900x500" src='/static/assets/bigstock.jpg' />
+                        <img width={700} height={600} alt="900x500" src='/static/assets/bigstock.jpg' />
                     </Col>
                 </Row>
             </Grid>
