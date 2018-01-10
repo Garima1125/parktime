@@ -1,5 +1,6 @@
 // Jessica
 
+
 import React, {Component} from 'react';
 import uuid from 'uuid/v4';
 import {Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap';
@@ -116,9 +117,10 @@ class ShowApplicationsModal extends Component {
                 </div>
         )
 
+        // removed payment feature, changed modal to notification, can be expanded in future
         let paymentComponent = (
             <div>
-                <h1>PAYMENT</h1>
+                <p>Successfully selected walker!</p>
             </div>
         );
 
