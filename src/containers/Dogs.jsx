@@ -3,7 +3,7 @@
 
 import React, {Component} from 'react';
 import uuid from 'uuid/v4';
-import {Grid, Row, Col, Button, Image,ButtonToolbar, Panel, PageHeader,localImage, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Grid, Row, Col, Button, ButtonToolbar, Panel, PageHeader, ListGroup, ListGroupItem} from 'react-bootstrap';
 import NewDogModal from '../modals/NewDogModal';
 import NewJobModal from '../modals/NewJobModal';
 import NewScheduleModal from '../modals/NewScheduleModal';
@@ -12,8 +12,7 @@ import DeleteJobModal from '../modals/DeleteJobModal';
 import DeleteScheduleModal from '../modals/DeleteScheduleModal';
 import ShowApplicationsModal from '../modals/ShowApplicationsModal';
 import Moment from 'moment';
-// import Background from '../../public/assets/background_img.jpg';
-import BackgroundImage from 'react-background-image-loader';
+import Background from '../../public/assets/background_img.jpg';
 
 class Dogs extends Component {
 
@@ -94,7 +93,10 @@ class Dogs extends Component {
                     </ButtonToolbar>
                     <Row className="show-grid">
                         <Col md={12}>
+                            <br />
+
                             <ListGroup>
+
                                 {this.scheduleList(dog, job)}
                             </ListGroup>
                         </Col>
@@ -113,10 +115,6 @@ class Dogs extends Component {
                  <ListGroupItem>
                    <h3> Your Dog's Profile</h3>
                     <div className="row" >
-                    <div className="col-sm-4">
-                    <Image key={uuid()} src={dog.dog_picture} rounded />
-                    </div>
-                    <div className="col-sm-8">
                      <dl className="dl-horizontal">
                       <dt>Dog's Name</dt>
                       <dd id="dog-name">{dog.dog_name}</dd>
@@ -127,19 +125,21 @@ class Dogs extends Component {
                       <dt>Dog's Description</dt>
                       <dd>{dog.dog_description}</dd>
                     </dl>
-                    </div>
-
-                    </div>
                     <Row className="show-grid">
                         <Col md={12}>
                             <ButtonToolbar>
                                 <DeleteDogModal dogID={dog.dog_id} getDogs={this.getDogs}/>
-                                <NewJobModal dogID={dog.dog_id} dogName={dog.dog_name} getDogs={this.getDogs}/>
+                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>
                             </ButtonToolbar>
                         </Col>
                     </Row>
-
+                    </div>
                     </ListGroupItem>
+                    <Row className="show-grid">
+                        <Col md={12}>
+                            {dog.dog_description}
+                        </Col>
+                    </Row>
                     <br />
                     <Row className="show-grid">
                         <Col md={12}>
@@ -157,17 +157,14 @@ class Dogs extends Component {
 
 
     render() {
-
+      
         return (
-          <BackgroundImage className="background_img" src={'/static/assets/jesse.jpg'} placeholder={localImage}>
             <Grid>
                 <Row className="show-grid">
                     <Col md={10}>
                         <PageHeader>
                             My Dogs &nbsp;
                         </PageHeader>
-                        <div>
-                        </div>
                         <ButtonToolbar>
                             <NewDogModal getDogs={this.getDogs} />
                         </ButtonToolbar>
@@ -180,7 +177,6 @@ class Dogs extends Component {
                     </Col>
                 </Row>
             </Grid>
-            </BackgroundImage>
         );
     }
 }

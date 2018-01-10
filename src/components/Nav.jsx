@@ -41,14 +41,28 @@ class Navigation extends Component {
     });
   }
 
+  renderOnType = (type, component) => {
+    if (!this.state.user) {
+        return null;
+    }
+    if (this.state.user.user_type === type) {
+        return component;
+    }
+    return null;
+  }
+
 
   render() {
     let authModal = (Object.keys(this.state.user).length !== 0) ? <LogoutModal /> : <LoginModal />;
     let hello = (Object.keys(this.state.user).length !== 0) ? <div><span className="glyphicon glyphicon-user"></span>Hello {this.state.user.user_email}</div> : null;
 
+    let myJobsMenu = this.renderOnType('walker', <LinkContainer to='/myjobs'><NavItem eventKey={3}>My Jobs</NavItem></LinkContainer>);
+    let searchJobsMenu = this.renderOnType('walker', <LinkContainer to='/search/jobs'><NavItem eventKey={4}>Search Jobs</NavItem></LinkContainer>);
+    let myDogsMenu = this.renderOnType('owner', <LinkContainer to='/dogs'><NavItem eventKey={2}>My Dogs</NavItem></LinkContainer>);
+    let myJobsOwnerMenu = this.renderOnType('owner', <LinkContainer to='/myjobsowner'><NavItem eventKey={5}>My Jobs Owner</NavItem></LinkContainer>);
+       
     return (
         <Navbar collapseOnSelect className="navbar navbar-inverse">
-        
             <Navbar.Header>
                 <Navbar.Brand>
                     <a href="/">
@@ -60,18 +74,10 @@ class Navigation extends Component {
                     <LinkContainer to='/about'>
                         <NavItem eventKey={1}>About</NavItem>
                     </LinkContainer>
-                    <LinkContainer to='/dogs'>
-                        <NavItem eventKey={2}>My Dogs</NavItem>
-                    </LinkContainer>
-                    <LinkContainer to='/myjobs'>
-                        <NavItem eventKey={3}>My Jobs</NavItem>
-                    </LinkContainer>
-                    <LinkContainer to='/search/jobs'>
-                        <NavItem eventKey={4}>Search Jobs</NavItem>
-                    </LinkContainer>
-                    <LinkContainer to='/myjobsowner'>
-                        <NavItem eventKey={5}>My Jobs Owner</NavItem>
-                    </LinkContainer>
+                    {myJobsMenu}
+                    {searchJobsMenu}
+                    {myDogsMenu}
+                    {myJobsOwnerMenu}
                 </Nav>
                 <Nav pullRight>
                     <NavItem eventKey={1}>
@@ -81,8 +87,10 @@ class Navigation extends Component {
                         <NavDropdown eventKey="4" title=  {hello} id="drop">
 
                         <MenuItem eventKey="4.1"><Link to={'/profile/view'}>My Profile</Link></MenuItem>
-
-                        <MenuItem eventKey="4.2">Another action</MenuItem>
+                        {myJobsMenu}
+                        {searchJobsMenu}
+                        {myDogsMenu}
+                        {myJobsOwnerMenu}
                       </NavDropdown>
                     </NavItem>
 

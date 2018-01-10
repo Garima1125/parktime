@@ -34,9 +34,9 @@ export default (knex) => {
         let user_id = req.user.user_id;
         console.log(user_id);
         knex.raw(`select * from users
-        left join dogs on dogs.owner_id = users.user_id and dog_deleted_at is null
-        left join jobs on dogs.dog_id = jobs.job_dog_id and job_deleted_at is null
-        left join schedules on jobs.job_id = schedules.schedule_job_id and schedule_deleted_at is null
+        left outer join dogs on dogs.owner_id = users.user_id and dog_deleted_at is null
+        left outer join jobs on dogs.dog_id = jobs.job_dog_id and job_deleted_at is null
+        left outer join schedules on jobs.job_id = schedules.schedule_job_id and schedule_deleted_at is null
         where user_id = ?`, [user_id])
         .then(result => {
             console.log(result);
@@ -108,7 +108,11 @@ export default (knex) => {
                     }
                     let dog_id = job.dog.dog_id;
                     delete job.dog;
-                    dog.jobs = [job];
+                    if (job.job_id !== null) {
+                         dog.jobs = [job];
+                    } else {
+                        dog.jobs = [];    
+                    }
                     dogs[dog_id] = dog;
                 }
             }
@@ -141,3 +145,10 @@ export default (knex) => {
     })
     return router;
 }
+
+
+// if (job.job_id !== null) {
+//     dog.jobs = [job];
+// } else {
+//     dog.jobs = [];    
+// }
