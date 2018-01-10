@@ -22,7 +22,8 @@ export default (knex) => {
             job_description: req.body.job_description,
             job_rate: req.body.job_rate,
             job_status: 'created',
-            job_dog_id: req.body.job_dog_id
+            job_dog_id: req.body.job_dog_id,
+            job_created_at: new Date()
         };
 
         knex('jobs').insert(newJob).returning('*').then(result => {

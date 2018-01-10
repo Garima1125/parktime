@@ -60,17 +60,17 @@ class NewJobModal extends Component {
                 <Button bsSize="small" onClick={this.open}>
                     <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                     &nbsp;
-                    Post New Walk
+                    Create a Job
                     &nbsp;
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>New Job for Dog {this.props.dogID}</Modal.Title>
+                        <Modal.Title>New Job for Dog {this.props.dogName}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form horizontal>
                             <FormGroup controlId="job_title">
-                                <Col componentClass={ControlLabel} sm={2}><span className="glyphicon glyphicon-pushpin"></span> Title
+                                <Col componentClass={ControlLabel} sm={2}> Title
                                 </Col>
                                 <Col sm={10}>
                                     <FormControl type="string" placeholder="Title"
@@ -80,7 +80,7 @@ class NewJobModal extends Component {
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="job_description">
-                                <Col componentClass={ControlLabel} sm={2}><span className="glyphicon glyphicon-pencil"></span>
+                                <Col componentClass={ControlLabel} sm={2}>
                                     Details
                                 </Col>
                                 <Col sm={10}>
@@ -91,7 +91,7 @@ class NewJobModal extends Component {
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="job_rate">
-                                <Col componentClass={ControlLabel} sm={2}><span className="glyphicon glyphicon-usd"></span>
+                                <Col componentClass={ControlLabel} sm={2}>
                                     Rate
                                 </Col>
                                 <Col sm={10}>

@@ -17,6 +17,7 @@ class Login extends Component {
 
     render() {
         return (
+          <div>
             <Grid>
                 <Row className="show-grid">
                     <Col md={10}>
@@ -77,6 +78,8 @@ class Login extends Component {
                     </Col>
                 </Row>
             </Grid>
+            <img width={1000} height={600} id="gif" alt="900x500" src='/static/assets/update.gif' />
+            </div>
         );
     }
 }

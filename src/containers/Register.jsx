@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Row, Col, PageHeader, Form, FormGroup, FormControl, ControlLabel, ButtonGroup, Button} from 'react-bootstrap';
+import {Grid, Row, Col, PageHeader, Panel, Form, FormGroup, FormControl, ControlLabel, ButtonGroup, Button} from 'react-bootstrap';
 
 class Register extends Component {
 
@@ -19,17 +19,18 @@ class Register extends Component {
         return (
             <Grid>
                 <Row className="show-grid">
-                    <Col md={12}>
+                    <Col md={6}>
                         <PageHeader>
-                            Register &nbsp;
-                            <small>text here</small>
+                            Register
                         </PageHeader>
                     </Col>
                 </Row>
                 <br />
-                <Row className="show-grid" >
-                    <Col md={6} id="reg">
 
+                <Row className="show-grid" >
+                    <Col md={6} xs={6} lg={6} sm={6} id="reg">
+                     <Panel>
+                     <Panel>
                         <Form horizontal action='/users/' method='POST'>
                             <FormGroup controlId="username">
                                 <Col componentClass={ControlLabel} sm={2}>
@@ -54,16 +55,18 @@ class Register extends Component {
                                 </Col>
                             </FormGroup>
                             <div className="signup">
-                                <Button type="submit">
-                                    Register
+                                <Button type="submit"><span className="glyphicon glyphicon-plus"></span>  Register
                                 </Button>
                             </div>
-
                         </Form>
+                          </Panel>
+                          </Panel>
+
                     </Col>
-                    <div id="flower">
-                    <img width={500} height={600} alt="900x500" src='/static/assets/flower.jpg' />
-                    </div>
+
+                    <Col md={6} xs={6} lg={6} sm={6}>
+                    <img width={700} height={600} alt="900x500" src='/static/assets/bigstock.jpg' />
+                    </Col>
                 </Row>
             </Grid>
         );

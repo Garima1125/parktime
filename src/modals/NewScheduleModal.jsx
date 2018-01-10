@@ -76,12 +76,12 @@ class NewScheduleModal extends Component {
                 <Button bsSize="small" onClick={this.open}>
                     <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                     &nbsp;
-                    Add Schedule
+                    Schedule a Walk
                     &nbsp;
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Schedule for Job {this.props.jobID}</Modal.Title>
+                        <Modal.Title>Schedule a Walk</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form horizontal>

@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import uuid from 'uuid/v4';
 import {Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class ShowApplicationsModal extends Component {
 
@@ -69,6 +70,13 @@ class ShowApplicationsModal extends Component {
         };
     }
 
+    viewProfile = (application) => {
+      this.context.router.push({ //browserHistory.push should also work here
+        pathname: pathToMyComponent,
+        state: {yourCalculatedData: data}
+      });
+    }
+
     render() {
         let applicationComponent = (
               <div>
@@ -77,7 +85,7 @@ class ShowApplicationsModal extends Component {
                     <tr>
                       <th>Applicant</th>
                       <th>Message</th>
-                      <th></th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -90,6 +98,15 @@ class ShowApplicationsModal extends Component {
                         <Button bsSize="small" onClick={this.select(application)} id="select-btn">
                           <span className="glyphicon glyphicon-ok"></span>  Select
                         </Button>
+                        &nbsp;&nbsp;
+                        <Link to={{
+                                  pathname: '/walkerprofileview',
+                                  state: application
+                                }}>
+                        <Button bsSize="small" id="select-btn">
+                          <span className="glyphicon glyphicon-eye-open"></span>  View Profile
+                        </Button>
+                        </Link>
                         </td>
                       </tr>
                     )
@@ -122,7 +139,7 @@ class ShowApplicationsModal extends Component {
         return (
             <div>
                 <Button bsSize="small" onClick={this.open}>
-                    <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
+                    <span className="glyphicon glyphicon-eye-open"></span>
                     &nbsp;
                     Show Applications
                 </Button>

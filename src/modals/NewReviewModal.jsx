@@ -1,110 +1,92 @@
 import React, {Component} from 'react';
 import {Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap';
+import Rating from 'react-rating';
 
 class NewReviewModal extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         showModal: false,
-    //         dog_picture:'',
-    //         dog_name: '',
-    //         dog_age: 0,
-    //         dog_breed: '',
-    //         dog_description: '',
-    //         imgFile:'',
-    //         imagePreviewUrl:'',
-    //     }
-    // }
-    //
-    // close = () => {
-    //     this.setState({ showModal: false });
-    // }
-    //
-    // open = () => {
-    //     this.setState({ showModal: true });
-    // }
-    //
-    // change = (e) => {
-    //     this.setState({ [e.target.id]: e.target.value });
-    // }
-    //
-    // handlePictureChange = (e) => {
-    //   e.preventDefault();
-    //
-    //     let reader = new FileReader();
-    //     let imgFile = e.target.files[0];
-    //
-    //     reader.onloadend = () => {
-    //       this.setState({
-    //         imgFile: imgFile,
-    //         imagePreviewUrl: reader.result
-    //       });
-    //     }
-    //
-    //     reader.readAsDataURL(imgFile)
-    // }
-    //
-    //
-    //
-    //
-    // register = () => {
-    //     let data = {
-    //         dog_picture: this.state.imagePreviewUrl,
-    //         dog_name: this.state.dog_name,
-    //         dog_age: this.state.dog_age,
-    //         dog_breed: this.state.dog_breed,
-    //         dog_description: this.state.dog_description
-    //     };
-    //     fetch('/dogs/new', {
-    //         method: 'POST',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body: JSON.stringify(data),
-    //         credentials: "same-origin"
-    //     }).then(resp => {
-    //         if (resp.status !== 200){
-    //             // TODO: error handling
-    //             return;
-    //         }
-    //         console.log(JSON.stringify(resp));
-    //         this.close();
-    //         this.props.getDogs();
-    //     }).catch(err => {
-    //         console.log(err);
-    //         console.log('error creating new dog');
-    //     });
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: false,
+            review_comment: '',
+            rating: 0
+        }
+    }
+
+    componentDidMount() {
+      console.log(this.props);
+    }
+
+    close = () => {
+        this.setState({ showModal: false });
+    }
+
+    open = () => {
+        this.setState({ showModal: true });
+    }
+
+    change = (e) => {
+        this.setState({ [e.target.id]: e.target.value });
+    }
+
+    handleRatingChange = (e) => {
+      this.setState({rating: e});
+    }
+
+    register = (e) => {
+      e.preventDefault();
+      let review = {
+        rating: this.state.rating,
+        review_comment: this.state.review_comment,
+        reviewer_id: this.props.user.user_id,
+        reviewee_id: this.props.job.walker_id
+      }
+      console.log(review);
+      fetch('/reviews/new', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(review)
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        console.log(data);
+        this.close();
+      }).catch((error) => {
+        console.log(error);
+      });
+
+    }
 
     render() {
         return (
             <div>
-                <Button bsSize="small" onClick={this.open}>
-                    <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
-                    &nbsp;
-                    Review
-                </Button>
+            <Button bsStyle="default" bsSize="small" onClick={this.open}>
+              <span className="glyphicon glyphicon-hand-right"></span>
+              Review Walker
+            </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Please leave ratings and Reviews</Modal.Title>
+                        <Modal.Title>Review Walker: {this.props.job.walker_name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form horizontal>
-                        <FormGroup controlId="picture">
+                        <FormGroup controlId="rating">
                           <Col componentClass={ControlLabel} sm={2}>
-                            Ratings
+                            Rating
                           </Col>
                           <Col sm={8}>
-                            <FormControl type="file" placeholder="picture url"
-                              onChange={this.handlePictureChange}
+                            <Rating
+                               initialRating={this.state.rating}
+                               onChange={this.handleRatingChange}
                             />
                           </Col>
                         </FormGroup>
-                            <FormGroup controlId="dog_description">
+                            <FormGroup controlId="review_comment">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Comments
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="My dog is ..."
+                                    <FormControl type="text"
                                         value={this.state.review_comment}
                                         onChange={this.change}
                                     />
@@ -114,8 +96,7 @@ class NewReviewModal extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.register}>Submit</Button>
-                        <Button onClick={this.close}>Delete</Button>
-                        <Button onClick={this.close}>Edit</Button>
+                        <Button onClick={this.close}>Exit</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
@@ -123,4 +104,4 @@ class NewReviewModal extends Component {
     }
 }
 
-export default NewDogModal;
+export default NewReviewModal;

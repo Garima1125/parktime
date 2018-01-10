@@ -168,14 +168,23 @@ app.get(
 })
 
 app.get(
-    '/jobsforreview', 
-    mw.auth, 
+    '/jobsforreview',
+    mw.auth,
     mw.authType('owner'),
     (req, res) => {
-        knexObj.raw(`select * from users
-        left outer join dogs on dogs.owner_id = users.user_id and dog_deleted_at is null
-        left outer join jobs on jobs.job_dog_id = dogs.dog_id
-        where owner_id = ? and job_status = 'completed'`, [req.user.user_id]).then(result => {
+        knexObj.raw(`
+          SELECT
+              jobs.job_id,
+              CONCAT(walkers.user_first_name, ' ' ,walkers.user_last_name) AS walker_name,
+              jobs.job_title,
+              dogs.dog_name,
+              jobs.job_created_at,
+              jobs.walker_id
+          FROM users AS owners
+          LEFT JOIN dogs ON (dogs.owner_id = owners.user_id AND dog_deleted_at IS NULL)
+          LEFT JOIN jobs ON (jobs.job_dog_id = dogs.dog_id)
+          LEFT JOIN users AS walkers ON (jobs.walker_id = walkers.user_id)
+          WHERE owners.user_id = ? AND job_status = 'completed'`, [req.user.user_id]).then(result => {
             res.json(result.rows);
         }).catch(err => {
             res.status(500).json(err);

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import uuid from 'uuid/v4';
-import {Grid, Row, Col, PageHeader, Button} from 'react-bootstrap';
+import {Grid, Row, Col, PageHeader, Button, ButtonToolbar, ListGroupItem} from 'react-bootstrap';
+import Moment from 'moment';
+import NewReviewModal from '../modals/NewReviewModal'
 
 class MyJobsOwner extends Component {
     constructor(props) {
@@ -43,6 +45,7 @@ class MyJobsOwner extends Component {
                 return;
             };
             resp.json().then(jobs => {
+              console.log(jobs);
                 this.setState({jobs: jobs});
             });
         }).catch(err => {
@@ -51,22 +54,48 @@ class MyJobsOwner extends Component {
     }
 
     render() {
-        let jobComponent = this.state.jobs.map(job => {
-            return (
-                <li key={uuid()}>
-                    <Button>Review Walker</Button>
-                    &nbsp;
-                    {job.job_status}: #{job.job_id} - {job.job_description} - {job.job_status} - walker assigned {job.walker_id}
-                </li>
-            );
-        });
+
+      let completedJobList = (
+        <div class="panel panel-default" id="compleletedJobs-panel">
+          <div class="panel-heading"></div>
+            <table class="table">
+           <thead>
+          <tr>
+          <th>Job Title</th>
+          <th>Dog's Name</th>
+          <th>Walker</th>
+          <th>Job Date</th>
+          <th></th>
+          </tr>
+           </thead>
+           <tbody>
+           {this.state.jobs.map(job =>
+          <tr key={job.job_id}>
+          <td>{job.job_title}</td>
+          <td>{job.dog_name}</td>
+          <td>{job.walker_name}</td>
+          <td>{Moment(job.job_created_at).format('MMMM Do YYYY')}</td>
+          <td>
+
+            <ButtonToolbar>
+                <NewReviewModal user={this.state.user} job={job} />
+            </ButtonToolbar>
+
+          </td>
+          </tr>
+        )}
+           </tbody>
+           </table>
+       </div>
+
+      )
+
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col md={12}>
                         <PageHeader>
-                            My Jobs &nbsp;
-                            <small>Offered</small>
+                            Completed Jobs
                         </PageHeader>
                     </Col>
                 </Row>
@@ -74,7 +103,7 @@ class MyJobsOwner extends Component {
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
                         <ul>
-                            {jobComponent}
+                            {completedJobList}
                         </ul>
                     </Col>
                 </Row>

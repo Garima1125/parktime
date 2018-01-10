@@ -147,7 +147,7 @@ class JobSearch extends Component {
     }
 
     render() {
-        let mapWidth = this.state.info ? 4 : 10;
+        let mapWidth = this.state.info ? 8 : 10;
         return (
             <Grid>
                 <Row className="show-grid">

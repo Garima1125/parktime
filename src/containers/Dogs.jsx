@@ -3,7 +3,7 @@
 
 import React, {Component} from 'react';
 import uuid from 'uuid/v4';
-import {Grid, Row, Col, Button, Image,ButtonToolbar, Panel, PageHeader, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Grid, Row, Col, Button, Image,ButtonToolbar, Panel, PageHeader,localImage, ListGroup, ListGroupItem} from 'react-bootstrap';
 import NewDogModal from '../modals/NewDogModal';
 import NewJobModal from '../modals/NewJobModal';
 import NewScheduleModal from '../modals/NewScheduleModal';
@@ -12,7 +12,8 @@ import DeleteJobModal from '../modals/DeleteJobModal';
 import DeleteScheduleModal from '../modals/DeleteScheduleModal';
 import ShowApplicationsModal from '../modals/ShowApplicationsModal';
 import Moment from 'moment';
-import Background from '../../public/assets/background_img.jpg';
+// import Background from '../../public/assets/background_img.jpg';
+import BackgroundImage from 'react-background-image-loader';
 
 class Dogs extends Component {
 
@@ -93,10 +94,7 @@ class Dogs extends Component {
                     </ButtonToolbar>
                     <Row className="show-grid">
                         <Col md={12}>
-                            <br />
-
                             <ListGroup>
-
                                 {this.scheduleList(dog, job)}
                             </ListGroup>
                         </Col>
@@ -136,7 +134,7 @@ class Dogs extends Component {
                         <Col md={12}>
                             <ButtonToolbar>
                                 <DeleteDogModal dogID={dog.dog_id} getDogs={this.getDogs}/>
-                                <NewJobModal dogID={dog.dog_id} getDogs={this.getDogs}/>
+                                <NewJobModal dogID={dog.dog_id} dogName={dog.dog_name} getDogs={this.getDogs}/>
                             </ButtonToolbar>
                         </Col>
                     </Row>
@@ -161,6 +159,7 @@ class Dogs extends Component {
     render() {
 
         return (
+          <BackgroundImage className="background_img" src={'/static/assets/jesse.jpg'} placeholder={localImage}>
             <Grid>
                 <Row className="show-grid">
                     <Col md={10}>
@@ -177,10 +176,11 @@ class Dogs extends Component {
                 <br/>
                 <Row className="show-grid">
                     <Col md={12}>
-                        {this.dogList()};
+                        {this.dogList()}
                     </Col>
                 </Row>
             </Grid>
+            </BackgroundImage>
         );
     }
 }
