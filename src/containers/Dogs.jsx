@@ -3,7 +3,7 @@
 
 import React, {Component} from 'react';
 import uuid from 'uuid/v4';
-import {Grid, Row, Col, Button, ButtonToolbar, Panel, PageHeader, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Grid, Row, Col, Button, ButtonToolbar,Image, Panel, PageHeader, ListGroup, ListGroupItem} from 'react-bootstrap';
 import NewDogModal from '../modals/NewDogModal';
 import NewJobModal from '../modals/NewJobModal';
 import NewScheduleModal from '../modals/NewScheduleModal';
@@ -115,6 +115,10 @@ class Dogs extends Component {
                  <ListGroupItem>
                    <h3> Your Dog's Profile</h3>
                     <div className="row" >
+                    <div className="col-sm-4">
+                     <Image key={uuid()} src={dog.dog_picture} rounded />
+                     </div>
+                     <div className="col-sm-8">
                      <dl className="dl-horizontal">
                       <dt>Dog's Name</dt>
                       <dd id="dog-name">{dog.dog_name}</dd>
@@ -125,6 +129,7 @@ class Dogs extends Component {
                       <dt>Dog's Description</dt>
                       <dd>{dog.dog_description}</dd>
                     </dl>
+                    </div>
                     <Row className="show-grid">
                         <Col md={12}>
                             <ButtonToolbar>
@@ -135,11 +140,6 @@ class Dogs extends Component {
                     </Row>
                     </div>
                     </ListGroupItem>
-                    <Row className="show-grid">
-                        <Col md={12}>
-                            {dog.dog_description}
-                        </Col>
-                    </Row>
                     <br />
                     <Row className="show-grid">
                         <Col md={12}>
@@ -157,7 +157,7 @@ class Dogs extends Component {
 
 
     render() {
-      
+
         return (
             <Grid>
                 <Row className="show-grid">
