@@ -95,6 +95,9 @@ class MyJobsOwner extends Component {
                 <Row className="show-grid">
                     <Col md={12}>
                         <PageHeader>
+                        <div>
+                        <img width={150} height={150} alt="900x500" src='/static/assets/glass.jpg' />
+                        </div>
                             Completed Jobs
                         </PageHeader>
                     </Col>
@@ -107,6 +110,7 @@ class MyJobsOwner extends Component {
                         </ul>
                     </Col>
                 </Row>
+
             </Grid>
         );
     }

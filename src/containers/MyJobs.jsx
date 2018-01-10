@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import uuid from 'uuid/v4';
-import {Grid, Row, Col, PageHeader, Button} from 'react-bootstrap';
+import {Grid, Row, Col, PageHeader, Button, ButtonToolbar} from 'react-bootstrap';
+import Moment from 'moment';
 
 class MyJobs extends Component {
     constructor(props) {
@@ -43,6 +44,7 @@ class MyJobs extends Component {
                 return;
             };
             resp.json().then(jobs => {
+              console.log(jobs);
                 this.setState({jobs: jobs});
             });
         }).catch(err => {
@@ -71,22 +73,50 @@ class MyJobs extends Component {
     }
 
     render() {
-        let jobComponent = this.state.jobs.map(job => {
-            return (
-                <li key={uuid()}>
-                    <Button onClick={this.complete(job)}>complete JOB</Button>
-                    &nbsp;
-                    {job.job_status}: #{job.job_id} - {job.job_description} - {job.job_status} - walker assigned {job.walker_id}
-                </li>
-            );
-        });
+      let completedJobList = (
+        <div class="panel panel-default" id="Jobs-panel">
+          <div class="panel-heading"></div>
+            <table class="table">
+           <thead>
+          <tr>
+          <th>Job Title</th>
+          <th>Dog's Name</th>
+          <th>Owner</th>
+          <th>Job Date</th>
+          <th></th>
+          </tr>
+           </thead>
+           <tbody>
+           {this.state.jobs.map(job =>
+          <tr key={job.job_id}>
+          <td>{job.job_title}</td>
+          <td>{job.dog_name}</td>
+          <td>{job.user_first_name + ' ' + job.user_last_name}</td>
+          <td>{Moment(job.job_created_at).format('MMMM Do YYYY')}</td>
+          <td>
+
+            <ButtonToolbar>
+            {job.job_status === 'completed'? <Button bsSize="small" disabled>Completed</Button> : <Button bsSize="small" onClick={this.complete(job)}>Mark Complete</Button>}
+
+            </ButtonToolbar>
+
+          </td>
+          </tr>
+        )}
+           </tbody>
+           </table>
+       </div>
+
+      )
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col md={12}>
                         <PageHeader>
-                            My Jobs &nbsp;
-                            <small>Offered</small>
+                        <div>
+                        <img width={250} height={250} src='/static/assets/ties.jpg' />
+                        </div>
+                            Current Job Status
                         </PageHeader>
                     </Col>
                 </Row>
@@ -94,7 +124,7 @@ class MyJobs extends Component {
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
                         <ul>
-                            {jobComponent}
+                            {completedJobList}
                         </ul>
                     </Col>
                 </Row>

@@ -158,7 +158,7 @@ app.get(
     mw.auth,
     mw.authType('walker'),
     (req, res) => {
-        knexObj.raw(`select * from jobs
+        knexObj.raw(`select * from jobs JOIN dogs on jobs.job_dog_id = dogs.dog_id JOIN users on users.user_id = dogs.owner_id
         left outer join applications
         on applications.application_job_id = jobs.job_id where applications.applicant_id = ?`, [req.user.user_id]).then(result => {
             res.json(result.rows);
