@@ -51,11 +51,6 @@ app.get('/test',
     mw.authType(null), (req, res) => {
     res.json(req.user);
 });
-app.get('/owneronly', mw.auth, mw.authType('owner'), (req, res) => {
-    res.json(req.user);
-});
-
-
 
 app.get('/', (req, res) => {
     res.render('main');
@@ -82,8 +77,6 @@ app.get('/dogs', (req, res) => {
 app.get('/profile/view', (req, res) => {
   res.render('main');
 });
-
-
 
 app.get('/about', (req, res) => {
     res.render('main');

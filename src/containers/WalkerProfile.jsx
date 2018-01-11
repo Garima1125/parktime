@@ -23,17 +23,7 @@ class WalkerProfile extends Component {
       description: '',
       reviews: []
     }
-    // this.handleClick = this.handleClick.bind(this);
-    // this.handleBack = this.handleBack.bind(this);
   }
-
-  // handleClick() {
-  //   this.props.history.push('/profile');
-  //   };
-  //
-  // handleBack() {
-  //     this.props.history.push('/');
-  //     };
 
   componentDidMount() {
     console.log(this.props.location.state);

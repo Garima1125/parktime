@@ -96,8 +96,7 @@ class MyJobs extends Component {
           <td>
 
             <ButtonToolbar>
-            {job.job_status === 'completed'? <Button bsSize="small" disabled>Completed</Button> : <Button bsSize="small" onClick={this.complete(job)}>Mark Complete</Button>}
-
+            {job.job_status === 'completed'? <Button bsSize="small">Completed</Button> : <Button bsSize="small" onClick={this.complete(job)}>Mark Complete</Button>}
             </ButtonToolbar>
 
           </td>

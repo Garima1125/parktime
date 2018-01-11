@@ -56,8 +56,8 @@ class JobSearch extends Component {
     }
 
     initMap = () => {
-      let lat = 51.0876682;
-      let lng = -49.0927846;
+      let lat = 45.0876682;
+      let lng = -79.0927846;
 
       this.map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: lat, lng: lng},
@@ -115,22 +115,18 @@ class JobSearch extends Component {
             let jobInfo = user.jobs.map(job => {
                 return (
                   <Row className="show-grid">
-                      <Col md={16}>
-                      <h3>Job Details</h3>
-                  <div className="panel panel-default">
-                  <dl className="dl-vertical" id="job-dis">
-                    <dd key={uuid()}></dd>
-                    <dt>Job Title</dt>
-                    <dd>{job.job_title}</dd>
-                    <dd></dd>
-                    <dt>Job Description</dt>
-                    <dd>{job.job_description}</dd>
-                    <dt>Job Pay-Rate</dt>
-                    <dd>{job.job_rate}</dd>
-                    <NewApplicationModal job={job}/>
-                    </dl>
-                    </div>
-                    </Col>
+                    <Col md={12}>
+                    <h3>{job.job_title} ${job.job_rate}/ hr</h3>
+                    <div className="panel panel-default">
+                        <dl className="dl-vertical" id="job-dis">
+                        <dd key={uuid()}></dd>
+                        <dd></dd>
+                        <dd>{job.job_description}</dd>
+                        <dd>Job Pay-Rate: {job.job_rate} / hr</dd>
+                        <NewApplicationModal job={job}/>
+                        </dl>
+                        </div>
+                        </Col>
                     </Row>
                 );
             });
@@ -147,11 +143,11 @@ class JobSearch extends Component {
     }
 
     render() {
-        let mapWidth = this.state.info ? 8 : 10;
+        let mapWidth = this.state.info ? 5 : 12;
         return (
             <Grid>
                 <Row className="show-grid">
-                    <Col md={10}>
+                    <Col md={12}>
                         <PageHeader>
                             Search Jobs &nbsp;
                             <small>find your paw-mate!</small>
@@ -163,7 +159,7 @@ class JobSearch extends Component {
                     <Col xs={10} md={mapWidth}>
                         <div id="map" style={{height:'400px', width:'100%'}}></div>
                     </Col>
-                    <Col xs={10} md={3}>
+                    <Col md={7}>
                         {this.state.info}
                     </Col>
                 </Row>
