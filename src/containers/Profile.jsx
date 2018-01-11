@@ -275,8 +275,8 @@ handlePictureChange = (e) => {
         <Row className="show-grid">
           <Col md={10}>
             <ButtonGroup>
-              <Button onClick={this.updateProfile}><span className="glyphicon glyphicon-ok"></span>  Update</Button>
-              <Button onClick={this.handleBack}><span className="glyphicon glyphicon-repeat"></span>  Back</Button>
+              <Button  id="update" onClick={this.updateProfile}><span className="glyphicon glyphicon-ok"></span>  Update</Button>
+              <Button id="back"  onClick={this.handleBack}><span className="glyphicon glyphicon-repeat"></span>  Back</Button>
             </ButtonGroup>
           </Col>
         </Row>

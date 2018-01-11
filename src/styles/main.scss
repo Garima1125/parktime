@@ -103,6 +103,22 @@ color:rgb(25, 18, 12);
   margin-left: 30px;
 }
 
+
+#update{
+  margin-left: 250px;
+}
+
+#back{
+  margin-left: 50px;
+}
+
+#deljob, #trash-dog, #trash-sch{
+  margin-left: 60px;
+}
+#canjob, #cancel-del, #cancel-sch{
+margin-left: 30px;
+}
+
 // #flower{
 //   float: right;
 //   radius:50%;
@@ -653,10 +669,26 @@ td.rdtYear:hover {
 margin-top: 20px;
 }
 
-#trash-dog{
-  margin: auto;
+#goo-reg{
+margin-top: -86px;
+margin-left: 124px;
+margin-bottom: 10px;
 }
-
-#cancel-del{
-  margin:auto;
+#regBtn{
+  margin-left: 235px;
+}
+#or{
+  height: 30px;
+  width: 30px;
+  border: 1px solid #C2C2C2;
+  border-radius: 50%;
+  font-weight: bold;
+  line-height: 28px;
+  text-align: center;
+  font-size: 12px;
+  // float: center;
+  position: absolute;
+  z-index: 1;
+  background: #DFDFDF;
+  margin-left: 256px;
 }

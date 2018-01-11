@@ -28,16 +28,17 @@ class Register extends Component {
                 <br />
                 <Row className="show-grid" >
                     <Col md={12} id="reg">
-                        <ButtonGroup justified >
+                    <h2 id="goo-reg">Signup withe Google</h2>
+                        <ButtonGroup justified>
                             <div className="signin">
-                                <Button bsStyle="default" bsSize="small" href='/auth/login' id="loginBtn-google">
+                                <Button bsStyle="default" bsSize="small" href='/auth/login' id="regBtn">
                                     <img width={23} height={23} src='/static/assets/googlelogo.png' />    Google
                                 </Button>
                             </div>
                         </ButtonGroup>
                     </Col>
                 </Row>
-
+                <h6 id="or">OR</h6>
                 <Row className="show-grid" >
                     <Col md={6} xs={6} lg={6} sm={6} id="reg">
                         <Panel>

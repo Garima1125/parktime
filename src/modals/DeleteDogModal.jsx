@@ -43,12 +43,12 @@ class DeleteDogModal extends Component {
         return (
             <div>
                 <Button bsSize='small' bsStyle='danger' onClick={this.open} >
-                    <span className="glyphicon glyphicon-trash"></span>  Remove
+                    <span className="glyphicon glyphicon-trash"></span>  Remove Dog
 
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close} width = {200}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Are you sure?</Modal.Title>
+                        <Modal.Title>Are you sure you want to delete this Dog's profile?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Button id="trash-dog" onClick={this.delete}><span className="glyphicon glyphicon-trash"></span> Delete</Button>
